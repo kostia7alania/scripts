@@ -1,0 +1,59 @@
+﻿ONDIALOG POS=1 BUTTON=OK CONTENT=
+VERSION BUILD=8970419 RECORDER=FX
+TAB T=1
+URL GOTO=http://irr.ru/advertsubmission/step1/moskva-gorod/?category=real-estate%2Fapartments-sale%2F
+TAG POS=1 TYPE=DIV ATTR=TXT:Продажа<SP>квартир
+TAG POS=1 TYPE=DIV ATTR=TXT:Аренда<SP>квартир
+
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:mapStreetVisible CONTENT=Краснодарская
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:mapHouseNr CONTENT=22
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:metro CONTENT=Люблино
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:price CONTENT=1500
+TAG POS=2 TYPE=DIV ATTR=TXT:месяц
+TAG POS=1 TYPE=DIV ATTR=TXT:сутки
+
+
+
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:etage CONTENT=1
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:rooms CONTENT=1
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:etage-all CONTENT=12
+TAG POS=2 TYPE=INS ATTR=CLASS:iCheck-helper&&TXT:
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:meters-total CONTENT=40
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:meters-living CONTENT=30
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:kitchen CONTENT=10
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>DIV>DIV>DIV:nth-of-type(2)>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(2)>DIV>FIELDSET>SPAN>DIV>DIV" BUTTON=0
+TAG POS=1 TYPE=DIV ATTR=TXT:типовой
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>DIV>DIV>DIV:nth-of-type(2)>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(2)>DIV>FIELDSET>SPAN:nth-of-type(2)>DIV>DIV" BUTTON=0
+TAG POS=1 TYPE=DIV ATTR=TXT:раздельный
+TAG POS=3 TYPE=INS ATTR=CLASS:iCheck-helper&&TXT:
+TAG POS=6 TYPE=INS ATTR=CLASS:iCheck-helper&&TXT:
+TAG POS=5 TYPE=INS ATTR=CLASS:iCheck-helper&&TXT:
+TAG POS=4 TYPE=INS ATTR=CLASS:iCheck-helper&&TXT:
+
+
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>DIV>DIV>DIV:nth-of-type(2)>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>FIELDSET>LABEL>SPAN>DIV>INS" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>DIV>DIV>DIV:nth-of-type(2)>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>FIELDSET>LABEL:nth-of-type(2)>SPAN>DIV>INS" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>DIV>DIV>DIV:nth-of-type(2)>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>FIELDSET>SPAN:nth-of-type(3)>DIV>DIV" BUTTON=0
+EVENT TYPE=MOUSEDOWN SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>DIV>DIV>DIV:nth-of-type(2)>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>FIELDSET>SPAN:nth-of-type(3)>DIV>DIV:nth-of-type(2)>DIV>DIV" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>DIV>DIV>DIV:nth-of-type(2)>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>FIELDSET>SPAN:nth-of-type(4)>DIV>DIV" BUTTON=0
+EVENT TYPE=MOUSEDOWN SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>DIV>DIV>DIV:nth-of-type(2)>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>FIELDSET>SPAN:nth-of-type(4)>DIV>DIV:nth-of-type(2)>DIV>DIV" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>DIV>DIV>DIV:nth-of-type(2)>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>FIELDSET>SPAN:nth-of-type(2)>DIV>DIV" BUTTON=0
+
+'описание:
+EVENTS TYPE=KEYPRESS SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>DIV>DIV>DIV:nth-of-type(2)>FORM>P>TEXTAREA" CHARS="==="
+'картинка:
+TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=* CONTENT=C:\Users\user\Desktop\yEmaiwtmahE.jpg
+
+
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:seller CONTENT=Ирина
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:phone CONTENT=+79166565581
+TAG POS=1 TYPE=BUTTON FORM=NAME:NoFormName ATTR=TXT:Добавить<SP>объявление
+
+
+TAG POS=1 TYPE=BUTTON ATTR=TXT:Регистрация
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:email CONTENT=kodi199kv@yandex.ru
+TAG POS=2 TYPE=INPUT:PASSWORD FORM=NAME:NoFormName ATTR=NAME:password CONTENT=kostia22
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=NAME:NoFormName ATTR=NAME:passwordConfirm CONTENT=kostia22
+TAG POS=2 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:phone CONTENT=89680608071
+FRAME NAME="undefined"
+TAG POS=1 TYPE=DIV ATTR=ROLE:presentation&&CLASS:recaptcha-checkbox-checkmark&&TXT:

@@ -1,0 +1,216 @@
+﻿
+
+'wait seconds=2
+' URL GOTO=http://addmefast.com/login/incorrect
+ 'TAG POS=1 TYPE=INPUT:EMAIL FORM=NAME:NoFormName ATTR=NAME:email CONTENT={{MAIL}}
+ 'TAG POS=1 TYPE=INPUT:PASSWORD FORM=NAME:NoFormName ATTR=NAME:password CONTENT=kostia22
+' TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=NAME:login_button
+ 
+ SET !ERRORIGNORE YES
+ SET !TIMEOUT_STEP 3
+SET !TIMEOUT_PAGE 3
+SET !TIMEOUT_TAG 3
+ 
+ URL GOTO=http://addmefast.com/free_points/vkontakte_pages
+ TAG POS=1 TYPE=DIV ATTR=TXT:Follow
+ TAB T=2
+ TAG POS=1 TYPE=A ATTR=TXT:Follow
+ TAG POS=1 TYPE=BUTTON ATTR=ID:subscribe_button
+ EVENT TYPE=CLICK SELECTOR="#subscribe_button" BUTTON=0
+ TAB T=1
+ TAB CLOSEALLOTHERS
+ 
+URL GOTO=http://addmefast.com/free_points/vkontakte_groups
+ TAG POS=1 TYPE=DIV ATTR=TXT:Join
+ TAB T=2
+ TAG POS=1 TYPE=A ATTR=TXT:Join<SP>community
+ TAG POS=1 TYPE=BUTTON ATTR=TXT:Join<SP>community
+ TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+
+  
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/ok_group_join
+ TAG POS=1 TYPE=DIV ATTR=TXT:Join
+ TAB T=2
+ TAG POS=1 TYPE=A ATTR=TXT:Присоединиться
+ TAG POS=1 TYPE=A ATTR=TXT:Join
+ TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+
+
+URL GOTO=http://addmefast.com/free_points/facebook_likes
+ TAG POS=2 TYPE=DIV ATTR=CLASS:btn3
+ TAB T=2
+ TAG POS=1 TYPE=BUTTON ATTR=ID:u_0_1t
+ TAB T=1
+ wait seconds=2
+  TAB CLOSEALLOTHERS
+
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/facebook_share
+ TAG POS=1 TYPE=DIV ATTR=TXT:Share
+ TAB T=2
+ TAG POS=1 TYPE=BUTTON FORM=ID:platformDialogForm ATTR=ID:u_0_d
+ TAB T=1
+
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/facebook_subscribes
+ TAG POS=1 TYPE=DIV ATTR=TXT:Follow
+ TAB T=2
+ TAG POS=1 TYPE=A ATTR=ID:u_ps_0_0_3n
+ TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/facebook_post_like
+ TAG POS=1 TYPE=DIV ATTR=TXT:Like
+ TAB T=2
+ TAG POS=5 TYPE=A ATTR=TXT:Like
+ TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/instagram
+ TAG POS=7 TYPE=SPAN ATTR=TXT:
+ TAB T=2
+ TAG POS=1 TYPE=BUTTON ATTR=TXT:Follow
+ TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/instagram_likes
+ TAG POS=1 TYPE=DIV ATTR=TXT:Like
+ TAB T=2
+ TAG POS=1 TYPE=A ATTR=TXT:Like
+ TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/twitter
+ TAG POS=1 TYPE=DIV ATTR=TXT:Follow
+ TAB T=2
+ TAG POS=1 TYPE=BUTTON FORM=ID:follow_btn_form ATTR=TXT:Follow
+ TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/twitter_retweets
+ TAG POS=1 TYPE=DIV ATTR=TXT:Retweet
+ TAB T=2
+ TAG POS=1 TYPE=INPUT:SUBMIT FORM=ID:retweet_btn_form ATTR=NAME:commit
+ TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+ 
+
+
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/twitter_favorites
+ TAG POS=1 TYPE=DIV ATTR=TXT:Favorite
+ TAB T=2
+ TAG POS=1 TYPE=INPUT:SUBMIT FORM=ID:favorite_btn_form ATTR=NAME:commit
+ TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/youtube_likes
+ TAG POS=1 TYPE=DIV ATTR=TXT:Like
+ TAB T=2
+ EVENT TYPE=CLICK SELECTOR=* BUTTON=0
+ TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+ 
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/soundcloud_follow
+ TAG POS=1 TYPE=DIV ATTR=TXT:Follow
+ TAB T=2
+ TAG POS=1 TYPE=BUTTON ATTR=TXT:Follow
+ wait seconds=7
+ TAB T=1
+ TAB CLOSEALLOTHERS
+
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/soundcloud_likes
+ TAG POS=1 TYPE=DIV ATTR=TXT:Like
+ TAB T=2
+ TAG POS=1 TYPE=BUTTON ATTR=TXT:Like
+ TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+
+ 
+ 
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/tsuco_followers
+ TAG POS=1 TYPE=DIV ATTR=TXT:Follow
+ TAB T=2
+ TAG POS=1 TYPE=A ATTR=TXT:Follow
+ TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+ 
+ 
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/myspace
+ TAG POS=1 TYPE=DIV ATTR=TXT:Connect
+ TAB T=2
+ TAG POS=1 TYPE=I ATTR=CLASS:close_18<SP>close&&TXT:
+ TAG POS=4 TYPE=SPAN ATTR=TXT:
+ TAB T=1
+ wait seconds=2
+  TAB CLOSEALLOTHERS
+
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/pinterest
+ TAG POS=1 TYPE=DIV ATTR=TXT:Follow
+ TAB T=2
+ TAG POS=1 TYPE=BUTTON ATTR=TXT:Follow
+ TAB T=1
+ TAB CLOSEALLOTHERS
+ 
+  
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/pinterest_repin
+ TAG POS=1 TYPE=DIV ATTR=TXT:Repin
+ TAB T=2
+ TAG POS=1 TYPE=BUTTON ATTR=TYPE:button&&CLASS:Button<SP>Module<SP>btn<SP>hasText<SP>isBrioFlat<SP>pinitLocalization<SP>primary<SP>primaryOnHover<SP>repinSmall<SP>repinBtn<SP>rounded
+  TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/pinterest_like
+ TAG POS=1 TYPE=DIV ATTR=TXT:Like
+ TAB T=2
+ TAG POS=1 TYPE=BUTTON ATTR=TXT:Like
+ TAB T=1
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+ 
+wait seconds=2
+ URL GOTO=http://addmefast.com/free_points/soundcloud_follow
+ TAG POS=1 TYPE=A ATTR=TXT:Website<SP>Hits
+ TAB T=2
+ TAB T=1
+ 
+ wait seconds=2
+ TAB CLOSEALLOTHERS
+ 
+ URL GOTO=http://addmefast.com/free_points/stumbleupon_followers
+ TAG POS=1 TYPE=DIV ATTR=TXT:Follow
+ TAB T=2
+ TAG POS=1 TYPE=SPAN ATTR=TXT:follow
+ wait seconds=2
+ TAB T=1
+ TAB CLOSEALLOTHERS
+

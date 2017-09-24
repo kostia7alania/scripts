@@ -1,0 +1,91 @@
+﻿TAB T=1
+URL GOTO=https://passport.yandex.ru/registration
+set !replayspeed fast
+clear
+set почта {{началоПочты}}{{строка}}{{имяПроекта}}
+'set почта kodi342kv2
+SET !ERRORIGNORE YES
+CMDLINE !DATASOURCE names4reg.txt
+SET !DATASOURCE_COLUMNS 1
+SET !VAR1 EVAL("var s=Math.floor(Math.random()*100 + 1); s;")
+SET !DATASOURCE_LINE {{!VAR1}}
+SET имя {{!COL1}}
+SET !VAR1 EVAL("var s=Math.floor(Math.random()*100 + 1); s;")
+SET !DATASOURCE_LINE {{!VAR1}}
+SET фамилия {{!COL1}}
+URL GOTO=https://passport.yandex.ru/registration
+
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:firstname CONTENT={{имя}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:lastname CONTENT={{фамилия}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:login CONTENT={{почта}}
+SET !ENCRYPTION NO
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=NAME:NoFormName ATTR=NAME:password CONTENT=kostia22
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=NAME:NoFormName ATTR=NAME:password_confirm CONTENT=kostia22
+set !replayspeed medium
+TAG POS=1 TYPE=LABEL FORM=NAME:NoFormName ATTR=TXT:У<SP>меня<SP>нет<SP>телефона
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV>DIV>FORM>DIV:nth-of-type(6)>DIV:nth-of-type(3)>DIV>DIV:nth-of-type(2)>SPAN" BUTTON=0
+TAG POS=1 TYPE=A ATTR=TXT:Задайте*
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:hint_question CONTENT=index
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:hint_answer CONTENT=363120
+
+FILTER TYPE=IMAGES STATUS=OFF
+ONDOWNLOAD FOLDER="C:\" FILE=cap.jpg WAIT=YES
+TAG POS=2 TYPE=IMG ATTR=SRC:* CONTENT=EVENT:SAVE_ELEMENT_SCREENSHOT
+TAB T=2
+URL GOTO=http://imacros2.rucaptcha.com/new/
+TAG POS=1 TYPE=INPUT:TEXT ATTR=NAME:key CONTENT=6440c629b2418bf14c6ca56d0e7e21d0
+TAG POS=1 TYPE=INPUT:FILE ATTR=NAME:file CONTENT="C:\cap.jpg"
+ONDIALOG POS=1 BUTTON=OK CONTENT=
+TAG POS=1 TYPE=INPUT:SUBMIT ATTR=*
+SET !EXTRACT NULL
+WAIT SECONDS=3
+TAG POS=1 TYPE=* ATTR=TXT:* EXTRACT=TXT
+TAB T=1
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:answer CONTENT={{!EXTRACT}}
+EVENT TYPE=CLICK SELECTOR="#nb-5" BUTTON=0
+URL GOTO=https://m.tune.yandex.ru/
+TAG POS=1 TYPE=A ATTR=TXT:Полная<SP>версия
+TAG POS=1 TYPE=A ATTR=TXT:Почта
+EVENT TYPE=CLICK SELECTOR="#js-app-promo-close" BUTTON=0
+url goto=https://mail.yandex.ru/touch/
+url goto=https://mail.yandex.ru/touch/
+url goto=https://mail.yandex.ru/touch/
+TAG POS=1 TYPE=SPAN ATTR=TXT:Входящие
+TAG POS=1 TYPE=SVG ATTR=HEIGHT:20&&WIDTH:20&&CLASS:ico<SP>ico_embedded<SP>ico_toolbar-menu<SP>header__ico&&XMLNS:http://www.w3.org/2000/svg&&TXT:
+TAG POS=1 TYPE=A ATTR=TXT:Полная
+TAG POS=3 TYPE=DIV ATTR=TXT:×
+TAG POS=1 TYPE=A ATTR=TXT:настроить…
+TAG POS=1 TYPE=A ATTR=TXT:Правила<SP>обработки<SP>почты
+TAG POS=3 TYPE=BUTTON ATTR=TXT:Создать<SP>правило
+TAG POS=4 TYPE=SPAN ATTR=TXT:×
+TAG POS=1 TYPE=SPAN ATTR=TXT:Продолжить
+SET !ENCRYPTION NO
+TAG POS=1 TYPE=INPUT:PASSWORD ATTR=NAME:password CONTENT=kostia22
+TAG POS=1 TYPE=BUTTON ATTR=TXT:Подтвердить
+TAG POS=5 TYPE=SPAN ATTR=CLASS:_nb-checkbox-flag<SP>_nb-checkbox-normal-flag&&TXT:
+TAG POS=5 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:clicker CONTENT=YES
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:forward_address CONTENT=kostia7alania@gmail.com
+TAG POS=6 TYPE=SPAN ATTR=CLASS:_nb-checkbox-flag<SP>_nb-checkbox-normal-flag&&TXT:
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:forward_with_store CONTENT=YES
+TAG POS=4 TYPE=BUTTON FORM=NAME:NoFormName ATTR=TXT:Создать<SP>правило
+set !replayspeed fast
+SET !TIMEOUT_STEP 0
+url goto=https://mail.yandex.ru/touch/
+URL GOTO=https://mail.yandex.ru/neo2/?dpda=yes
+TAG POS=1 TYPE=A ATTR=TXT:настроить…
+TAG POS=1 TYPE=A ATTR=TXT:Правила<SP>обработки<SP>почты
+
+TAG POS=1 TYPE=A ATTR=HREF:#setup/filters-create/*
+TAG POS=1 TYPE=SPAN ATTR=TXT:Продолжить
+
+TAG POS=1 TYPE=INPUT:PASSWORD ATTR=NAME:password CONTENT=kostia22
+
+TAG POS=1 TYPE=BUTTON ATTR=DATA-ACTION:dialog.submit&&DATA-NB:button&&CLASS:<SP>nb-button<SP>_nb-small-button<SP>_init<SP>daria-action<SP>
+TAG POS=2 TYPE=SPAN ATTR=TXT:Переслать<SP>по<SP>адресу
+TAG POS=5 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:clicker CONTENT=YES
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:forward_address CONTENT=kostia7alania@gmail.com
+TAG POS=1 TYPE=BUTTON FORM=NAME:NoFormName ATTR=TXT:Добавить<SP>условие
+TAG POS=4 TYPE=SPAN ATTR=TXT:×
+TAG POS=1 TYPE=BUTTON FORM=NAME:NoFormName ATTR=TXT:Сохранить<SP>изменения
+
+ 

@@ -1,0 +1,17 @@
+﻿VERSION  BUILD=7500718 RECORDER=FX
+TAB T=1     
+'    
+'You can use the FOLDER=* part of the ONDOWNLOAD command to define another download directory
+'And you can overwrite the automatic file name generation by replacing
+'FILE=+_{{!NOW:yyyymmdd_hhnnss}}  
+'with 
+'FILE=yourname (The correct file extension is added automatically)
+'You can specify if the macro player should wait until the file is downloaded with parameter
+'WAIT=YES/NO (the default is YES)
+'Here starts the regular download macro
+'
+URL GOTO=http://demo.imacros.net/Automate/Downloads
+ONDOWNLOAD FOLDER=* FILE=* WAIT=YES
+TAG POS=2 TYPE=A ATTR=TXT:*Download*   
+WAIT SECONDS=3
+URL GOTO=http://demo.imacros.net/Automate/OK

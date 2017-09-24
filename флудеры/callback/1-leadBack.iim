@@ -1,0 +1,45 @@
+﻿clear
+set !replayspeed fast
+SET !TIMEOUT_STEP 1 
+set !errorignore yes
+
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE names4reg.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set name {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+set mail {{!var1}}osea@mail.ru
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_tels.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set tel {{!col1}}
+  
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*999 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_sms.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set sms {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE useragents-pc.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set !USERAGENT {{!col1}}
+
+
+SET !DATASOURCE C:\4flood\leadback.txt
+SET !DATASOURCE_LINE {{!LOOP}}
+url goto={{!COL1}}
+set !replayspeed medium
+wait seconds=1
+
+
+EVENT TYPE=CLICK SELECTOR="#lb_button-call>DIV>DIV" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="#lb_phone" BUTTON=0
+EVENTS TYPE=KEYPRESS SELECTOR="#lb_phone" KEYS="[8,8,8]"
+EVENTS TYPE=KEYPRESS SELECTOR="#lb_phone" CHARS={{tel}}
+EVENT TYPE=KEYPRESS SELECTOR="#lb_phone" KEY=13
+EVENT TYPE=CLICK SELECTOR="#lb_send" BUTTON=0
+
+wait seconds=200

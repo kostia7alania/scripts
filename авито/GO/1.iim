@@ -1,0 +1,190 @@
+﻿'======first объЯВление по УСЛУГАМ:==========
+
+				'=========== смена юзерагента:
+						SET !USERAGENT {{useragent}}
+						SET !ERRORIGNORE YES		
+						URL GOTO=https://m.avito.ru/profile
+						URL GOTO=https://m.avito.ru/add
+	'каунт++ категорий:
+						CMDLINE !DATASOURCE C:\\Users\\User\\Onedrive\\all\\pc\\1\\внутреннийСчетчикКатегорий.txt
+						SET !DATASOURCE_LINE 1
+						Set счетчикКатегорий {{!COL1}}
+						ADD счетчикКатегорий 1
+						SET проверкаСчетчика EVAL('var s=\\"{{счетчикКатегорий}}\\"; if(s>\\"4\\"){1} else s;')
+						SET !EXTRACT NULL
+						SET !EXTRACT {{проверкаСчетчика}}
+						FILEDELETE NAME=C:\\Users\\User\\Onedrive\\all\\pc\\1\\внутреннийСчетчикКатегорий.txt
+						SAVEAS TYPE=EXTRACT FOLDER=C:\\Users\\User\\Onedrive\\all\\pc\\1\\ FILE=внутреннийСчетчикКатегорий.txt						
+						SET !DATASOURCE_DELIMITER ,
+						CMDLINE !DATASOURCE C:\\Users\\User\\Onedrive\\all\\pc\\1\\категории.txt
+						SET !DATASOURCE_COLUMNS 4
+						SET !DATASOURCE_LINE {{проверкаСчетчика}}
+						set категория1 {{!col1}}
+						set категория2 {{!col2}}
+						set категория3 {{!col3}}
+						set paramId {{!col4}}
+	'заголовок:	
+						CMDLINE !DATASOURCE C:\\Users\\User\\Onedrive\\all\\pc\\1\\заголовки-{{проверкаСчетчика}}.txt
+						SET !DATASOURCE_LINE {{строка}}
+						set заголовок {{!COL1}}
+	'описание:
+						SET !DATASOURCE_DELIMITER ;
+						CMDLINE !DATASOURCE C:\\Users\\User\\Onedrive\\all\\pc\\1\\описание-{{проверкаСчетчика}}.txt
+						SET !DATASOURCE_LINE {{строка}}
+						set описание {{!COL1}}
+
+	'Генерируем связанный ГОРОД или ид_МЕТРО:	
+						SET !DATASOURCE_DELIMITER ,
+						CMDLINE !DATASOURCE all_metros.txt
+						SET !DATASOURCE_COLUMNS 3
+						SET !DATASOURCE_LINE {{строка}}
+						set город {{!COL1}}
+				'город:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:region_id CONTENT=%{{город}}
+						set метроИлиПодГород {{!COL2}}
+						set метроСловами {{!COL3}}
+						
+						CMDLINE !DATASOURCE метро-замануха.txt
+						SET !DATASOURCE_LINE {{строка}}
+						set началоМетроЗаманухи {{!col1}}
+						set конецМетроЗаманухи {{!col2}}
+						set описалово {{описание}}
+						add описалово {{началоМетроЗаманухи}}
+						add описалово {{метроСловами}}
+						add описалово {{конецМетроЗаманухи}}
+						SET !REPLAYSPEED medium
+'предложение услуг:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:category_id CONTENT=%{{категория1}}
+'категория услуг:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_716 CONTENT=%{{категория2}}
+'подкатегория услуг:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_{{paramId}} CONTENT=%{{категория3}}		
+						'метро (или гоород -в области)
+						wait seconds=5
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:metro_id CONTENT=%{{метроИлиПодГород}}			
+						'TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:location_id CONTENT=%{{метроИлиПодГород}}
+						TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=ID:title CONTENT={{заголовок}}
+						TAG POS=1 TYPE=TEXTAREA FORM=NAME:NoFormName ATTR=ID:description CONTENT={{описалово}}
+			' ценник:
+						SET ценник EVAL("var randomNumber=Math.floor(Math.random()*(1111-2+1)+2); randomNumber;")
+						TAG POS=1 TYPE=INPUT:NUMBER FORM=NAME:NoFormName ATTR=ID:price CONTENT={{ценник}}
+			'КАРТИНКА:
+						SET !REPLAYSPEED medium
+						TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=ID:image_upload CONTENT=C:\\Users\\User\\Onedrive\\all\\pc\\1\\фото-для-подачи\\{{строка}}.jpg
+						TAG POS=1 TYPE=BUTTON ATTR=TXT:OK
+						wait seconds=7
+						CLICK X=734 Y=363
+			'клик по ПРОДОЛЖИТЬ:	
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+						TAG POS=1 TYPE=INPUT:RADIO FORM=NAME:NoFormName ATTR=ID:service_no
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_premium CONTENT=NO
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_vip CONTENT=NO
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_highlight CONTENT=NO
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+			'скрин+отчет:
+							URL GOTO=https://m.avito.ru/profile
+							wait seconds=1
+							TAG POS=1 TYPE=A ATTR=HREF:https://m.avito.ru/profile/item/*
+							wait seconds=1
+							TAG POS=1 TYPE=SPAN ATTR=TXT:Показать<SP>полностью
+							SET !EXTRACT #{{строка}},<sp>{{!NOW:dd.mm.yyyy}}<sp>[{{!NOW:hh:nn}}],<sp>{{!URLCURRENT}}
+							'сохраняем все ето дело:
+							SAVEAS TYPE=EXTRACT FOLDER=C:\\Users\\User\\Onedrive\\all FILE=add-PC-[1].txt
+							SCREENSHOT TYPE=Page FOLDER=C:\\Users\\User\\Onedrive\\all\\pc\\скрины FILE={{строка}}--PC-[1]-{{!NOW:dd.mm.yyyy}}-[{{!NOW:hh:nn}}].jpg
+ 							wait seconds = 5
+
+							
+'======ВТОРОЕ объЯВление по УСЛУГАМ:==========
+						SET !REPLAYSPEED fast
+						URL GOTO=https://m.avito.ru/add
+	'каунт++ категорий:
+						CMDLINE !DATASOURCE C:\\Users\\User\\Onedrive\\all\\pc\\2\\внутреннийСчетчикКатегорий.txt
+						SET !DATASOURCE_LINE 1
+						Set счетчикКатегорий {{!COL1}}
+						ADD  счетчикКатегорий 1
+						SET проверкаСчетчика EVAL("var s=\\"{{счетчикКатегорий}}\\"; if(s>\\"4\\"){1} else s;")
+						SET !EXTRACT NULL
+						SET !EXTRACT {{проверкаСчетчика}}
+						FILEDELETE NAME=C:\\Users\\User\\Onedrive\\all\\pc\\2\\внутреннийСчетчикКатегорий.txt
+						SAVEAS TYPE=EXTRACT FOLDER=C:\\Users\\User\\Onedrive\\all\\pc\\2\\ FILE=внутреннийСчетчикКатегорий.txt						
+						set !extract null
+						SET !DATASOURCE_DELIMITER ,
+						CMDLINE !DATASOURCE C:\\Users\\User\\Onedrive\\all\\pc\\2\\категории.txt
+						SET !DATASOURCE_COLUMNS 4
+						SET !DATASOURCE_LINE {{проверкаСчетчика}}
+						set категория1 {{!col1}}
+						set категория2 {{!col2}}
+						set категория3 {{!col3}}
+						set paramId {{!col4}}
+	'заголовок:	
+						CMDLINE !DATASOURCE C:\\Users\\User\\Onedrive\\all\\pc\\2\\заголовки-{{проверкаСчетчика}}.txt
+						SET !DATASOURCE_LINE {{строка}}
+						set заголовок {{!COL1}}
+	'описание:
+						SET !DATASOURCE_DELIMITER ;
+						CMDLINE !DATASOURCE C:\\Users\\User\\Onedrive\\all\\pc\\2\\описание-{{проверкаСчетчика}}.txt
+						SET !DATASOURCE_LINE {{строка}}
+						set описание {{!COL1}}			
+
+	'Генерируем связанный ГОРОД или ид_МЕТРО:	
+						SET !DATASOURCE_DELIMITER ,
+						CMDLINE !DATASOURCE all_podmsk.txt
+						SET !DATASOURCE_COLUMNS 3
+						SET !DATASOURCE_LINE {{строка}}										
+						set город {{!COL1}}						
+						set метроИлиПодГород {{!COL2}}
+						set метроСловами {{!COL3}}
+						
+						SET !DATASOURCE_DELIMITER ;	
+						CMDLINE !DATASOURCE C:\\Users\\User\\Onedrive\\all\\pc\\2\\метроЗамануха.csv
+						SET !DATASOURCE_LINE {{строка}}						
+						set началоМетроЗаманухи {{!col1}}
+						set конецМетроЗаманухи {{!col2}}
+						set описалово {{описание}}
+						add описалово {{началоМетроЗаманухи}}
+						add описалово {{метроСловами}}
+						add описалово {{конецМетроЗаманухи}}
+						SET !REPLAYSPEED medium
+'предложение услуг:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:category_id CONTENT=%{{категория1}}
+'категория услуг:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_716 CONTENT=%{{категория2}}
+'подкатегория услуг:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_{{paramId}} CONTENT=%{{категория3}}
+						'город:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:region_id CONTENT=%{{город}}
+						'метро (или подГород -в области)
+						wait seconds=5
+						'TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:metro_id CONTENT=%{{метроИлиПодГород}}
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:location_id CONTENT=%{{метроИлиПодГород}}
+						TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=ID:title CONTENT={{заголовок}}
+						TAG POS=1 TYPE=TEXTAREA FORM=NAME:NoFormName ATTR=ID:description CONTENT={{описалово}}
+			' ценник:
+						SET ценник EVAL("var randomNumber=Math.floor(Math.random()*(1111-88+1)+88); randomNumber;")
+						TAG POS=1 TYPE=INPUT:NUMBER FORM=NAME:NoFormName ATTR=ID:price CONTENT={{ценник}}
+			'КАРТИНКА:
+						SET !REPLAYSPEED medium
+						TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=ID:image_upload CONTENT=C:\\Users\\User\\Onedrive\\all\\pc\\2\\фото-для-подачи-pc\\{{строка}}.jpg
+						TAG POS=1 TYPE=BUTTON ATTR=TXT:OK
+						wait seconds=7
+						CLICK X=734 Y=363
+			'клик по ПРОДОЛЖИТЬ:
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+						TAG POS=1 TYPE=INPUT:RADIO FORM=NAME:NoFormName ATTR=ID:service_no
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_premium CONTENT=NO
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_vip CONTENT=NO
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_highlight CONTENT=NO
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+			'скрин+отчет:
+						URL GOTO=https://m.avito.ru/profile
+						wait seconds=1
+						TAG POS=1 TYPE=A ATTR=HREF:https://m.avito.ru/profile/item/*
+						wait seconds=1
+						TAG POS=1 TYPE=SPAN ATTR=TXT:Показать<SP>полностью
+						SET !EXTRACT #{{строка}},<sp>{{!NOW:dd.mm.yyyy}}<sp>[{{!NOW:hh:nn}}],<sp>{{!URLCURRENT}}
+						'сохраняем все ето дело:
+						SAVEAS TYPE=EXTRACT FOLDER=C:\\Users\\User\\Onedrive\\all FILE=add-PC-[2].txt
+						SCREENSHOT TYPE=Page FOLDER=C:\\Users\\User\\Onedrive\\all\\pc\\скрины FILE={{строка}}--PC-[2]-{{!NOW:dd.mm.yyyy}}-[{{!NOW:hh:nn}}].jpg
+ 						wait seconds = 5

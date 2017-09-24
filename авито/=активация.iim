@@ -1,0 +1,6 @@
+﻿TAG POS=1 TYPE=A ATTR=TXT:Завершённые
+TAG POS=2 TYPE=SPAN ATTR=TXT:Активировать
+BACK
+TAG POS=2 TYPE=SPAN ATTR=TXT:Активировать
+BACK
+TAG POS=2 TYPE=SPAN ATTR=TXT:Активировать

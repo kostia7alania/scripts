@@ -1,0 +1,5 @@
+﻿VERSION  BUILD=7500718 RECORDER=FX
+TAB T=1
+SAVEAS TYPE=PNG FOLDER=* FILE=Screenshot_Time_{{!NOW:yyyymmdd_hhnnss}}.png
+URL GOTO=http://demo.imacros.net/Automate/Screenshot
+

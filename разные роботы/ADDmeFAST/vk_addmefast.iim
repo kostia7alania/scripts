@@ -1,0 +1,14 @@
+﻿SET !REPLAYSPEED slow
+SET !ERRORIGNORE YES
+SET "!WAITPAGECOMPLETE" YES
+SET !TIMEOUT_STEP 11
+SET !TIMEOUT_PAGE 11
+URL GOTO=http://addmefast.com/free_points/vkontakte_pages
+TAG POS=1 TYPE=DIV ATTR=TXT:Follow
+TAB T=2
+wait seconds=1
+TAG POS=1 TYPE=BUTTON ATTR=ID:subscribe_button
+wait seconds=1
+TAB CLOSE
+TAB T=1
+wait seconds = 22

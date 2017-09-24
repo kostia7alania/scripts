@@ -1,0 +1,48 @@
+﻿clear
+set !replayspeed fast
+SET !TIMEOUT_STEP 1 
+set !errorignore yes
+
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE names4reg.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set name {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+set mail {{!var1}}osea@mail.ru
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_tels.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set tel {{!col1}}
+  
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*999 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_sms.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set sms {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE useragents-pc.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set !USERAGENT {{!col1}}
+
+SET !DATASOURCE C:\4flood\siteheart.com.txt
+SET !DATASOURCE_LINE {{!LOOP}}
+url goto={{!COL1}}
+set !replayspeed medium
+wait seconds=1
+
+
+TAG POS=1 TYPE=DIV ATTR=TXT:Оставить<SP>сообщение
+TAG POS=1 TYPE=IMG ATTR=SRC:http://static.siteheart.com/*
+TAG POS=1 TYPE=TEXTAREA ATTR=NAME:text CONTENT={{sms}}
+TAG POS=1 TYPE=DIV ATTR=TITLE:Отправить&&REL:enter*
+
+TAG POS=5 TYPE=INPUT:TEXT ATTR=* CONTENT={{name}}
+TAG POS=6 TYPE=INPUT:TEXT ATTR=* CONTENT={{mail}}
+TAG POS=7 TYPE=INPUT:TEXT ATTR=* CONTENT={{tel}}
+TAG POS=1 TYPE=TEXTAREA ATTR=TITLE:Ваш<SP>вопрос&&PLACEHOLDER:Ваш<SP>вопрос&&CLASS:shc<SP>sh_textarea&&TXT: CONTENT={{sms}}
+ONDIALOG POS=1 BUTTON=OK CONTENT=
+TAG POS=1 TYPE=DIV ATTR=TXT:Отправить
+ 

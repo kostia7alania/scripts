@@ -1,0 +1,18 @@
+﻿SET !REPLAYSPEED fast
+SET !ERRORIGNORE YES
+CMDLINE !DATASOURCE useragents.txt
+SET !DATASOURCE_COLUMNS 1
+SET !DATASOURCE_LINE {{строка}}
+SET !USERAGENT {{!COL1}}
+SET !REPLAYSPEED medium
+			'скрин+отчет:
+						URL GOTO=https://m.avito.ru/profile
+						wait seconds=1
+						TAG POS=1 TYPE=A ATTR=HREF:https://m.avito.ru/profile/item/*
+						wait seconds=1
+						TAG POS=1 TYPE=SPAN ATTR=TXT:Показать<SP>полностью
+						SET !EXTRACT #{{строка}},<sp>{{!NOW:dd.mm.yyyy}}<sp>[{{!NOW:hh:nn}}],<sp>{{num}}<sp>{{телефон}}<sp>{{!URLCURRENT}}
+						'сохраняем все ето дело:
+						SAVEAS TYPE=EXTRACT FOLDER=* FILE={{имяПроекта}}-{{действие}}.txt
+						SCREENSHOT TYPE=Page FOLDER=C:\фотки-{{имяПроекта}}\скрины FILE={{строка}}--{{действие}}-{{имяПроекта}}-{{num}}-{{!NOW:dd.mm.yyyy}}-[{{!NOW:hh:nn}}]-{{телефон}}.jpg
+ 						wait seconds = 5

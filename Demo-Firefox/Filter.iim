@@ -1,0 +1,15 @@
+﻿VERSION  BUILD=7500718 RECORDER=FX
+TAB T=1
+'
+FILTER TYPE=IMAGES STATUS=ON 
+'
+URL GOTO=http://demo.imacros.net/Automate/Filter
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:form1 ATTR=NAME:textfield CONTENT="Image Filter ON (No images downloaded from server)"
+WAIT SECONDS=3
+'
+FILTER TYPE=IMAGES STATUS=OFF
+'
+REFRESH
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:form1 ATTR=NAME:textfield CONTENT="Image Filter OFF (Web page not filtered)"
+WAIT SECONDS=3
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:form1 ATTR=NAME:textfield CONTENT="Image Filter Test completed"

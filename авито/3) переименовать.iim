@@ -1,0 +1,8 @@
+﻿'ПЕРЕИМЕНОВАТЬ УЧЕТКУ
+URL GOTO=https://www.avito.ru/profile
+TAG POS=1 TYPE=A ATTR=TXT:Настройки
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:contacts_frm ATTR=ID:fld_name CONTENT=Надежда<SP>[8]<SP>[925]<SP>[044]<SP><SP>[3905]
+TAG POS=1 TYPE=SELECT FORM=ID:contacts_frm ATTR=ID:region&&NAME:locationId CONTENT=%0
+TAG POS=2 TYPE=STRONG ATTR=*
+TAG POS=1 TYPE=SELECT FORM=ID:contacts_frm ATTR=CLASS:contact-change&&NAME:metroId&&ID:metro_id CONTENT=%61
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ID:contacts_frm ATTR=*

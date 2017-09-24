@@ -1,0 +1,18 @@
+﻿//инста -комменты: 
+iimPlayCode(`URL GOTO=http://bosslike.ru/tasks/instagram/comment
+wait seconds=1
+TAG POS=1 TYPE=BUTTON ATTR=TXT:*баллов
+wait seconds=1`)
+
+if(iimPlayCode('TAG POS=1 TYPE=INPUT ATTR=NAME:taskComment* extract=txt')){alert(getLastExtract(1)}
+if(iimPlayCode('TAG POS=1 TYPE=DIV ATTR=TXT:Любой<SP>текст* extract=txt')){alert(getLastExtract(1)}
+
+iimPlayCode(`
+wait seconds=1
+TAG POS=1 TYPE=BUTTON ATTR=TXT:Оставить<SP>комментарий
+wait seconds=1
+TAB T=2
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=* CONTENT=={{!Extract}}
+wait seconds=1
+TAB T=1
+tab closeallothers`)

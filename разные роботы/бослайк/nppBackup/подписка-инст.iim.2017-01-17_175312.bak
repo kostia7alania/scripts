@@ -1,0 +1,10 @@
+﻿wait seconds=2
+URL GOTO=http://bosslike.ru/tasks/instagram/subscribe/
+wait seconds=2
+EVENT TYPE=CLICK SELECTOR="#task_list>DIV>DIV:nth-of-type(2)>ARTICLE>DIV>DIV>ASIDE>BUTTON" BUTTON=0
+wait seconds=2
+TAB T=2
+wait seconds=2
+EVENT TYPE=CLICK SELECTOR="#react-root>SECTION>MAIN>ARTICLE>HEADER>DIV:nth-of-type(2)>DIV>SPAN>SPAN>BUTTON" BUTTON=0
+wait seconds=4
+tab close

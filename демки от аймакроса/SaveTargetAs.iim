@@ -1,0 +1,19 @@
+﻿VERSION  BUILD=7500718 RECORDER=FX
+TAB T=1     
+URL GOTO=http://demo.imacros.net/Automate/SaveTargetAs
+'
+'Note: The SAVETARGETAS event is only available in the IM Browser, not the IE-Plugin    
+'
+'Download 1
+'
+'Define download folder and file
+ONDOWNLOAD FOLDER=*  FILE=+_pdf-file_{{!NOW:yyyymmdd_hhnnss}}  
+'TAG statement, the  CONTENT=EVENT:SAVETARGETAS part was added manually after recording
+TAG POS=1 TYPE=A ATTR=TXT:"Open PDF Document" CONTENT=EVENT:SAVETARGETAS
+'
+'Download 2
+'
+ONDOWNLOAD FOLDER=*  FILE=+_video-file_{{!NOW:yyyymmdd_hhnnss}} 
+TAG POS=1 TYPE=A ATTR=TXT:"Play Video"  CONTENT=EVENT:SAVETARGETAS
+
+ 

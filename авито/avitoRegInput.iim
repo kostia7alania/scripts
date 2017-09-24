@@ -1,0 +1,19 @@
+﻿SET !ERRORIGNORE YES
+clear
+SET !USERAGENT {{useragent}}
+TAB T=2
+URL GOTO=https://m.avito.ru/profile/
+URL GOTO=https://m.avito.ru/profile/registration
+wait seconds=3
+EVENT TYPE=CLICK SELECTOR="#name" BUTTON=0
+EVENTS TYPE=KEYPRESS SELECTOR="#email" KEYS="[8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8]"
+EVENTS TYPE=KEYPRESS SELECTOR="#email" CHARS="{{почта}}"
+CMDLINE !DATASOURCE names4reg.txt
+SET !DATASOURCE_COLUMNS 1
+SET !VAR1 EVAL("var s=Math.floor(Math.random()*100 + 1); s;")
+SET !DATASOURCE_LINE {{!VAR1}}
+SET имя {{!COL1}}
+EVENT TYPE=CLICK SELECTOR="#name" BUTTON=0
+EVENTS TYPE=KEYPRESS SELECTOR="#name" KEYS="[8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8]"
+EVENTS TYPE=KEYPRESS SELECTOR="#name" CHARS="{{имя}}"
+tab t=1

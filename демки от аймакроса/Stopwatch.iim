@@ -1,0 +1,41 @@
+﻿VERSION  BUILD=7500718 RECORDER=FX
+TAB T=1     
+'Change the default stopwatch file name:
+'The file is saved to iMacros DOWNLOAD folder
+'
+'SET !FILESTOPWATCH C:\Temp\demo-stopwatch.csv 
+'Note: Use SET !FILESTOPWATCH NO if you do NOT need a response time log file 
+'(for example, if you return the values to the Scripting Interface via iimGetStopwatch)   
+
+'
+'Start reponse time measurement  
+'Measure total macro runtime
+STOPWATCH ID=Total
+'Measure load time for first page
+STOPWATCH ID=Firstpage
+URL GOTO=http://demo.imacros.net/Automate/StopWatchDemo
+STOPWATCH ID=Firstpage 
+'
+'  
+TAG POS=1 TYPE=A ATTR=HREF:http://demo.imacros.net/Automate/AutoDataEntry   
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:demo ATTR=NAME:fname CONTENT=Tom 
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:demo ATTR=NAME:lname CONTENT=Tester 
+'Measure server reaction on submit
+STOPWATCH ID=SubmitData
+TAG POS=1 TYPE=BUTTON:SUBMIT FORM=ID:demo ATTR=TXT:Submit
+STOPWATCH ID=SubmitData 
+STOPWATCH ID=Store1
+'Measure time for secure Online store to open
+'go to store
+URL GOTO=http://www.iopus.com/imacros/
+TAG POS=1 TYPE=A ATTR=TXT:*Buy*
+'open store =>  start timer
+TAG POS=1 TYPE=A ATTR=TXT:Buy<SP>Now
+TAB T=2
+STOPWATCH ID=Store1
+'Measure time for second page  
+STOPWATCH ID=Total
+'
+WAIT SECONDS=2
+URL GOTO=http://demo.imacros.net/Automate/StopWatchReport
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:form1 ATTR=ID:path CONTENT="In iMacros Downloads folder"

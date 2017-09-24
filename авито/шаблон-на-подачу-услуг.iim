@@ -1,0 +1,133 @@
+﻿set папкаФоток C:\фотки-
+'set строка 16
+SET !TIMEOUT_STEP 1
+SET !REPLAYSPEED fast
+SET !ERRORIGNORE YES
+CMDLINE !DATASOURCE useragents.txt
+SET !DATASOURCE_COLUMNS 10
+SET !DATASOURCE_LINE {{строка}}
+SET !USERAGENT {{!COL1}}
+SET максЦена 1
+SET минЦена 1500
+			URL GOTO=https://m.avito.ru/profile
+	'=LoginG:
+			EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>FORM>DIV>DIV:nth-of-type(2)>DIV>INPUT" BUTTON=0
+			EVENTS TYPE=KEYPRESS SELECTOR="HTML>BODY>SECTION>FORM>DIV>DIV:nth-of-type(2)>DIV>INPUT" CHARS={{почта}}
+			EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>FORM>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>INPUT" BUTTON=0
+			EVENTS TYPE=KEYPRESS SELECTOR="HTML>BODY>SECTION>FORM>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>INPUT" CHARS={{пароль}}
+			EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>FORM>DIV:nth-of-type(3)>DIV>DIV>INPUT" BUTTON=0	
+			
+			SET !TIMEOUT_STEP 11
+			SET !REPLAYSPEED medium
+						URL GOTO=https://m.avito.ru/add
+			'каунт++ категорий:
+						SET !REPLAYSPEED fast
+						CMDLINE !DATASOURCE {{имяПроекта}}-внутреннийСчетчикКатегорий.txt
+						SET !DATASOURCE_LINE 1
+						Set счетчикКатегорий {{!COL1}}						
+						
+						CMDLINE !DATASOURCE {{имяПроекта}}-колличество-категорий.txt
+						SET !DATASOURCE_LINE 1
+						Set колличествоКатегорий {{!COL1}}						
+						ADD счетчикКатегорий 1 
+						
+						SET проверкаСчетчика EVAL("var s='{{счетчикКатегорий}}'; var b='{{колличествоКатегорий}}'; if(s>b){1} else s;")
+						SET !EXTRACT {{проверкаСчетчика}}
+						FILEDELETE NAME={{имяПроекта}}-внутреннийСчетчикКатегорий.txt
+						SAVEAS TYPE=EXTRACT FOLDER=* FILE={{имяПроекта}}-внутреннийСчетчикКатегорий.txt
+	
+	'заголовок:						
+						SET !DATASOURCE_DELIMITER ;
+						CMDLINE !DATASOURCE {{имяПроекта}}-заголовки-{{проверкаСчетчика}}.txt
+						SET !DATASOURCE_LINE {{строка}}
+						set заголовок {{!COL1}}
+						
+	'описание:
+						CMDLINE !DATASOURCE {{имяПроекта}}-описание-{{проверкаСчетчика}}.txt
+						SET !DATASOURCE_LINE {{строка}}
+						set описание {{!COL1}}
+
+	'Генерируем связанный ГОРОД или ид_МЕТРО:	
+						SET !DATASOURCE_DELIMITER ,
+						CMDLINE !DATASOURCE {{метроИлиГород}}
+						SET !DATASOURCE_LINE {{строка}}						
+						set город {{!COL1}}
+						set метроИлиПодГород {{!COL2}}
+						set метроСловами {{!COL3}}
+						
+	'ген метроИлиГородЗамануха--для ОПИСАЛОВА:
+						SET метроИлиГородЗамануха EVAL("var a='замануха-метро.txt'; var b='замануха-город.txt'; var s='{{метроИлиГород}}'; if(s=='all_metros.txt'){a;} else b;")
+						CMDLINE !DATASOURCE {{метроИлиГородЗамануха}}
+						SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*(690-1+1)+1); randomNumber;")
+						SET !DATASOURCE_LINE {{!VAR1}}
+						set началоМетроЗаманухи {{!col1}}
+						
+						CMDLINE !DATASOURCE замануха-конец.txt
+						SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*(690-1+1)+1); randomNumber;")
+						SET !DATASOURCE_LINE {{!VAR1}}
+						set конецМетроЗаманухи {{!col1}}
+						
+						set описалово {{описание}}{{началоМетроЗаманухи}}{{метроСловами}},{{конецМетроЗаманухи}}
+
+						SET !DATASOURCE_DELIMITER ,
+						CMDLINE !DATASOURCE {{имяПроекта}}-категории.txt
+						SET !DATASOURCE_LINE {{проверкаСчетчика}}
+						set категория1 {{!col1}}
+						set категория2 {{!col2}}
+						set категория3 {{!col3}}
+						set paramId {{!col4}}
+					
+						SET location EVAL("var a='metro_id'; var b='location_id'; var s='{{метроИлиГород}}'; if(s=='all_metros.txt'){a;} else b;")
+						
+						SET !REPLAYSPEED medium
+		''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'город:						
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:region_id CONTENT=%{{город}}						
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:{{location}} CONTENT=%{{метроИлиПодГород}}				
+'предложение услуг: 
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:category_id CONTENT=%{{категория1}}
+'категория услуг:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_716 CONTENT=%{{категория2}}
+'подкатегория услуг:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_{{paramId}} CONTENT=%{{категория3}}		
+						wait seconds=1
+			'описание и заголовок:
+						TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=ID:title CONTENT={{заголовок}}
+						TAG POS=1 TYPE=TEXTAREA FORM=NAME:NoFormName ATTR=ID:description CONTENT={{описалово}}
+			' ценник:
+						SET ценник EVAL("var randomNumber=Math.floor(Math.random()*({{максЦена}}-{{минЦена}}+1)+{{минЦена}}); randomNumber;")
+						TAG POS=1 TYPE=INPUT:NUMBER FORM=NAME:NoFormName ATTR=ID:price CONTENT={{ценник}}
+						
+	'каунт++ КАРТИНКи: 
+						CMDLINE !DATASOURCE {{папкаФоток}}{{имяПроекта}}\счетчик.txt
+						SET !DATASOURCE_LINE 1
+						Set счетчикКартинок {{!COL1}}
+ 			'КАРТИНКА: 
+'TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=ID:image_upload CONTENT={{папкаФоток}}{{имяПроекта}}\DSC-000{{счетчикКартинок}}.jpg
+ TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=NAME:image[] CONTENT={{папкаФоток}}{{имяПроекта}}\DSC-000{{счетчикКартинок}}.jpg
+						wait seconds=1
+						TAG POS=1 TYPE=BUTTON ATTR=TXT:OK
+						wait seconds=7
+	CLICK X=734 Y=363
+	set !EXTRACT NULL
+	TAG POS=1 TYPE=DIV ATTR=CLASS:popup-content extract=txt
+ 	set ошибкаЗагрузкиФото {{!EXTRACT}}
+
+	'клик по ПРОДОЛЖИТЬ:
+						SET !ERRORIGNORE NO
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+						TAG POS=1 TYPE=INPUT:RADIO FORM=NAME:NoFormName ATTR=ID:service_no
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_premium CONTENT=NO
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_vip CONTENT=NO
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_highlight CONTENT=NO
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+						
+		'в случае телег от авиты,чеб картинка не ккаунтировалась++;
+
+ 						ADD счетчикКартинок 1
+						Set !EXTRACT {{счетчикКартинок}}
+ 						FILEDELETE NAME={{папкаФоток}}{{имяПроекта}}\счетчик.txt
+						SAVEAS TYPE=EXTRACT FOLDER={{папкаФоток}}{{имяПроекта}} FILE=счетчик.txt
+ 			set !EXTRACT {{ошибкаЗагрузкиФото}}
+ 

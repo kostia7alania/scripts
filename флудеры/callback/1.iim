@@ -1,0 +1,6 @@
+﻿'set имя 1
+'set телефон 2
+URL GOTO=http://www.cvntr.ru/callback/
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=TYPE:text&&SIZE:35&&NAME:callback_name CONTENT={{имя}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=TYPE:text&&SIZE:20&&NAME:callback_number CONTENT={{телефон}}
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=TYPE:submit&&NAME:callback_btn&&VALUE:<SP><SP>Перезвоните<SP>мне<SP><SP>&&CLASS:blue-btn

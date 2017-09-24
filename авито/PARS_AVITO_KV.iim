@@ -1,0 +1,23 @@
+﻿proxy address=1.1.1.1:1
+TAG POS={{!loop}} TYPE=SPAN ATTR=CLASS:metro-name extract=txt
+set метро {{!Extract}}
+set !extract null
+
+TAG POS={{!loop}} TYPE=DIV ATTR=CLASS:param<SP>floor extract=txt
+set улица {{!Extract}}
+set !extract null
+
+TAG POS={{!loop}} TYPE=DIV ATTR=CLASS:fader extract=txt
+set метраж {{!Extract}}
+set !extract null
+
+TAG POS={{!loop}} TYPE=DIV ATTR=CLASS:param<SP>area extract=txt
+set этажность {{!Extract}}
+set !extract null
+
+TAG POS={{!loop}} TYPE=DIV ATTR=CLASS:metro-info__wrap-2 extract=txt
+set метроИрасстояние {{!Extract}}
+set !extract null
+
+set !extract {{метраж}},{{этажность}},{{метро}},{{улица}},{{метроИрасстояние}}
+SAVEAS TYPE=EXTRACT FOLDER=C:\ FILE=OTCHET_avito_kv_pars_addresa.txt

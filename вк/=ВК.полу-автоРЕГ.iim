@@ -1,0 +1,13 @@
+﻿URL GOTO=https://vk.com/
+TAG POS=1 TYPE=INPUT:TEXT ATTR=ID:ij_first_name CONTENT=тимур
+TAG POS=1 TYPE=INPUT:TEXT ATTR=ID:ij_last_name CONTENT=кудаков
+TAG POS=1 TYPE=BUTTON ATTR=ID:ij_submit
+TAG POS=1 TYPE=INPUT:TEXT ATTR=ID:join_phone CONTENT=79671351397
+'нажать продолжить как введешь номер
+pause
+TAG POS=1 TYPE=BUTTON ATTR=ID:join_send_phone
+'нажать продолжить как введешь KOd
+pause
+TAG POS=1 TYPE=BUTTON ATTR=ID:join_send_code
+TAG POS=1 TYPE=INPUT:TEXT ATTR=ID:join_pass CONTENT=kostia22
+ 

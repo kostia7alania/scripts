@@ -1,0 +1,269 @@
+﻿
+SET !REPLAYSPEED FAST 
+TAB T=1
+TAB CLOSEALLOTHERS
+SET !ERRORIGNORE YES
+SET "!WAITPAGECOMPLETE" YES
+SET !EXTRACT_TEST_POPUP NO
+SET !TIMEOUT_STEP 6
+SET !TIMEOUT_PAGE 66
+'===========обнуляем !экстракт:
+SET !EXTRACT NULL
+'===========чистим кеши и куки всего компа:
+clear
+'=========== смена юзерагента:
+CMDLINE !DATASOURCE useragents.txt
+'количество колонок в этом файле:
+SET !DATASOURCE_COLUMNS 1 
+SET !VAR3 EVAL("var s=Math.floor(Math.random()*147 + 1); s;")
+SET !DATASOURCE_LINE {{!VAR3}}
+SET !USERAGENT {{!COL1}}
+SET !REPLAYSPEED medium
+'=========== МЕНЯЕМ ИП = GO в роутер:
+ONLOGIN USER=admin PASSWORD=admin 
+URL GOTO=192.168.1.1
+'
+TAG POS=1 TYPE=A ATTR=HREF:http://192.168.1.1/#broadband.globals
+wait seconds=5
+'логирование старого ип:
+TAG POS=1 TYPE=TD ATTR=CLASS:td_address EXTRACT=TXT
+SET !VAR4 {{!EXTRACT}}
+'====сразу обнуляем !экстракт:
+SET !EXTRACT NULL
+'
+TAG POS=1 TYPE=TD ATTR=TXT:Internet
+wait seconds=2
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:editor ATTR=ID:editor_enabled CONTENT=NO
+TAG POS=1 TYPE=BUTTON FORM=ID:editor ATTR=ID:editor_submit
+wait seconds=2
+TAG POS=1 TYPE=TD ATTR=TXT:Internet
+wait seconds=2
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:editor ATTR=ID:editor_enabled CONTENT=YES
+TAG POS=1 TYPE=BUTTON FORM=ID:editor ATTR=ID:editor_submit
+'еще раз =проверяем птичку
+TAG POS=1 TYPE=A ATTR=HREF:http://192.168.1.1/#broadband.globals
+TAG POS=1 TYPE=TD ATTR=TXT:Internet
+wait seconds=2
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:editor ATTR=ID:editor_enabled CONTENT=YES
+TAG POS=1 TYPE=BUTTON FORM=ID:editor ATTR=ID:editor_submit
+'айпи успешно сменен, идем дальше:
+TAB CLOSEALLOTHERS
+TAB OPEN
+TAB T=2
+TAB CLOSEALLOTHERS
+URL GOTO=192.168.1.1
+TAG POS=1 TYPE=A ATTR=HREF:http://192.168.1.1/#broadband.globals
+TAG POS=1 TYPE=TD ATTR=TXT:Internet
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:editor ATTR=ID:editor_enabled CONTENT=YES
+TAG POS=1 TYPE=BUTTON FORM=ID:editor ATTR=ID:editor_submit
+'еще раз =проверяем птичку
+SET !TIMEOUT_STEP 15
+URL GOTO=http://192.168.1.1/#broadband.globals
+TAG POS=1 TYPE=TD ATTR=TXT:Internet
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:editor ATTR=ID:editor_enabled CONTENT=YES
+TAG POS=1 TYPE=BUTTON FORM=ID:editor ATTR=ID:editor_submit
+'логирование айпи: 
+wait seconds=15
+TAG POS=1 TYPE=TD ATTR=CLASS:td_address EXTRACT=TXT
+SET !VAR5 {{!EXTRACT}}
+'======срау жжеж обнуляем !экстракт:
+SET !EXTRACT NULL
+'11111111111111111111111111111111111111111111 = START:
+TAB CLOSEALLOTHERS
+wait seconds=2
+URL GOTO=https://www.avito.ru/
+wait seconds=2
+URL GOTO=https://www.avito.ru/
+wait seconds=2
+'===================
+CMDLINE !DATASOURCE logINs.txt 
+'количество колонок в этом файле:
+SET !DATASOURCE_COLUMNS 1 
+'из какой строки по счету нужно извлечь инф:
+SET !LOOP 1
+'Команда счетчика вообщем, при увеличении LOOP будет переходит на следующую строку 
+SET !DATASOURCE_LINE {{!LOOP}}
+'logIN:
+TAG POS=1 TYPE=A ATTR=CLASS:btn<SP>btn-yellow&&HREF://www.avito.ru/profile
+URL GOTO=https://www.avito.ru/profile/login?next=%2Fprofile
+'====
+EVENTS TYPE=KEYPRESS SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV>DIV>DIV>DIV>FORM>DIV>DIV>INPUT" CHARS={{!COL1}}
+wait seconds=3 
+'MASTERCLASS!!-->>
+TAG POS=1 TYPE=INPUT:EMAIL FORM=ACTION:/profile/login ATTR=NAME:login CONTENT={{!COL1}}
+SET !VAR2 {{!COL1}}
+'=опять мастер-класС:
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=ACTION:/profile/login ATTR=NAME:password CONTENT=kostia22
+TAG POS=1 TYPE=BUTTON FORM=ACTION:/profile/login ATTR=TXT:Войти
+'
+'
+'=все. мы внутри
+'
+'
+URL GOTO=https://www.avito.ru/profile
+TAG POS=1 TYPE=A ATTR=TXT:Подать<SP>объявление
+'на всякий случай -принудительно го по урл
+URL GOTO=https://www.avito.ru/additem/
+'го ниже
+URL GOTO=javascript:window.scrollBy(0,200)
+TAG POS=1 TYPE=SPAN ATTR=TXT:Недвижимость
+'TAG POS=2 TYPE=INPUT:RADIO FORM=NAME:NoFormName ATTR=NAME:root_category_id
+TAG POS=1 TYPE=SPAN ATTR=TXT:Квартиры
+'TAG POS=6 TYPE=INPUT:RADIO FORM=NAME:NoFormName ATTR=NAME:category_id
+TAG POS=1 TYPE=SPAN ATTR=TXT:Сдам
+'TAG POS=2 TYPE=INPUT:RADIO FORM=NAME:NoFormName ATTR=NAME:params[201]
+TAG POS=1 TYPE=SPAN ATTR=TXT:Посуточно
+'го ниже
+URL GOTO=javascript:window.scrollBy(0,200)
+TAG POS=2 TYPE=INPUT:RADIO FORM=NAME:NoFormName ATTR=NAME:params[504]
+TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=NAME:location_id CONTENT=%0
+TAG POS=1 TYPE=STRONG ATTR=TXT:Москва
+SET !REPLAYSPEED FAST 
+'Генерируем случайный АДРЕС+МЕТРО:
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*200 + 1); randomNumber;")
+'Генерируем Адрес
+CMDLINE !DATASOURCE metro+addr.txt
+'количество колонок в этом файле:
+SET !DATASOURCE_COLUMNS 2
+SET !DATASOURCE_LINE {{!VAR1}}
+TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:fld_metro_id CONTENT=%{{!COL1}}
+TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=NAME:metro_id CONTENT=%{{!COL1}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=ID:flt_param_address CONTENT={{!COL2}}
+TAG POS=2 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=NAME:params[493] CONTENT={{!COL2}}
+URL GOTO=javascript:window.scrollBy(0,200)
+'комнаты и кирпичности:
+TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:flt_param_550 CONTENT=%5703
+TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:flt_param_503 CONTENT=%5249
+'генерируем этажи и этажности
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*7 + 2); randomNumber;")
+EVENT TYPE=MOUSEDOWN SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV>DIV>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(3)>DIV>SELECT" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV>DIV>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(3)>DIV>SELECT>OPTION:nth-of-type({{!VAR1}})" BUTTON=0
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*27 + 7); randomNumber;")
+EVENT TYPE=MOUSEDOWN SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV>DIV>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(4)>DIV>SELECT" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV>DIV>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV:nth-of-type(4)>DIV>SELECT>OPTION:nth-of-type({{!VAR1}})" BUTTON=0
+'Генерируем метраж кв
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*35 + 20); randomNumber;")
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=ID:flt_param_500 CONTENT={{!VAR1}}
+'го ниже
+URL GOTO=javascript:window.scrollBy(0,200)
+'Генерируем диваны и спальни
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*2 + 5); randomNumber;")
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV>DIV>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(5)>DIV>DIV>DIV>DIV>SELECT" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV>DIV>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(5)>DIV>DIV>DIV>DIV>SELECT>OPTION:nth-of-type({{!VAR1}})" BUTTON=0
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*2 + 5); randomNumber;")
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV>DIV>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(5)>DIV>DIV>DIV:nth-of-type(2)>DIV>SELECT" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV>DIV>FORM>DIV:nth-of-type(4)>DIV:nth-of-type(5)>DIV>DIV>DIV:nth-of-type(2)>DIV>SELECT>OPTION:nth-of-type({{!VAR1}})" BUTTON=0
+'го ниже
+URL GOTO=javascript:window.scrollBy(0,200)
+'го ниже
+URL GOTO=javascript:window.scrollBy(0,200)
+'ставим птички:
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1352][0][1353][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Телевизор
+TAG POS=2 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1352][0][1353][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Кабельное<SP>/<SP>цифровое<SP>ТВ
+TAG POS=3 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1352][0][1353][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Плита
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1354][0][1355][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Микроволновка
+TAG POS=2 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1354][0][1355][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Холодильник
+TAG POS=3 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1354][0][1355][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Стиральная<SP>машина
+TAG POS=4 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1354][0][1355][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Фен
+TAG POS=5 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1354][0][1355][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Утюг
+TAG POS=6 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1354][0][1355][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Кондиционер
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1356][0][1357][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Камин
+TAG POS=2 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1356][0][1357][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Балкон<SP>/<SP>лоджия
+TAG POS=3 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1356][0][1357][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Парковочное<SP>место
+TAG POS=4 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1356][0][1357][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Можно<SP>с<SP>питомцами
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1358][0][1359][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Можно<SP>с<SP>детьми
+TAG POS=2 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1358][0][1359][] CONTENT=YES
+TAG POS=1 TYPE=SPAN ATTR=TXT:Можно<SP>для<SP>мероприятий
+TAG POS=3 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1358][0][1359][] CONTENT=YES
+TAG POS=6 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=NAME:params[1354][0][1355][] CONTENT=YES
+SET !REPLAYSPEED medium
+'го ниже
+URL GOTO=javascript:window.scrollBy(0,200)
+'го ниже
+URL GOTO=javascript:window.scrollBy(0,200)
+'генерируем описание:
+SET !DATASOURCE_DELIMITER ;
+CMDLINE !DATASOURCE 5_объяв_недвижка.txt
+SET !DATASOURCE_COLUMNS 1
+SET !DATASOURCE_LINE {{!LOOP}}
+TAG POS=1 TYPE=TEXTAREA FORM=NAME:NoFormName ATTR=ID:item-edit__description CONTENT={{!COL1}}
+'Генерируем ценник:
+SET !VAR1 EVAL("var randomNumber=Math.floor((Math.random()*2222-1444)+1444); randomNumber;")
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=ID:item-edit__price CONTENT={{!VAR1}}
+'генерируем картинку:
+TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=NAME:image CONTENT=C:\Users\user\OneDrive\avito.ru\FirefoxPortable\Data\profile\iMacros\Datasources\5_img_nedv\dsc{{!LOOP}}.jpg
+'генерируем картинку2:
+TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=NAME:image CONTENT=C:\Users\user\OneDrive\avito.ru\FirefoxPortable\Data\profile\iMacros\Datasources\5_img_nedv\2dsc{{!LOOP}}.jpg
+'обычная продажа+птички убираем
+TAG POS=1 TYPE=SPAN ATTR=TXT:Обычная<SP>продажа
+TAG POS=1 TYPE=INPUT:RADIO FORM=NAME:NoFormName ATTR=ID:pack3
+TAG POS=1 TYPE=BUTTON FORM=NAME:NoFormName ATTR=TXT:Продолжить<SP>с<SP>пакетом<SP>«Обычная<SP>продажа»
+TAG POS=1 TYPE=DIV ATTR=TXT:Объявление<SP>будет<SP>показываться<SP>на<SP>самом<SP>заметн*
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ACTION:/additem/confirm ATTR=ID:service-premium CONTENT=NO
+TAG POS=1 TYPE=DIV ATTR=TXT:VIP-статус
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ACTION:/additem/confirm ATTR=ID:service-vip CONTENT=NO
+TAG POS=1 TYPE=DIV ATTR=TXT:Выделить<SP>объявление
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ACTION:/additem/confirm ATTR=ID:service-highlight CONTENT=NO
+'го ниже:
+URL GOTO=javascript:window.scrollBy(0,200)
+'переходим к КАПЧЕ:
+FILTER TYPE=IMAGES STATUS=OFF
+ONDOWNLOAD FOLDER=C:\Users\user\OneDrive\avito.ru\FirefoxPortable\Data\profile\iMacros\Datasources\ FILE=cap.jpg WAIT=YES
+TAG POS=1 TYPE=IMG ATTR=SRC:https://www.avito.ru/captcha?* CONTENT=EVENT:SAVE_ELEMENT_SCREENSHOT
+TAB OPEN
+TAB T=2
+URL GOTO=http://imacros2.rucaptcha.com/new/
+TAG POS=1 TYPE=INPUT:TEXT ATTR=NAME:key CONTENT=6440c629b2418bf14c6ca56d0e7e21d0
+TAG POS=1 TYPE=INPUT:FILE ATTR=NAME:file CONTENT=C:\Users\user\OneDrive\avito.ru\FirefoxPortable\Data\profile\iMacros\Datasources\cap.jpg
+ONDIALOG POS=1 BUTTON=OK CONTENT=
+TAG POS=1 TYPE=INPUT:SUBMIT ATTR=*
+WAIT SECONDS=5
+TAG POS=1 TYPE=* ATTR=TXT:* EXTRACT=TXT
+TAB T=1
+TAB CLOSEALLOTHERS  
+EVENTS TYPE=KEYPRESS SELECTOR="#captcha" CHARS={{!EXTRACT}}
+'''или так: (если не вставляется)
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/additem/confirm ATTR=NAME:captcha CONTENT={{!EXTRACT}}
+WAIT SECONDS=10
+'далее
+TAG POS=1 TYPE=BUTTON FORM=ACTION:/additem/confirm ATTR=NAME:done
+'=все!;
+'ИЗВЛЕЧ текущий урл и записать в файл
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV>DIV>DIV>DIV>P>A" BUTTON=0
+wait seconds=2
+SET !VAR1 NULL
+ADD !VAR1 {{!URLCURRENT}}
+''''
+''''
+''''    ====    и так-начинаем собирать отчет:     ====
+SET !EXTRACT NULL
+'=== в отчет -номер шага:(здесь ее поставил ---ибо до этого могли проиойти много др сбоев));-чеб не писать лишние строки в лог));
+ADD !EXTRACT {{!LOOP}}
+'=== url:
+ADD !EXTRACT {{!VAR1}}
+'=== logINs:
+ADD !EXTRACT {{!var2}}
+'=== id-userAGENTa;
+ADD !EXTRACT {{!VAR3}}
+'=== старый ип)):
+ADD !EXTRACT {{!VAR4}}
+'=== новый ип)):
+ADD !EXTRACT {{!VAR5}}
+' +дату
+ADD !EXTRACT {{!NOW:ДАТА=dd.mm.yyyy-hh:nn}}
+'сохраняем все ето дело:
+SAVEAS TYPE=EXTRACT FOLDER=C:\Users\user\OneDrive\avito.ru\FirefoxPortable\Data\profile\iMacros\Datasources\ FILE=otchetREG.txt

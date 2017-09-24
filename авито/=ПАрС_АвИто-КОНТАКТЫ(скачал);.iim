@@ -1,0 +1,823 @@
+﻿set !replayspeed fast
+SET !EXTRACT_TEST_POPUP NO
+VERSION BUILD=8300326 RECORDER=FX
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+WAIT SECONDS=3
+TAG POS=1  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}} 
+ 
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+set отчет {{!Extract}}
+set !extract null
+TAG POS=1 TYPE=DIV ATTR=CLASS:person-name<SP>js-person-name EXTRACT=txt
+add отчет {{!Extract}}
+set !extract null
+TAG POS=1 TYPE=DIV ATTR=CLASS:item-id EXTRACT=txt
+add отчет {{!Extract}}
+set !extract null
+TAG POS=1 TYPE=SPAN ATTR=CLASS:avito-address-text EXTRACT=txt
+add отчет {{!Extract}}
+set !extract {{отчет}}
+WAIT SECONDS=3
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345.txt
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=2  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+ 
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=3  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=4  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=5  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=6  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=7  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=8  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=9  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=10  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=11  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=12  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=13  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=14  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=15  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=16  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=17  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=18  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=19  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=20  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=21  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+
+SET !ERRORIGNORE YES
+SET !ERRORCONTINUE YES
+TAB T=1
+'URL GOTO=http://m.avito.ru/kostromskaya_oblast/kvartiry
+WAIT SECONDS=3
+TAG POS=22  TYPE=A ATTR=CLASS:item-link EXTRACT=HREF
+SET !VAR2 {{!EXTRACT}}
+SET !EXTRACT NULL
+TAB OPEN
+TAB T=2
+URL GOTO={{!VAR2}}
+SET !EXTRACT_TEST_POPUP NO
+'URL GOTO=http://m.avito.ru/krasnoe-na-volge/kvartiry/2-k_kvartira_46_m_12_et._290886196
+'Complete Page TEXT only
+TAG POS=1 TYPE=A ATTR=TXT:Показать<SP>номер
+'EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>ARTICLE>SECTION:nth-of-type(3)>UL>LI>A" BUTTON=0
+'TAG POS=1 TYPE=A ATTR=TXT:8*
+'TAG POS=1 TYPE=SPAN ATTR=CLASS:button-text action-link link pageNoFollow_hilite&&TXT:* EXTRACT=HTM  
+'TAG POS=1 TYPE=A ATTR=TXT:HREF<SP>Телефон продавца<SP>links EXTRACT=HREF 
+TAG POS=1 TYPE=A ATTR=TXT:8* EXTRACT=HREF 
+SET !EXTRACT_TEST_POPUP NO
+WAIT SECONDS=3
+'ADD !EXTRACT {{!HREF }}
+
+'вывод на экран не обязателен, только для отладки, можно выкинуть из кода.
+'PROMPT {{!EXTRACT}}
+'сохранение в файл по умолчанию в папку c iМacros, в папку"Downloads"
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=12345
+'вместо звездочек можно указать свои данные, тогда имя и путь к файлу изменятся.
+SET !EXTRACT NULL
+TAB CLOSE
+TAB T=1
+'BACK
+'WAIT SECONDS=3
+'BACK
+WAIT SECONDS=3
+
+
+TAG POS=1 TYPE=A ATTR=TXT:Следующие

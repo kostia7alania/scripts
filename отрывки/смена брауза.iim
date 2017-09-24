@@ -1,0 +1,12 @@
+﻿SET "!WAITPAGECOMPLETE" YES 
+'выбираем юзерагента:
+SET !REPLAYSPEED FAST 
+prompt {{!USERAGENT}}
+CMDLINE !DATASOURCE useragents.txt
+'количество колонок в этом файле:
+SET !DATASOURCE_COLUMNS 1 
+SET !VAR3 EVAL("var s=Math.floor(Math.random()*147 + 1); s;")
+SET !DATASOURCE_LINE {{!VAR3}}
+SET !USERAGENT {{!COL1}}
+prompt {{!COL1}}
+SET !FILELOG C:\imacrosss.log

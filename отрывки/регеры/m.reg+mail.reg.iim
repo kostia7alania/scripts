@@ -1,0 +1,154 @@
+﻿SET !REPLAYSPEED FAST 
+
+'с какого начать:
+SET !LOOP 1
+
+'===берем тел+почту из файла;
+CMDLINE !DATASOURCE tel+mail.txt
+SET !DATASOURCE_COLUMNS 2
+SET !DATASOURCE_LINE {{!LOOP}}
+SET телефон {{!COL1}}
+SET почта {{!COL2}}
+
+'===берем имя1 и имя2;
+CMDLINE !DATASOURCE names4reg.txt
+SET !DATASOURCE_COLUMNS 1
+SET !VAR1 EVAL("var s=Math.floor(Math.random()*100 + 1); s;")
+SET !VAR2 EVAL("var s=Math.floor(Math.random()*100 + 1); s;")
+SET !DATASOURCE_LINE {{!VAR1}}
+SET имя1 {{!COL1}}
+SET !DATASOURCE_LINE {{!VAR2}}
+SET имя2 {{!COL1}}
+
+
+TAB T=1
+TAB CLOSEALLOTHERS
+SET !ERRORIGNORE YES
+SET "!WAITPAGECOMPLETE" YES
+SET !EXTRACT_TEST_POPUP NO
+SET !TIMEOUT_STEP 6
+SET !TIMEOUT_PAGE 6
+'===========обнуляем !экстракт:
+SET !EXTRACT NULL
+'===========чистим кеши и куки всего компа:
+clear
+'=========== смена юзерагента:
+CMDLINE !DATASOURCE useragents.txt
+'количество колонок в этом файле:
+SET !DATASOURCE_COLUMNS 1 
+SET browser_id EVAL("var s=Math.floor(Math.random()*147 + 1); s;")
+SET !DATASOURCE_LINE {{browser_id}}
+SET !USERAGENT {{!COL1}}
+'=========== МЕНЯЕМ ИП = GO в роутер:
+ONLOGIN USER=admin PASSWORD=admin 
+URL GOTO=192.168.1.1
+SET !REPLAYSPEED medium
+TAG POS=1 TYPE=A ATTR=HREF:http://192.168.1.1/#broadband.globals
+'wait seconds=5
+'логирование старого ип:
+TAG POS=1 TYPE=TD ATTR=CLASS:td_address EXTRACT=TXT
+SET old_ip {{!EXTRACT}}
+'====сразу обнуляем !экстракт:
+SET !EXTRACT NULL
+'
+TAG POS=1 TYPE=TD ATTR=TXT:Internet
+wait seconds=2
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:editor ATTR=ID:editor_enabled CONTENT=NO
+TAG POS=1 TYPE=BUTTON FORM=ID:editor ATTR=ID:editor_submit
+wait seconds=2
+TAG POS=1 TYPE=TD ATTR=TXT:Internet
+wait seconds=2
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:editor ATTR=ID:editor_enabled CONTENT=YES
+TAG POS=1 TYPE=BUTTON FORM=ID:editor ATTR=ID:editor_submit
+'айпи успешно сменен, идем дальше:
+TAB CLOSEALLOTHERS
+TAB OPEN
+TAB T=2
+TAB CLOSEALLOTHERS
+URL GOTO=192.168.1.1
+TAG POS=1 TYPE=A ATTR=HREF:http://192.168.1.1/#broadband.globals
+TAG POS=1 TYPE=TD ATTR=TXT:Internet
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:editor ATTR=ID:editor_enabled CONTENT=YES
+TAG POS=1 TYPE=BUTTON FORM=ID:editor ATTR=ID:editor_submit
+'логирование айпи: 
+wait seconds=21
+SET !REPLAYSPEED FAST 
+TAG POS=1 TYPE=TD ATTR=CLASS:td_address EXTRACT=TXT
+SET new_ip {{!EXTRACT}}
+'======срау жжеж обнуляем !экстракт:
+SET !EXTRACT NULL
+'11111111111111111111111111111111111111111111 = START РЕГИСТРИРУЕМ МЭИЛ:
+
+
+
+'let"s го регать почту!!;
+
+URL GOTO=https://m.mail.ru/cgi-bin/signup
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:reg ATTR=TYPE:ID:Username CONTENT={{почта}}
+TAG POS=2 TYPE=INPUT:TEXT FORM=ACTION:reg ATTR=TYPE:ID:id-x_* CONTENT={{имя1}}
+TAG POS=3 TYPE=INPUT:TEXT FORM=ACTION:reg ATTR=TYPE:ID:id-x_* CONTENT={{имя2}}
+TAG POS=1 TYPE=INPUT:RADIO FORM=ACTION:reg ATTR=TYPE:radio&&VALUE:1
+SET !TIMEOUT_STEP 0
+TAG POS=1 TYPE=INPUT:NUMBER FORM=ACTION:reg ATTR=TYPE:number&&PLACEHOLDER:ДД&&SIZE:2&&VALUE:&&NAME:x_*&&CLASS:birthday&&STEP:1&&MAX:31&&MIN:1 CONTENT=5
+TAG POS=1 TYPE=SELECT FORM=ACTION:reg ATTR=NAME:BirthMonth CONTENT=%4
+TAG POS=1 TYPE=INPUT:NUMBER FORM=ACTION:reg ATTR=TYPE:number&&PLACEHOLDER:ГГГГ&&SIZE:4&&VALUE:&&NAME:x_*&&CLASS:birthyear&&STEP:1&&MAX:2016&&MIN:1910 CONTENT=1996
+
+
+
+
+TAG POS=1 TYPE=INPUT:NUMBER FORM=ACTION:reg ATTR=TYPE:number&&PLACEHOLDER:ДД&&SIZE:2&&VALUE:&&NAME:x_*&&CLASS:birthday&&STEP:1&&MAX:31&&MIN:1 CONTENT=3
+TAG POS=1 TYPE=SELECT FORM=ACTION:reg ATTR=NAME:BirthMonth CONTENT=%5
+TAG POS=1 TYPE=INPUT:NUMBER FORM=ACTION:reg ATTR=TYPE:number&&PLACEHOLDER:ГГГГ&&SIZE:4&&VALUE:&&NAME:x_*&&CLASS:birthyear&&STEP:1&&MAX:2016&&MIN:1910 CONTENT=1917
+
+TAG POS=1 TYPE=INPUT:NUMBER FORM=ACTION:reg ATTR=TYPE:number&&PLACEHOLDER:DD&&SIZE:2&&VALUE:&&NAME:x_*&&CLASS:birthday&&STEP:1&&MAX:31&&MIN:1 CONTENT=5
+TAG POS=1 TYPE=SELECT FORM=ACTION:reg ATTR=NAME:BirthMonth CONTENT=%3
+TAG POS=1 TYPE=INPUT:NUMBER FORM=ACTION:reg ATTR=TYPE:number&&PLACEHOLDER:YYYY&&SIZE:4&&VALUE:&&NAME:x_*&&CLASS:birthyear&&STEP:1&&MAX:2016&&MIN:1910 CONTENT=1992
+SET !TIMEOUT_STEP 5
+SET !REPLAYSPEED medium
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:reg ATTR=TYPE:submit&&VALUE:Далее
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:reg ATTR=TYPE:submit&&VALUE:Next
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:reg ATTR=TYPE:text&&VALUE:&&NAME:x_*&&MAXLENGTH:40&&AUTOCOMPLETE:off&&ID:password&&TABINDEX:1 CONTENT=kostia22
+TAG POS=1 TYPE=INPUT:TEL FORM=ACTION:reg ATTR=TYPE:tel&&VALUE:&&NAME:RemindPhone&&TABINDEX:2&&ID:phone CONTENT={{телефон}}
+TAG POS=1 TYPE=BUTTON FORM=ACTION:reg ATTR=VALUE:2&&NAME:RegStep&&TABINDEX:3&&CLASS:button-next
+
+'11111111111111111111111111111111111111111111 = START РЕГИСТРИРУЕМ М.АВИТО:
+URL GOTO=https://m.avito.ru/profile/registration?next=%2Fprofile
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=ID:name CONTENT={{имя1}}
+TAG POS=1 TYPE=INPUT:TEL FORM=NAME:NoFormName ATTR=ID:phone CONTENT={{телефон}}
+TAG POS=1 TYPE=INPUT:EMAIL FORM=NAME:NoFormName ATTR=ID:email CONTENT={{почта}}
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=NAME:NoFormName ATTR=ID:password CONTENT=kostia22
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=NAME:NoFormName ATTR=ID:confirm CONTENT=kostia22
+
+prompt ВВОДИ_КАПЧУ-и-ЖМИ-КОНТИНУЕ_!!
+pause
+
+TAG POS=1 TYPE=BUTTON FORM=NAME:NoFormName ATTR=TXT:Зарегистрироваться
+TAG POS=1 TYPE=BUTTON FORM=NAME:NoFormName ATTR=TXT:Получить<SP>код
+prompt ВВЕДИ_КОД_с_телефона!и_ЖМИ_КОНТИНУЕ
+pause
+TAG POS=1 TYPE=BUTTON FORM=NAME:NoFormName ATTR=TXT:Подтвердить
+'
+
+'ГО АКТИВИРОВАТЬ В ПОЧТ!У!!ж;
+URL GOTO=https://m.mail.ru/login
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:* ATTR=TYPE:text&&CLASS:w80p&&VALUE:* CONTENT={{почта}}
+SET !ENCRYPTION NO
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=ACTION:* ATTR=TYPE:password&&MAXLENGTH:40&&CLASS:w80p&&NAME:Password CONTENT=kostia22
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:* ATTR=TYPE:submit&&VALUE:Войти
+URL GOTO=https://m.mail.ru/messages/inbox/?back=1
+TAG POS=1 TYPE=SPAN ATTR=TXT:Пожалуйста,<SP>подтвердите<SP>свою<SP>регистрацию
+TAG POS=1 TYPE=A ATTR=TXT:https://www.avito.ru/registration/confirm/*
+
+
+
+''''    ====    отчет:     ====
+'имя1
+'имя2
+'телефон
+'почта
+'old_ip
+'new_ip
+'browser_id
+set отчет "#{{!LOOP}}, {{телефон}}, {{почта}}, дата: {{!NOW:ДАТА=dd.mm.yyyy-hh:nn}}, Браузер: {{browser_id}}, старый: {{old_ip}}, новый: {{new_ip}}"
+set !EXTRACT {{отчет}}
+SAVEAS TYPE=EXTRACT FOLDER=C:\ FILE=otchetREG.txt

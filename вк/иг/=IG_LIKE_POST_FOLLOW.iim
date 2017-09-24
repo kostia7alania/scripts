@@ -1,0 +1,45 @@
+﻿set !loop 73
+SET !ERRORIGNORE YES
+SET "!WAITPAGECOMPLETE" YES
+SET !EXTRACT_TEST_POPUP NO
+SET !TIMEOUT_STEP 10
+SET !TIMEOUT_PAGE 30
+SET !TIMEOUT_TAG 1
+
+SET !VAR0 EVAL("var s=Math.floor(Math.random()*15 + 1); s;")
+SET !VAR1 EVAL("var s=Math.floor(Math.random()*10 + 1); s;")
+SET !VAR2 EVAL("var s=Math.floor(Math.random()*7 + 1); s;")
+SET !VAR3 EVAL("var s=Math.floor(Math.random()*3 + 1); s;")
+SET !VAR4 EVAL("var s=Math.floor(Math.random()*2610 + 1); s;")
+
+CMDLINE !DATASOURCE vedma.txt
+SET !DATASOURCE_COLUMNS 1
+SET !DATASOURCE_LINE {{!VAR4}}
+set объявы {{!COL1}}
+
+'===берем имя1 и имя2;
+CMDLINE !DATASOURCE ig.txt
+SET !DATASOURCE_COLUMNS 1
+SET !DATASOURCE_LINE {{!LOOP}}
+URL GOTO=https://www.instagram.com/{{!COL1}}
+'клик по 1 фотке
+TAG POS=1 TYPE=DIV ATTR=DATA-REACTID:*$mostRecentSection/=*&&CLASS:_ovg3g&&TXT:
+wait seconds = {{!VAR1}}
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(2)>DIV>DIV:nth-of-type(2)>DIV>ARTICLE>DIV:nth-of-type(2)>SECTION:nth-of-type(2)>FORM>INPUT" BUTTON=0
+EVENTS TYPE=KEYPRESS SELECTOR="HTML>BODY>DIV:nth-of-type(2)>DIV>DIV:nth-of-type(2)>DIV>ARTICLE>DIV:nth-of-type(2)>SECTION:nth-of-type(2)>FORM>INPUT" CHARS="{{объявы}}"
+EVENT TYPE=KEYPRESS SELECTOR="HTML>BODY>DIV:nth-of-type(2)>DIV>DIV:nth-of-type(2)>DIV>ARTICLE>DIV:nth-of-type(2)>SECTION:nth-of-type(2)>FORM>INPUT" KEY=13
+wait seconds = {{!VAR2}}
+TAG POS=1 TYPE=A ATTR=TXT:Next
+TAG POS=1 TYPE=A ATTR=TXT:Next
+TAG POS=1 TYPE=BUTTON ATTR=TXT:Follow
+TAG POS=1 TYPE=A ATTR=TXT:Like
+TAG POS=1 TYPE=A ATTR=TXT:Next
+TAG POS=1 TYPE=A ATTR=TXT:Like
+TAG POS=1 TYPE=A ATTR=TXT:Next
+TAG POS=1 TYPE=A ATTR=TXT:Next
+wait seconds = {{!VAR3}}
+TAG POS=1 TYPE=A ATTR=TXT:Next
+TAG POS=1 TYPE=A ATTR=TXT:Next
+TAG POS=1 TYPE=A ATTR=TXT:Next
+TAG POS=1 TYPE=A ATTR=TXT:Like
+wait seconds = {{!VAR0}}

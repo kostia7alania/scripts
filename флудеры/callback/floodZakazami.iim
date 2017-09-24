@@ -1,0 +1,49 @@
+﻿SET !ERRORIGNORE YES
+
+CMDLINE !DATASOURCE useragents.txt
+SET !VAR1 EVAL("var s=Math.floor(Math.random()*900 + 1); s;")
+SET !DATASOURCE_LINE {{!VAR1}}
+SET !USERAGENT {{!COL1}}
+
+URL GOTO=http://www.ds-pirog.ru/
+
+CMDLINE !DATASOURCE names4reg.txt
+SET !VAR1 EVAL("var s=Math.floor(Math.random()*100 + 1); s;")
+SET !DATASOURCE_LINE {{!VAR1}}
+set имя {{!COL1}}
+
+CMDLINE !DATASOURCE tels.txt
+SET !VAR1 EVAL("var s=Math.floor(Math.random()*149 + 1); s;")
+SET !DATASOURCE_LINE {{!VAR1}}
+set номер {{!COL1}}
+
+
+
+SET !TIMEOUT_STEP 0 
+
+SET пирог1 EVAL("var s=Math.floor(Math.random()*36 + 1); s;")
+SET пирог2 EVAL("var s=Math.floor(Math.random()*36 + 1); s;")
+TAG POS={{пирог1}} TYPE=DIV ATTR=TITLE:Добавить<SP>в<SP>корзину<SP>1<SP>ед.<SP>товара&&CLASS:r&&TXT:
+TAG POS={{пирог2}} TYPE=DIV ATTR=TITLE:Добавить<SP>в<SP>корзину<SP>1<SP>ед.<SP>товара&&CLASS:r&&TXT:
+
+
+SET пирог3 EVAL("var s=Math.floor(Math.random()*36 + 1); s;")
+SET пирог4 EVAL("var s=Math.floor(Math.random()*36 + 1); s;") 
+TAG POS={{пирог3}} TYPE=DIV ATTR=TITLE:Добавить<SP>в<SP>корзину<SP>1<SP>ед.<SP>товара&&CLASS:r&&TXT:
+TAG POS={{пирог4}} TYPE=DIV ATTR=TITLE:Добавить<SP>в<SP>корзину<SP>1<SP>ед.<SP>товара&&CLASS:r&&TXT:
+
+SET пирог5 EVAL("var s=Math.floor(Math.random()*36 + 1); s;")
+SET пирог6 EVAL("var s=Math.floor(Math.random()*36 + 1); s;")
+TAG POS={{пирог5}} TYPE=DIV ATTR=TITLE:Добавить<SP>в<SP>корзину<SP>1<SP>ед.<SP>товара&&CLASS:r&&TXT:
+TAG POS={{пирог6}} TYPE=DIV ATTR=TITLE:Добавить<SP>в<SP>корзину<SP>1<SP>ед.<SP>товара&&CLASS:r&&TXT:
+
+wait seconds=1
+TAG POS=1 TYPE=A ATTR=TXT:Заказать
+wait seconds=1
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:https://auth.robokassa.ru/Merchant/Index.aspx?MerchantLogin=dspirog&* ATTR=NAME:fio CONTENT={{имя}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:https://auth.robokassa.ru/Merchant/Index.aspx?MerchantLogin=dspirog&* ATTR=NAME:mail CONTENT=
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:https://auth.robokassa.ru/Merchant/Index.aspx?MerchantLogin=dspirog&* ATTR=NAME:tel CONTENT={{номер}}
+TAG POS=1 TYPE=TEXTAREA FORM=ACTION:https://auth.robokassa.ru/Merchant/Index.aspx?MerchantLogin=dspirog&* ATTR=NAME:adres CONTENT=<br>
+wait seconds=1
+TAG POS=1 TYPE=INPUT:BUTTON FORM=ACTION:https://auth.robokassa.ru/Merchant/Index.aspx?MerchantLogin=dspirog&* ATTR=NAME:ok
+clear

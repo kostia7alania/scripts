@@ -1,0 +1,32 @@
+﻿set !errorignore yes
+'заходим на сайт;
+ URL GOTO=https://www.mos.ru/pgu/ru/application/dtiu/030301/#step_1
+ 
+
+ 'выбираем ИП;
+ TAG POS=1 TYPE=LABEL FORM=ID:form_element ATTR=TXT:Индивидуальный<SP>предприниматель
+
+'выбираем период
+EVENT TYPE=CLICK SELECTOR="#period_chosen>A" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="#period_chosen>DIV>UL>LI" BUTTON=0
+
+'выбираем округ:
+EVENT TYPE=CLICK SELECTOR="#step_1>FIELDSET>DIV:nth-of-type(3)>DIV>DIV>DIV>A>DIV>B" BUTTON=0
+EVENT TYPE=MOUSEDOWN SELECTOR="#step_1>FIELDSET>DIV:nth-of-type(3)>DIV>DIV>DIV>DIV>UL>LI:nth-of-type(12)" BUTTON=0
+EVENT TYPE=MOUSEUP POINT="(507,920)"
+
+
+'район
+EVENT TYPE=CLICK SELECTOR="#step_1>FIELDSET>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV>DIV>A>DIV>B" BUTTON=0
+EVENT TYPE=MOUSEDOWN SELECTOR="#step_1>FIELDSET>DIV:nth-of-type(3)>DIV:nth-of-type(2)>DIV>DIV>DIV>UL>LI:nth-of-type(3)" BUTTON=0
+EVENT TYPE=MOUSEUP POINT="(468,870)"
+
+'ярмарка (надо допилить);
+EVENT TYPE=CLICK SELECTOR="#yarmarka_chosen>A" BUTTON=0
+EVENT TYPE=MOUSEDOWN SELECTOR="#yarmarka_chosen>DIV>UL>LI:nth-of-type(3)" BUTTON=0
+EVENT TYPE=MOUSEUP POINT="(563,968)"
+
+''группа товаров:
+EVENT TYPE=CLICK SELECTOR="#tovar_group_chosen>A" BUTTON=0
+EVENT TYPE=MOUSEDOWN SELECTOR="#tovar_group_chosen>DIV>UL>LI" BUTTON=0
+EVENT TYPE=MOUSEUP POINT="(498,949)"

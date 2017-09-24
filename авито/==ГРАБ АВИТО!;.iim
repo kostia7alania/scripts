@@ -1,0 +1,19 @@
+﻿TAG POS={{!LOOP}} TYPE=A ATTR=HREF:https://m.avito.ru/moskva/predlozheniya_uslug/*
+		set !replayspeed fast
+		set !EXTRACT_TEST_POPUP NO
+		TAG POS=1 TYPE=HEADER ATTR=CLASS:single-item-header<SP>b-with-padding EXTRACT=TXT
+		Set заголовок {{!EXtract}}
+		set !EXTRACT NULL
+		TAG POS=1 TYPE=SPAN ATTR=CLASS:price-value EXTRACT=TXT
+		Set цена {{!EXtract}}
+		set !EXTRACT NULL
+		TAG POS=1 TYPE=P ATTR=* EXTRACT=TXT
+		Set описание {{!EXtract}}
+		set !EXTRACT NULL
+		TAG POS=1 TYPE=DIV ATTR=CLASS:person-name EXTRACT=TXT
+		Set имя {{!EXtract}}
+		set !EXTRACT NULL
+		SET !EXTRACT "\n#{{!LOOP}}--------------------- {{заголовок}} {{имя}} {{цена}}  {{описание}}"
+		SAVEAS TYPE=EXTRACT FOLDER=C:\\Users\\User\\OneDrive FILE=го.txt
+BACK
+	

@@ -1,0 +1,15 @@
+﻿114,10195,15330,1371,It-телеком-МАСТЕР НА ВСЕ случаи
+114,10195,15329,1371,It-телеком=НАСТРОЙКА СЕТЕЙ
+114,10195,15331,1371,It-телеком=УСТАНОВКА ПО
+114,15834,15855,1391, комп техника
+
+ATTR=ID:param_1391 CONTENT=%15855 - комп техника
+ATTR=ID:param_716 CONTENT=%15834 - комп техника
+
+
+TAG POS=1 TYPE=SELECT FORM=ACTION:/search/items ATTR=ID:param_716 CONTENT=%10195 -ит
+TAG POS=1 TYPE=SELECT FORM=ACTION:/search/items ATTR=ID:param_716 CONTENT=%15834 -обслуга техники
+
+TAG POS=1 TYPE=SELECT FORM=ACTION:/search/items ATTR=ID:param_1371 CONTENT=%15331 -под_ит
+TAG POS=1 TYPE=SELECT FORM=ACTION:/search/items ATTR=ID:param_1391 CONTENT=%15855 -под_обслуга
+

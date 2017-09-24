@@ -1,0 +1,61 @@
+﻿set !replayspeed fast
+SET !LOOP 1
+
+clear
+SET !TIMEOUT_STEP 1 
+set !errorignore yes
+ 
+
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE names4reg.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set name {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+set mail {{!VAR1}}oseas@mail.ru
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_tels.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set tel {{!col1}}
+  
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*999 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_sms.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set sms {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE useragents-pc.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set !USERAGENT {{!col1}}
+
+
+set !replayspeed medium 
+			FRAME NAME="jivo_container"
+			SET !ERRORIGNORE YES
+			TAG POS=1 TYPE=DIV ATTR=ID:jivo-label-status*
+			EVENT TYPE=CLICK SELECTOR="#jivo-label-inner-text" BUTTON=0
+			SET !TIMEOUT_STEP 1 
+EVENT TYPE=CLICK SELECTOR="#input-field" BUTTON=0
+EVENTS TYPE=KEYPRESS SELECTOR="#input-field" CHARS={{sms}}
+EVENT TYPE=KEYPRESS SELECTOR="#input-field" KEY=13
+TAG POS=1 TYPE=INPUT:TEXT ATTR=* CONTENT={{name}}
+TAG POS=1 TYPE=INPUT:TEL ATTR=* CONTENT={{tel}}
+TAG POS=1 TYPE=INPUT:EMAIL ATTR=* CONTENT={{mail}}
+TAG POS=1 TYPE=INPUT:BUTTON ATTR=*
+
+FRAME NAME="jivo_container"
+EVENT TYPE=CLICK SELECTOR="#name" BUTTON=0
+EVENTS TYPE=KEYPRESS SELECTOR="#name" CHARS={{name}}
+EVENT TYPE=CLICK SELECTOR="#phone" BUTTON=0
+EVENTS TYPE=KEYPRESS SELECTOR="#phone" CHARS={{tel}}
+EVENT TYPE=CLICK SELECTOR="#email" BUTTON=0
+EVENTS TYPE=KEYPRESS SELECTOR="#email" CHARS={{mail}}
+EVENT TYPE=CLICK SELECTOR="#submit" BUTTON=0
+ 
+			FRAME NAME="jivo_container"
+			EVENT TYPE=CLICK SELECTOR="#message" BUTTON=0
+			EVENTS TYPE=KEYPRESS SELECTOR="#message" CHARS={{sms}}
+			EVENT TYPE=CLICK SELECTOR="#submit" BUTTON=0
+			TAG POS=1 TYPE=INPUT:BUTTON ATTR=*

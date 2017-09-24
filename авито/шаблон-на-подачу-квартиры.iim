@@ -1,0 +1,149 @@
+﻿SET !REPLAYSPEED fast
+SET !ERRORIGNORE YES
+CMDLINE !DATASOURCE useragents.txt
+SET !DATASOURCE_COLUMNS 14
+SET !DATASOURCE_LINE {{строка}}
+SET !USERAGENT {{!COL1}}
+SET раздел1 гостинная
+SET раздел2 кухня
+SET раздел3 ванна
+SET папкаФоток C:\фотки-
+CMDLINE !DATASOURCE {{папкаФоток}}{{имяПроекта}}\счетчик.txt
+SET !DATASOURCE_LINE 1
+SET счетчикКартинок {{!COL1}}
+SET минЦена 1850
+SET максЦена 2100
+SET ценник EVAL("var randomNumber=Math.floor(Math.random()*({{максЦена}}-{{минЦена}}+1)+{{минЦена}}); randomNumber;")
+
+		'=LOGin:
+			URL GOTO=https://m.avito.ru/profile
+			SET !TIMEOUT_STEP 2
+			SET !TIMEOUT_TAG 1
+			EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>FORM>DIV>DIV:nth-of-type(2)>DIV>INPUT" BUTTON=0
+			EVENTS TYPE=KEYPRESS SELECTOR="HTML>BODY>SECTION>FORM>DIV>DIV:nth-of-type(2)>DIV>INPUT" CHARS={{почта}}
+			EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>FORM>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>INPUT" BUTTON=0
+			EVENTS TYPE=KEYPRESS SELECTOR="HTML>BODY>SECTION>FORM>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>INPUT" CHARS={{пароль}}			
+			EVENT TYPE=CLICK SELECTOR="HTML>BODY>SECTION>FORM>DIV:nth-of-type(3)>DIV>DIV>INPUT" BUTTON=0			
+			SET !TIMEOUT_STEP 17
+			SET !TIMEOUT_TAG 6
+						SET !REPLAYSPEED medium
+						URL GOTO=https://m.avito.ru/add
+						'квартира
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:category_id CONTENT=%24
+						'сдам:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_201 CONTENT=%1060	
+						'кол-во комнат
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_550 CONTENT=%5703
+						'тип дома:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_503 CONTENT=%5249					
+						'ПОСУТОЧНО:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_504 CONTENT=%5257			
+						'москва:
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:region_id CONTENT=%637640
+					   'Генерируем АДРЕС и связанный с ним ид_МЕТРО:	
+						SET !REPLAYSPEED FAST
+						CMDLINE !DATASOURCE {{имяПроекта}}-объекты.txt
+						SET !DATASOURCE_LINE {{строка}}
+						set площадь {{!COL1}}
+						set этаж {{!COL2}}
+						add этаж 1
+						set этажей {{!COL3}}
+						add этажей 1
+						set метро {{!COL4}}
+						set словамиМетро {{!COL5}}
+						set адрес {{!COL6}}
+						CMDLINE !DATASOURCE {{имяПроекта}}-начало-описания.txt
+						SET !DATASOURCE_LINE {{строка}}
+						set началоОписалова {{!COL1}}
+					SET !DATASOURCE_DELIMITER ;
+					CMDLINE !DATASOURCE {{имяПроекта}}-описание.txt
+					SET !DATASOURCE_LINE {{строка}}
+					SET конецОписалова {{!COL1}}
+						set описалово {{началоОписалова}}
+						add описалово <sp>{{словамиМетро}}
+						add описалово {{конецОписалова}}
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:metro_id CONTENT=%{{метро}}
+						TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=ID:param_493 CONTENT={{адрес}} 
+						TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:* ATTR=ID:param_493 CONTENT={{адрес}}
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_501 CONTENT={{этаж}}
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_502 CONTENT={{этажей}}
+						TAG POS=1 TYPE=INPUT:NUMBER FORM=NAME:NoFormName ATTR=ID:param_500 CONTENT={{площадь}}
+						URL GOTO=javascript:window.scrollBy(0,777)
+						SET !REPLAYSPEED medium
+						'клик на ДОП ПАРАМЕТРЫ:
+						TAG POS=1 TYPE=SPAN ATTR=TXT:Дополнительные<SP>параметры
+						'Генерируем диваны и спальни
+						SET кроватей EVAL("var randomNumber=Math.floor(Math.random()*2 + 3); randomNumber;")
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_1514_0_1351 CONTENT={{кроватей}}
+						'кол-во спальных мест
+						SET спальныйМест EVAL("var randomNumber=Math.floor(Math.random()*3 + 3); randomNumber;")
+						TAG POS=1 TYPE=SELECT FORM=NAME:NoFormName ATTR=ID:param_1349_0_1350 CONTENT={{спальныйМест}}
+					'пошли птички:	
+						SET !REPLAYSPEED fast						
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1352_0_1353_15264 CONTENT=YES
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1352_0_1353_15265 CONTENT=YES	
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1352_0_1353_15266 CONTENT=YES
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1354_0_1355_15267 CONTENT=YES
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1354_0_1355_15268 CONTENT=YES
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1354_0_1355_15269 CONTENT=YES
+					SET !VAR1 EVAL("var s=Math.floor(Math.random()*2+1); if(s==2){'NO'} else 'YES'")
+					SET !VAR2 EVAL("var s=Math.floor(Math.random()*2+1); if(s==2){'NO'} else 'YES'")
+					SET !VAR3 EVAL("var s=Math.floor(Math.random()*2+1); if(s==2){'NO'} else 'YES'")
+					SET !VAR4 EVAL("var s=Math.floor(Math.random()*2+1); if(s==2){'NO'} else 'YES'")
+					SET !VAR5 EVAL("var s=Math.floor(Math.random()*2+1); if(s==2){'NO'} else 'YES'")
+					SET !VAR6 EVAL("var s=Math.floor(Math.random()*2+1); if(s==2){'NO'} else 'YES'")
+					SET !VAR7 EVAL("var s=Math.floor(Math.random()*2+1); if(s==2){'NO'} else 'YES'")
+					SET !VAR8 EVAL("var s=Math.floor(Math.random()*2+1); if(s==2){'NO'} else 'YES'")
+					SET !VAR9 EVAL("var s=Math.floor(Math.random()*2+1); if(s==2){'NO'} else 'YES'")
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1354_0_1355_15270 CONTENT={{!VAR1}} 
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1354_0_1355_15271 CONTENT={{!VAR2}}
+ 						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1356_0_1357_15273 CONTENT={{!VAR3}}
+ 						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1354_0_1355_15272 CONTENT={{!VAR4}}
+					'камин:
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1356_0_1357_15274 CONTENT=NO
+ 						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1356_0_1357_15275 CONTENT={{!VAR5}}
+ 						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1356_0_1357_15276 CONTENT={{!VAR6}}
+ 						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1358_0_1359_15281 CONTENT={{!VAR7}}
+ 						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1358_0_1359_15280 CONTENT={{!VAR8}}
+ 						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:param_1358_0_1359_15279 CONTENT={{!VAR9}}
+					
+						URL GOTO=javascript:window.scrollBy(0,1234)
+						SET !REPLAYSPEED medium
+			'ОПИСАНИЕ:
+						TAG POS=1 TYPE=TEXTAREA FORM=NAME:NoFormName ATTR=ID:description CONTENT={{описалово}}
+			' ценник:
+						TAG POS=1 TYPE=INPUT:NUMBER FORM=NAME:NoFormName ATTR=ID:price CONTENT={{ценник}}
+			'КАРТИНКА:
+						SET !TIMEOUT_STEP 5
+TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=ID:image_upload CONTENT={{папкаФоток}}{{имяПроекта}}\{{раздел1}}\{{счетчикКартинок}}.jpg
+ 						TAG POS=1 TYPE=BUTTON ATTR=TXT:OK
+						CLICK X=733 Y=362
+TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=ID:image_upload CONTENT={{папкаФоток}}{{имяПроекта}}\{{раздел2}}\{{счетчикКартинок}}.jpg
+ 						TAG POS=1 TYPE=BUTTON ATTR=TXT:OK
+						CLICK X=735 Y=364
+TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=ID:image_upload CONTENT={{папкаФоток}}{{имяПроекта}}\{{раздел3}}\{{счетчикКартинок}}.jpg
+						wait seconds=2
+						TAG POS=1 TYPE=BUTTON ATTR=TXT:OK
+						CLICK X=736 Y=365
+	
+	SET !EXTRACT NULL
+	TAG POS=1 TYPE=DIV ATTR=CLASS:popup-content extract=txt
+	SET ошибкаЗагрузкиФото {{!EXTRACT}}
+	
+		'клик по ПРОДОЛЖИТЬ:
+						SET !ERRORIGNORE NO
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+						TAG POS=1 TYPE=INPUT:RADIO FORM=NAME:NoFormName ATTR=ID:service_no
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_premium CONTENT=NO
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_vip CONTENT=NO
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_highlight CONTENT=NO
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+						
+		'в случае телег от авиты,чеб картинка не ккаунтировалась++;
+				ADD счетчикКартинок 1
+				SET !EXTRACT {{счетчикКартинок}}
+				FILEDELETE NAME={{папкаФоток}}{{имяПроекта}}\счетчик.txt
+				SAVEAS TYPE=EXTRACT FOLDER={{папкаФоток}}{{имяПроекта}} FILE=счетчик.txt
+	
+	SET !EXTRACT {{ошибкаЗагрузкиФото}}

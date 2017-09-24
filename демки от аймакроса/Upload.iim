@@ -1,0 +1,9 @@
+VERSION  BUILD=7500718 RECORDER=FX
+TAB T=1     
+URL GOTO=http://demo.imacros.net/Automate/FileUploadDemo
+'
+TAG POS=1 TYPE=INPUT:FILE FORM=ID:demo ATTR=NAME:uploaded_file CONTENT={{!FOLDER_DATASOURCE}}\Address.csv
+'Display some information for the user
+TAG POS=1 TYPE=TEXTAREA FORM=ID:demo ATTR=NAME:S1 CONTENT="Done! The filename is in the upload box.\nWe could now click on the \"SUBMIT\" button or continue to fill in the rest of the form." 
+'
+WAIT SECONDS=1

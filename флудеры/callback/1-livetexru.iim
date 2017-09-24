@@ -1,0 +1,57 @@
+﻿clear
+set !replayspeed fast
+SET !TIMEOUT_STEP 1 
+set !errorignore yes
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE names4reg.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set name {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+set mail {{!var1}}osea@mail.ru
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_tels.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set tel {{!col1}}
+  
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*999 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_sms.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set sms {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE useragents-pc.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set !USERAGENT {{!col1}}
+
+
+SET !DATASOURCE C:\4flood\livetexru.txt
+SET !DATASOURCE_LINE {{!LOOP}}
+url goto={{!COL1}}
+set !replayspeed medium
+wait seconds=1
+
+
+set mailOrTel {{tel}}
+
+TAG POS=1 TYPE=SPAN ATTR=CLASS:lt-label-block__txt
+TAB T=2
+wait seconds=2
+TAG POS=1 TYPE=DIV ATTR=CLASS:lt-wrapper-body
+SET !TIMEOUT_STEP 1 
+TAG POS=1 TYPE=INPUT:TEXT ATTR=TYPE:text&&VALID-TYPE:name&&DATA-Q-TEMPLATE:visitor-name&&NAME:name&&VALUE:&&CLASS:lt-i-label__input<SP>lt-user-name CONTENT={{name}}
+TAG POS=1 TYPE=TEXTAREA ATTR=REQUIRED:&&NAME:message&&VALUE:&&TYPE:text&&MAXLENGTH:2000&&CLASS:lt-i-label__textarea CONTENT={{sms}}
+TAG POS=1 TYPE=BUTTON ATTR=CLASS:lt-bttn<SP>lt-main-color<SP>lt-go-to-chat-event
+
+TAG POS=9 TYPE=DIV ATTR=CLASS:lt-i-label__hint
+TAG POS=1 TYPE=INPUT:TEXT ATTR=TYPE:text&&DATA-Q-TEMPLATE:visitor-name&&VALID-TYPE:name&&NAME:name&&VALUE:&&CLASS:lt-i-label__input CONTENT={{name}}
+TAG POS=2 TYPE=INPUT:TEXT ATTR=TYPE:text&&DATA-Q-TEMPLATE:visitor-email_0&&REQUIRED:&&NAME:email&&VALID-TYPE:email&&VALUE:&&CLASS:lt-i-label__input<SP>lt-complaint-email-input CONTENT={{mail}}
+TAG POS=2 TYPE=INPUT:TEXT ATTR=TYPE:text&&DATA-Q-TEMPLATE:visitor-phone_0&&VALID-TYPE:phone&&NAME:phone&&VALUE:&&CLASS:lt-i-label__input<SP>lt-complaint-phone-input&&REGION:ru CONTENT={{tel}}
+TAG POS=1 TYPE=TEXTAREA ATTR=DATA-Q-TEMPLATE:visitor-offlineMessage&&ROWS:1&&NAME:message&&VALUE:&&TYPE:text&&MAXLENGTH:2000&&REQUIRED:required&&CLASS:lt-i-label__textarea CONTENT={{sms}}
+TAG POS=2 TYPE=INPUT:TEXT ATTR=TYPE:text&&DATA-Q-TEMPLATE:visitor-emailPhone&&REQUIRED:&&VALID-TYPE:email-phone&&NAME:emailPhone&&VALUE:&&CLASS:lt-i-label__input<SP>lt-complaint-email-phone-input CONTENT={{mailOrTel}} 
+TAG POS=1 TYPE=BUTTON ATTR=CLASS:lt-bttn<SP>lt-main-color<SP>lt-submit
+tab closeallothers
+
+ 

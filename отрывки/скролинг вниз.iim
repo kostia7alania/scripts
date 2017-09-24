@@ -1,0 +1,3 @@
+﻿URL GOTO=javascript:window.scrollTo(0,11111)  
+ wait seconds=0
+URL GOTO=javascript:window.scrollBy(0,-555)  

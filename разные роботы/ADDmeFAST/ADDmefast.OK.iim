@@ -1,0 +1,11 @@
+﻿SET !ERRORIGNORE YES
+SET "!WAITPAGECOMPLETE" YES
+URL GOTO=http://addmefast.com/free_points/ok_group_join
+TAG POS=1 TYPE=DIV ATTR=TXT:Join
+TAB T=2
+wait seconds=2
+TAG POS=1 TYPE=A ATTR=TXT:Join
+EVENT TYPE=CLICK SELECTOR="#hook_Block_LeftColumnTopCardAltGroup>UL>DIV>A" BUTTON=0
+wait seconds=2
+TAB T=1
+TAB CLOSEALLOTHERS

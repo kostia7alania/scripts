@@ -1,0 +1,17 @@
+﻿SET !TIMEOUT_STEP 6
+SET !TIMEOUT_PAGE 6
+SET !ERRORIGNORE YES
+TAB T=1
+URL GOTO=http://addmefast.com/free_points/vkontakte_pages
+TAG POS=1 TYPE=DIV ATTR=TXT:Follow
+TAB T=2
+TAG POS=1 TYPE=BUTTON ATTR=ID:subscribe_button
+TAB CLOSE
+TAB T=1
+URL GOTO=http://addmefast.com/free_points/vkontakte_groups
+TAG POS=1 TYPE=DIV ATTR=TXT:Join
+TAB T=2
+TAG POS=1 TYPE=BUTTON ATTR=TXT:Join<SP>community
+TAB CLOSE
+TAB T=1
+wait seconds =100

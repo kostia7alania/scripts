@@ -1,0 +1,52 @@
+﻿SET !REPLAYSPEED FAST 
+
+'===берем тел+почту из файла;
+CMDLINE !DATASOURCE tel+mail.txt
+SET !DATASOURCE_COLUMNS 3
+SET !DATASOURCE_LINE {{!LOOP}}
+SET телефон {{!COL1}}
+SET почта {{!COL2}}
+SET телефон2 {{!COL3}}
+
+'===берем имя1 и имя2;
+CMDLINE !DATASOURCE names4reg.txt
+SET !DATASOURCE_COLUMNS 1
+SET !VAR1 EVAL("var s=Math.floor(Math.random()*100 + 1); s;")
+SET !VAR2 EVAL("var s=Math.floor(Math.random()*100 + 1); s;")
+SET !DATASOURCE_LINE {{!VAR1}}
+SET имя1 {{!COL1}}
+SET !DATASOURCE_LINE {{!VAR2}}
+SET имя2 {{!COL1}}
+
+
+URL GOTO=https://www.facebook.com/
+SET !REPLAYSPEED medium
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:reg ATTR=NAME:reg_email__ CONTENT={{почта}}
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=NAME:reg ATTR=NAME:reg_passwd__ CONTENT=kostia22
+TAG POS=1 TYPE=SELECT FORM=NAME:reg ATTR=NAME:birthday_day CONTENT=%7
+TAG POS=1 TYPE=DIV ATTR=TXT:Create<SP>a<SP>Page<SP>for<SP>a<SP>celebrity,<SP>band<SP>or*
+TAG POS=1 TYPE=SELECT FORM=NAME:reg ATTR=NAME:birthday_month CONTENT=%4
+TAG POS=1 TYPE=SELECT FORM=NAME:reg ATTR=NAME:birthday_year CONTENT=%1992
+TAG POS=1 TYPE=LABEL FORM=NAME:reg ATTR=TXT:Female
+TAG POS=1 TYPE=INPUT:RADIO FORM=NAME:reg ATTR=NAME:sex
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:reg ATTR=NAME:firstname CONTENT={{имя1}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:reg ATTR=NAME:lastname CONTENT={{имя2}}
+EVENTS TYPE=KEYPRESS SELECTOR="#u_0_9" CHARS={{почта}}
+TAG POS=1 TYPE=BUTTON FORM=NAME:reg ATTR=NAME:websubmit
+
+'активация ФБ ! ! ! и дозаполнение
+URL GOTO=https://m.mail.ru/messages
+TAG POS=1 TYPE=SPAN ATTR=TXT:Confirm<SP>Your<SP>Account
+TAB T=2
+TAG POS=1 TYPE=A ATTR=TXT:Enter<SP>a<SP>mobile<SP>number
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:u_2_1 ATTR=NAME:contact_point CONTENT={{телефон2}}
+TAG POS=1 TYPE=BUTTON FORM=ID:u_2_1 ATTR=TXT:Continue
+'код с телефон  - нужно прерывание ! ! !
+
+TAG POS=1 TYPE=BUTTON FORM=ID:u_6_1 ATTR=TXT:Confirm
+TAG POS=1 TYPE=BUTTON FORM=ID:u_7_5 ATTR=TXT:Save<SP>Settings
+TAG POS=1 TYPE=A ATTR=ID:u_0_0
+TAG POS=1 TYPE=A ATTR=TXT:Skip<SP>Step
+TAG POS=1 TYPE=INPUT:FILE FORM=ID:u_0_u ATTR=ID:js_0 CONTENT=C:\Users\user\Desktop\avito.ru\ведьма\mL5BKVtjnSs.jpg
+TAG POS=1 TYPE=A ATTR=HREF:https://www.facebook.com/*/about?ref=bookmarks&section=work
+set фб {{!URLCURRENT}}

@@ -1,0 +1,45 @@
+﻿clear
+set !replayspeed fast
+SET !TIMEOUT_STEP 1 
+set !errorignore yes
+
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE names4reg.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set name {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+set mail {{!var1}}osea@mail.ru
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_tels.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set tel {{!col1}}
+  
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*999 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_sms.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set sms {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE useragents-pc.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set !USERAGENT {{!col1}}
+
+
+SET !DATASOURCE C:\4flood\chatra-io.txt
+SET !DATASOURCE_LINE {{!LOOP}}
+url goto={{!COL1}}
+set !replayspeed medium
+wait seconds=1
+
+
+FRAME F=1
+TAG POS=1 TYPE=SPAN ATTR=TXT:Напишите*
+TAG POS=1 TYPE=TEXTAREA ATTR=CLASS:chat-textarea<SP>js-chat-textarea<SP>js-autofocus-chat<SP>is-empty<SP>custom-scrollbar__recipient&&PLACEHOLDER:* CONTENT={{sms}}
+TAG POS=1 TYPE=TEXTAREA ATTR=CLASS:chat-textarea<SP>js-chat-textarea<SP>js-autofocus-chat<SP>custom-scrollbar__recipient&&PLACEHOLDER:* CONTENT={{sms}}
+EVENT TYPE=CLICK SELECTOR="#main>DIV>DIV>DIV>DIV>DIV:nth-of-type(3)>DIV>DIV>DIV>DIV>TEXTAREA" BUTTON=0
+EVENT TYPE=KEYPRESS SELECTOR="#main>DIV>DIV>DIV>DIV>DIV:nth-of-type(3)>DIV>DIV>DIV>DIV>TEXTAREA" KEY=13 
+
+ 

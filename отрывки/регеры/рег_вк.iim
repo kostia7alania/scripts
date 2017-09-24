@@ -1,0 +1,22 @@
+﻿TAB T=1
+URL GOTO=http://m.vk.com/join
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/join?act=start ATTR=NAME:first_name CONTENT={{имя1}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/join?act=start ATTR=NAME:last_name CONTENT={{имя2}}
+TAG POS=1 TYPE=SPAN ATTR=TXT:Female
+TAG POS=1 TYPE=INPUT:RADIO FORM=ACTION:/join?act=start ATTR=NAME:sex
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:/join?act=start ATTR=*
+'капча - можно перевести фокус или вставить паузу!
+
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:/join?act=start ATTR=*
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/join?act=phone&hash=* ATTR=NAME:phone CONTENT=+{{телефон}}
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:/join?act=phone&hash=* ATTR=*
+'код с телефона - пауза необходима!
+
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:/join?act=check_code&hash=* ATTR=*
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:https://login.vk.com/?act=login&_origin=http://m.vk.com&ip_h=* ATTR=NAME:pass CONTENT=kostia22
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:https://login.vk.com/?act=login&_origin=http://m.vk.com&ip_h=* ATTR=*
+TAG POS=2 TYPE=H2 ATTR=TXT:Name<SP>Fename
+TAG POS=1 TYPE=IMG ATTR=SRC:http://m.vk.com/images/camera_50.png
+TAG POS=2 TYPE=INPUT:FILE ATTR=* CONTENT=C:\Users\user\Desktop\avito.ru\ведьма\mL5BKVtjnSs.jpg
+TAG POS=1 TYPE=A ATTR=TXT:Save
+EVENT TYPE=CLICK SELECTOR="#zpv_save_button" BUTTON=0

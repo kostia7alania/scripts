@@ -1,0 +1,14 @@
+﻿'твиттер. шаг 1(2):
+URL GOTO=https://mobile.twitter.com/signup
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/signup/submit ATTR=ID:oauth_signup_client_fullname CONTENT={{имя1}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/signup/submit ATTR=ID:oauth_signup_client_phone_number CONTENT={{телефон}}
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:/signup/submit ATTR=NAME:commit
+'код с смс -нужно прерывание
+'твиттер шаг 2(2)
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:/signup/phone/verify ATTR=NAME:commit
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/signup/create_password ATTR=ID:password CONTENT=kostia22
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:/signup/create_password ATTR=NAME:commit
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/signup/add_email ATTR=ID:email CONTENT={{почта}}
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:/signup/add_email ATTR=NAME:commit
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:/signup/screen_name ATTR=NAME:commit
+TAG POS=1 TYPE=A ATTR=TXT:Finish

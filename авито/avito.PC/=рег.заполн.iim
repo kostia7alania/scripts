@@ -1,0 +1,21 @@
+﻿SET !REPLAYSPEED FAST 
+
+'==берем из файла ИМЯ...
+CMDLINE !DATASOURCE names4reg.txt
+SET !TIMEOUT_STEP 15
+'количество колонок в этом файле:
+SET !DATASOURCE_COLUMNS 1 
+SET !VAR2 EVAL("var s=Math.floor(Math.random()*25 + 1); s;")
+'при увеличении LOOP будет переходит на следующую строку 
+SET !DATASOURCE_LINE {{!VAR2}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/registration ATTR=ID:name CONTENT={{!COL1}}
+SET !TIMEOUT_STEP 100
+'===берем тел+почту из файла;
+CMDLINE !DATASOURCE tel+mail.txt
+SET !DATASOURCE_COLUMNS 2
+SET !DATASOURCE_LINE {{!LOOP}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/registration ATTR=ID:email CONTENT={{!COL2}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/registration ATTR=ID:phone CONTENT={{!COL1}}
+SET !ENCRYPTION NO
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=ACTION:/registration ATTR=TYPE:password&&TABINDEX:7&&MAXLENGTH:70&&NAME:password&&PLACEHOLDER:Пароль&&CLASS:password-field<SP>col-4<SP>not-margin-left&&VALUE:&&ID:password CONTENT=kostia22
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=ACTION:/registration ATTR=TYPE:password&&TABINDEX:8&&VALUE:&&NAME:confirm&&ID:confirm&&MAXLENGTH:70&&PLACEHOLDER:Пароль<SP>ещё<SP>раз&&CLASS:password-field<SP>password-confirm<SP>col-4<SP>not-margin-left&&DATA-DEPEND:password CONTENT=kostia22

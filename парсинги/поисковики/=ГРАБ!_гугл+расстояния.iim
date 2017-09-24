@@ -1,0 +1,15 @@
+﻿set !EXTRACT NULL
+CMDLINE !DATASOURCE all_podmsk.txt
+SET !DATASOURCE_COLUMNS 3
+SET !DATASOURCE_LINE {{!loop}}
+set певрый {{!col1}}
+set второй {{!col2}}
+set третий {{!col3}}
+TAG POS=1 TYPE=INPUT:SEARCH FORM=ID:tsf ATTR=ID:lst-ib CONTENT=расстояние<SP>до<SP>{{третий}},<SP>московская<SP>область<SP>
+TAG POS=1 TYPE=BUTTON FORM=ID:tsf ATTR=ID:tsbb
+TAG POS=1 TYPE=SPAN ATTR=CLASS:_Ex extract=txt
+set расстояние {{!extract}}
+
+set !EXTRACT NULL
+SET !EXTRACT #{{!LOOP}},{{певрый}},{{второй}},{{третий}},{{расстояние}}
+SAVEAS TYPE=EXTRACT FOLDER=C:\\ FILE=го.txt

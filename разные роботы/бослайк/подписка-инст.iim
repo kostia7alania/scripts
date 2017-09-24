@@ -1,0 +1,15 @@
+﻿SET !ERRORIGNORE YES
+wait seconds=5
+URL GOTO=http://bosslike.ru/tasks/instagram/subscribe/
+wait seconds=5
+EVENT TYPE=CLICK SELECTOR="#task_list>DIV>DIV:nth-of-type(2)>ARTICLE>DIV>DIV>ASIDE>BUTTON" BUTTON=0
+wait seconds=5
+TAB T=2
+wait seconds=5
+set !timeout_tag 1
+set !timeout_step 1
+TAG POS=1 TYPE=BUTTON ATTR=TXT:Follow
+TAG POS=1 TYPE=BUTTON ATTR=TXT:Подписаться
+wait seconds=15
+tab t=1
+tab closeallothers

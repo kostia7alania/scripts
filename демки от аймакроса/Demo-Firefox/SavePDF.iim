@@ -1,0 +1,28 @@
+﻿VERSION BUILD=7500718 RECORDER=FX
+TAB T=1     
+URL GOTO=http://demo.imacros.net/Automate/PDFDemo
+'
+WAIT SECONDS=2
+'
+'1st Download (small file)
+' 
+ONDOWNLOAD FOLDER=* FILE=+_{{!NOW:yyyymmdd_hhnnss}}   
+TAG POS=1 TYPE=A ATTR=TXT:*View<SP>small<SP>PDF<SP>Document*     
+
+'
+'2nd Download (same as #1 but larger file)
+' 
+URL GOTO=http://demo.imacros.net/Automate/PDFDemo
+ONDOWNLOAD FOLDER=* FILE=+_{{!NOW:yyyymmdd_hhnnss}}    
+TAG POS=1 TYPE=A ATTR=TXT:*View<SP>iMacros<SP>Case*   
+'
+'
+WAIT SECONDS=3
+URL GOTO=http://demo.imacros.net/Automate/OK
+'
+
+'
+'Notes for Firefox:
+' - If you want to DISPLAY a PDF document (and not download it) use: SET !DOWNLOADPDF NO
+
+

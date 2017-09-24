@@ -1,0 +1,26 @@
+﻿'URL GOTO=https://vk.com/market-64987689?w=product-64987689_287730%2Fquery
+SET !REPLAYSPEED FAST
+TAG POS=1 TYPE=DIV ATTR=TITLE:*&&CLASS:market_item_title extract=txt
+SET название {{!EXTRACT}}
+set !extract null
+
+TAG POS=1 TYPE=DIV ATTR=CLASS:market_item_price extract=txt
+SET цена {{!EXTRACT}}
+set !extract null
+
+SET !REPLAYSPEED MEDIUM
+TAG POS=1 TYPE=A ATTR=ONCLICK:hide(this,<SP>domPS(this));<SP>show(domNS(this));&&CLASS:wall_post_more
+TAG POS=1 TYPE=DIV ATTR=CLASS:market_item_description&&ID:market_item_description extract=txt
+SET описание {{!EXTRACT}}
+set !extract null
+
+FILTER TYPE=IMAGES STATUS=OFF
+ONDOWNLOAD FOLDER=* FILE={{!LOOP}}-{{название}}.jpg WAIT=YES
+TAG POS=1 TYPE=IMG ATTR=SRC:https://pp.vk.me/*&&CLASS:market_item_photo&&ID:market_item_photo CONTENT=EVENT:SAVE_ELEMENT_SCREENSHOT
+
+SET !REPLAYSPEED FAST
+SET !EXTRACT ======================={{!LOOP}}========================<br>{{название}}<br>{{цена}}<br>{{описание}}<br>==<sp>{{!URLCURRENT}}
+SAVEAS TYPE=EXTRACT FOLDER=* FILE=вк-товары-парсинг.txt
+
+TAG POS=2 TYPE=DIV ATTR=CLASS:wk_arrow_bg_inner
+WAIT SECONDS=1

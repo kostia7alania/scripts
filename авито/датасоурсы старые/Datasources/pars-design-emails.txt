@@ -1,0 +1,75 @@
+﻿"Оценка специалистов: 0"
+"Оценка специалистов: 2"
+"Оценка специалистов: 1"
+"
+                
+
+    
+        
+        
+        
+                     Мне нравится 
+
+            
+
+                
+                    $(document).ready(function () {
+                        function LoadRating() {
+                            $("".personal-data-mark"").load(""/bitrix/templates/archiprofi_v2015/components/scid/user.detail/personal-data-specialist-public/ajax/get-mark.php"", {""TO_USER_ID"": 43292}, function () {
+                                PAGE_LOADING.Hide();
+                            });
+                        }
+
+                        LoadRating();
+
+                        $(""a.mark-positive, a.mark-negative"", "".personal-data-mark"").live(""click"", function () {
+                            PAGE_LOADING.Show();
+                            var mark = 0;
+                            $(""input[name='MARK']"", "".personal-data-mark"").val(mark);
+                            $.post(""/bitrix/templates/archiprofi_v2015/components/scid/user.detail/personal-data-specialist-public/ajax/set-mark.php"", $(""form[name='rating-mark-form']"").serialize(), function () {
+                                LoadRating();
+                            });
+                        });
+
+                    });
+
+
+                
+                "
+"
+                
+
+    
+        
+        
+        
+                     Мне нравится 
+
+            
+
+                
+                    $(document).ready(function () {
+                        function LoadRating() {
+                            $("".personal-data-mark"").load(""/bitrix/templates/archiprofi_v2015/components/scid/user.detail/personal-data-specialist-public/ajax/get-mark.php"", {""TO_USER_ID"": 33029}, function () {
+                                PAGE_LOADING.Hide();
+                            });
+                        }
+
+                        LoadRating();
+
+                        $(""a.mark-positive, a.mark-negative"", "".personal-data-mark"").live(""click"", function () {
+                            PAGE_LOADING.Show();
+                            var mark = 0;
+                            $(""input[name='MARK']"", "".personal-data-mark"").val(mark);
+                            $.post(""/bitrix/templates/archiprofi_v2015/components/scid/user.detail/personal-data-specialist-public/ajax/set-mark.php"", $(""form[name='rating-mark-form']"").serialize(), function () {
+                                LoadRating();
+                            });
+                        });
+
+                    });
+
+
+                
+                "
+"Личный
+                    сайт→"

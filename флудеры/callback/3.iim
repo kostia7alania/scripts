@@ -1,0 +1,7 @@
+﻿SET телефон +79680608011
+URL GOTO=http://amper33.ru/
+'http://okna-stroyvector.ru/services/ustanovka-i-montazh.html
+	
+TAG POS=1 TYPE=DIV ATTR=CLASS:lb_call-btn<SP>bigEntrance*
+TAG POS=1 TYPE=INPUT:TEXT ATTR=TYPE:text&&ID:lb_phone&&PLACEHOLDER:+7&&CLASS:lb_input CONTENT={{телефон}}
+TAG POS=1 TYPE=BUTTON ATTR=ID:lb_send&&CLASS:lb_button*

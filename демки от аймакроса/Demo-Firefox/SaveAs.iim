@@ -1,0 +1,12 @@
+﻿VERSION  BUILD=7500718 RECORDER=FX
+TAB T=1     
+URL GOTO=http://demo.imacros.net/Automate/SaveAs
+WAIT SECONDS=3
+URL GOTO=http://www.iopus.com/imacros/
+'Save the page in all three different formats     
+SAVEAS TYPE=CPL FOLDER=* FILE=+_{{!NOW:yyyymmdd_hhnnss}}   
+SAVEAS TYPE=HTM FOLDER=* FILE=+_{{!NOW:yyyymmdd_hhnnss}}   
+SAVEAS TYPE=TXT FOLDER=* FILE=+_{{!NOW:yyyymmdd_hhnnss}}     
+'Wait a few seconds 
+WAIT SECONDS=3
+URL GOTO=http://demo.imacros.net/Automate/SaveAs

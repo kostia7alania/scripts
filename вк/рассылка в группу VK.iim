@@ -1,0 +1,9 @@
+﻿URL GOTO=http://vk.com/newsreklama 
+WAIT SECONDS=2 
+EVENT TYPE=CLICK SELECTOR="#post_field" BUTTON=0 
+TAG POS=1 TYPE=A ATTR=CLASS:ms_item* 
+TAG POS=1 TYPE=INPUT:FILE ATTR=TYPE:file&&ID:choose_photo_upload CONTENT={{!FOLDER_DATASOURCE}}\фота.jpg
+EVENTS TYPE=KEYPRESS SELECTOR="#post_field" CHARS="Есть реально крутая фишка как на автомате размещать рекламу в интернете,более чем 500 рекламных досок, я ее на ночь ставлю, а утром не успеваю отвечать на сообщения!!! Мега Вещь! Если интересно, пиши в личку" 
+WAIT SECONDS=5
+EVENT TYPE=CLICK SELECTOR="#send_post" BUTTON=0
+WAIT SECONDS=5

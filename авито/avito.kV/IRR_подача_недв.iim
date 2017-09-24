@@ -1,0 +1,40 @@
+﻿VERSION BUILD=8961227 RECORDER=FX
+TAB T=1
+URL GOTO=http://irr.ru/advertsubmission/step1/moskva-gorod/
+TAG POS=1 TYPE=SPAN ATTR=TXT:Выберите<SP>категорию
+TAG POS=1 TYPE=LI ATTR=TXT:Недвижимость
+TAG POS=1 TYPE=SPAN ATTR=TXT:Выберите<SP>категорию
+TAG POS=1 TYPE=LI ATTR=TXT:Аренда<SP>квартир
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:submissionForm ATTR=ID:fr-street-visible CONTENT=Таганрогская
+TAG POS=1 TYPE=A ATTR=ID:ui-active-menuitem
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:submissionForm ATTR=ID:fr-house CONTENT=11к1
+TAG POS=1 TYPE=A ATTR=ID:ui-active-menuitem
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:submissionForm ATTR=ID:f_price CONTENT=1480
+TAG POS=1 TYPE=SPAN ATTR=TXT:месяц
+TAG POS=1 TYPE=LI ATTR=TXT:сутки
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:submissionForm ATTR=ID:f_fee CONTENT=0
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:submissionForm ATTR=ID:f_etage CONTENT=1
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:submissionForm ATTR=ID:f_rooms CONTENT=1
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:submissionForm ATTR=ID:f_etage-all CONTENT=11
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:submissionForm ATTR=ID:f_meters-total CONTENT=25
+TAG POS=2 TYPE=INS ATTR=CLASS:iCheck-helper&&TXT:
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:submissionForm ATTR=ID:f_meters-total CONTENT=25
+TAG POS=3 TYPE=INS ATTR=CLASS:iCheck-helper&&TXT:
+TAG POS=1 TYPE=LABEL FORM=ID:submissionForm ATTR=TXT:Охрана<SP>здания
+TAG POS=1 TYPE=LABEL FORM=ID:submissionForm ATTR=TXT:Лифты<SP>в<SP>здании
+TAG POS=5 TYPE=INS ATTR=CLASS:iCheck-helper&&TXT:
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:submissionForm ATTR=ID:f_meters-living CONTENT=15
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:submissionForm ATTR=ID:f_kitchen CONTENT=10
+TAG POS=1 TYPE=SPAN ATTR=TXT:Ремонт
+TAG POS=1 TYPE=LI ATTR=TXT:евроремонт
+TAG POS=8 TYPE=INS ATTR=CLASS:iCheck-helper&&TXT:
+TAG POS=1 TYPE=LABEL FORM=ID:submissionForm ATTR=TXT:Телефон
+TAG POS=1 TYPE=LABEL FORM=ID:submissionForm ATTR=TXT:Бытовая<SP>техника
+TAG POS=9 TYPE=INS ATTR=CLASS:iCheck-helper&&TXT:
+TAG POS=1 TYPE=SPAN ATTR=TXT:Санузел
+TAG POS=1 TYPE=LI ATTR=TXT:раздельный
+TAG POS=1 TYPE=TEXTAREA FORM=ID:submissionForm ATTR=ID:f_text CONTENT=Сдаю<SP>1-2<SP>ком.<SP>кв.<SP>(<SP>Братиславская<SP>-<SP>марьино<SP>)<BR>Комфортное<SP>проживание<SP>-<SP>гарантировано<SP>✓<BR>хoлл,<SP>стиралка,<SP>ТВ,<SP>wifi,<SP>и<SP>т.п.<SP>тeл,<SP>✓<BR>бесшумно,<SP>уютно,<SP>комфортaбельнo<SP>✓<BR>Цена<SP>=<SP>сроку<SP>проживания<BR>Мошенников<SP>просьба<SP>не<SP>беспокоить<SP>✘<BR>Установлено<SP>видеoнaблюдение<BR>Возможна<SP>сдача<SP>по<SP>часам<BR>Заселение<SP>-<SP>круглосуточно,<SP>бронь<BR>Расчитываемся<SP>через<SP>24<SP>часа<SP>=<SP>полные<SP>сутки<BR>Все<SP>документы.<SP>Рядом<SP>супермаркеты,<SP>аптеки,<SP>стоянки<SP>для<SP>авто...<BR>%
+TAG POS=1 TYPE=INPUT:FILE FORM=ID:upload-photo-form ATTR=ID:input-file-upload CONTENT=C:\Users\user\Desktop\FirefoxPortable\Data\profile\iMacros\Datasources\img<SP>-<SP>копия\398886315.jpg
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:submissionForm ATTR=ID:f_seller CONTENT=Надежда
+TAG POS=1 TYPE=BUTTON FORM=ID:submissionForm ATTR=ID:js-waiting
+TAG POS=1 TYPE=B ATTR=TXT:Бесплатно

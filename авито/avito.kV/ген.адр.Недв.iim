@@ -1,0 +1,9 @@
+﻿SET !REPLAYSPEED FAST
+'Генерируем Адрес
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*50 + 1); randomNumber;")
+CMDLINE !DATASOURCE pechat.txt
+'количество колонок в этом файле:
+SET !DATASOURCE_COLUMNS 1 
+'при увеличении LOOP будет переходит на следующую строку 
+SET !DATASOURCE_LINE {{!VAR1}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=ID:flt_param_address CONTENT={{!COL1}}

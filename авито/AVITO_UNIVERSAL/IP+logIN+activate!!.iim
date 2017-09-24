@@ -1,0 +1,50 @@
+﻿VERSION BUILD=8961227 RECORDER=FX
+SET !ERRORIGNORE YES
+URL GOTO=192.168.1.1
+TAG POS=1 TYPE=A ATTR=HREF:http://192.168.1.1/#broadband.globals
+wait seconds=2
+TAG POS=1 TYPE=TD ATTR=TXT:Internet
+wait seconds=2
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:editor ATTR=ID:editor_enabled CONTENT=NO
+TAG POS=1 TYPE=BUTTON FORM=ID:editor ATTR=ID:editor_submit
+wait seconds=2
+TAG POS=1 TYPE=TD ATTR=TXT:Internet
+TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:editor ATTR=ID:editor_enabled CONTENT=YES
+wait seconds=2
+TAG POS=1 TYPE=BUTTON FORM=ID:editor ATTR=ID:editor_submit
+wait seconds=5
+TAB CLOSEALLOTHERS
+TAB OPEN
+TAB T=2
+TAB CLOSEALLOTHERS
+wait seconds=2
+URL GOTO=https://www.avito.ru/
+wait seconds=2
+URL GOTO=https://www.avito.ru/
+wait seconds=2
+'===================
+CMDLINE !DATASOURCE 4activations.csv 
+'количество колонок в этом файле:
+SET !DATASOURCE_COLUMNS 1 
+'из какой строки по счету нужно извлечь инф:
+SET !LOOP 5
+'Команда счетчика вообщем, при увеличении LOOP будет переходит на следующую строку 
+SET !DATASOURCE_LINE {{!LOOP}}
+'logIN:
+TAG POS=1 TYPE=A ATTR=CLASS:btn<SP>btn-yellow&&HREF://www.avito.ru/profile
+URL GOTO=https://www.avito.ru/profile/login?next=%2Fprofile
+'====
+EVENTS TYPE=KEYPRESS SELECTOR="HTML>BODY>DIV:nth-of-type(3)>DIV>DIV>DIV>DIV>FORM>DIV>DIV>INPUT" CHARS={{!COL1}}
+wait seconds=3 
+'MASTERCLASS!!-->>
+TAG POS=1 TYPE=INPUT:EMAIL FORM=ACTION:/profile/login ATTR=NAME:login CONTENT={{!COL1}}
+'=опять мастер-класС:
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=ACTION:/profile/login ATTR=NAME:password CONTENT=kostia22
+TAG POS=1 TYPE=BUTTON FORM=ACTION:/profile/login ATTR=TXT:Войти
+'=все. мы внутри
+TAG POS=1 TYPE=A ATTR=TXT:Завершённые
+TAG POS=2 TYPE=SPAN ATTR=TXT:Активировать
+BACK
+TAG POS=2 TYPE=SPAN ATTR=TXT:Активировать
+BACK
+TAG POS=2 TYPE=SPAN ATTR=TXT:Активировать

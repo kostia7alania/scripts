@@ -1,0 +1,4 @@
+﻿URL GOTO=http://ремонт-телефонов-белгород.рф/
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:http://jbcallme.ru/api/ ATTR=TYPE:text&&NAME:name&&PLACEHOLDER:Введите<SP>имя&&REQUIRED:required CONTENT={{имя}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:http://jbcallme.ru/api/ ATTR=TYPE:text&&NAME:tel&&PLACEHOLDER:Номер<SP>телефона&&REQUIRED:required CONTENT={{телефон}}
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:http://jbcallme.ru/api/ ATTR=TYPE:submit&&NAME:submit&&VALUE:Отправить

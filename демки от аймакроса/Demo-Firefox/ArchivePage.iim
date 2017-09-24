@@ -1,0 +1,8 @@
+﻿VERSION  BUILD=7500718 RECORDER=FX
+'Simple but effective macro to saves the current page
+'
+'Ask for a name
+PROMPT "Enter a Page Name" !VAR1 NoName_Time_{{!NOW:yyyymmdd_hhnnss}} 
+'
+'Save the page    
+SAVEAS TYPE=CPL FOLDER=* FILE={{!VAR1}} 

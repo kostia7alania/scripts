@@ -1,0 +1,17 @@
+﻿SET !TIMEOUT_PAGE 60 
+SET !TIMEOUT_STEP 5 
+SET !ERRORIGNORE yes 
+SET !REPLAYSPEED MEDIUM 
+SET !DATASOURCE Group.csv 
+SET !DATASOURCE_LINE {{cycle}} 
+URL GOTO=http://vk.com/{{!COL1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*100 + 1); randomNumber;")
+SET !DATASOURCE текст.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+
+TAG POS=1 TYPE=TEXTAREA ATTR=ONFOCUS:Wall.showEditPost()&&ONKEYDOWN:onCtrlEnter(event,<SP>Wall.sendPost)&&ONKEYUP:Wall.postChanged()&&CLASS:fl_l&&ID:post_field CONTENT={{!COL1}}
+
+TAG POS=1 TYPE=BUTTON ATTR=ONCLICK:wall.sendPost()&&ID:send_post&&CLASS:flat_button<SP>fl_l 
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*15 + 5); randomNumber;") 
+WAIT SECONDS={{!VAR1}}

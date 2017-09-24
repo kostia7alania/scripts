@@ -1,0 +1,59 @@
+﻿clear
+set !replayspeed fast
+SET !TIMEOUT_STEP 1 
+set !errorignore yes
+
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE names4reg.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set name {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+set mail {{!var1}}osea@mail.ru
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_tels.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set tel {{!col1}}
+  
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*999 + 1); randomNumber;")
+SET !DATASOURCE 4_flood_sms.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set sms {{!col1}}
+
+SET !VAR1 EVAL("var randomNumber=Math.floor(Math.random()*99 + 1); randomNumber;")
+SET !DATASOURCE useragents-pc.txt
+SET !DATASOURCE_LINE {{!VAR1}}
+set !USERAGENT {{!col1}}
+
+
+SET !DATASOURCE C:\4flood\comagic.txt
+SET !DATASOURCE_LINE {{!LOOP}}
+
+url goto={{!COL1}}
+set !replayspeed medium
+wait seconds=1
+
+' 1) запрос на звонок:
+TAG POS=1 TYPE=DIV ATTR=ID:comagic-cmp-4
+TAG POS=1 TYPE=INPUT:TEL ATTR=ID:comagic-cmp-9 CONTENT={{tel}}
+
+
+' 2) запрос на sms:
+TAG POS=1 TYPE=DIV ATTR=ID:comagic-cmp-6
+TAG POS=1 TYPE=INPUT:TEXT ATTR=ID:comagic-cmp-13 CONTENT={{name}}
+TAG POS=1 TYPE=INPUT:TEL ATTR=ID:comagic-cmp-14 CONTENT={{tel}}
+TAG POS=1 TYPE=INPUT:TEXT ATTR=ID:comagic-cmp-15 CONTENT={{mail}}
+TAG POS=1 TYPE=TEXTAREA ATTR=ID:comagic-cmp-16 CONTENT={{sms}}
+TAG POS=1 TYPE=A ATTR=ID:comagic-cmp-17
+
+' 3) заявка:
+TAG POS=3 TYPE=DIV ATTR=CLASS:comagic-buttons-way-item-inner&&TXT:
+TAG POS=1 TYPE=INPUT:TEXT ATTR=ID:comagic-cmp-19 CONTENT={{name}}
+TAG POS=1 TYPE=INPUT:TEL ATTR=ID:comagic-cmp-20 CONTENT={{tel}}
+TAG POS=1 TYPE=INPUT:TEXT ATTR=ID:comagic-cmp-21 CONTENT={{mail}}
+TAG POS=1 TYPE=TEXTAREA ATTR=ID:comagic-cmp-22 CONTENT={{sms}}
+TAG POS=1 TYPE=A ATTR=ID:comagic-cmp-23
+
+ TAB CLOSEALLOTHERS

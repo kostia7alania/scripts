@@ -1,0 +1,43 @@
+﻿'setIIM нужен для имяПРекта + строки ! и все! квартирs=using разделы;
+
+SET !REPLAYSPEED FAST
+SET папкаФоток C:\фотки-
+
+SET раздел1 гостинная
+SET раздел2 кухня
+SET раздел3 ванна
+
+CMDLINE !DATASOURCE {{папкаФоток}}{{имяПроекта}}\счетчик.txt
+SET !DATASOURCE_LINE 1
+SET счетчикКартинок {{!COL1}}
+
+CMDLINE !DATASOURCE useragents.txt
+SET !DATASOURCE_COLUMNS 7
+SET !DATASOURCE_LINE {{строка}}
+SET !USERAGENT {{!COL1}}
+SET !ERRORIGNORE YES
+						SET !REPLAYSPEED MEDIUM
+						URL GOTO=https://m.avito.ru/profile
+							WAIT SECONDS=1
+						TAG POS=1 TYPE=A ATTR=HREF:https://m.avito.ru/profile/item/*						
+						TAG POS=1 TYPE=A ATTR=TXT:Редактировать
+							SET !TIMEOUT_STEP 1
+						TAG POS=3 TYPE=SPAN ATTR=CLASS:avico<SP>avico-close
+						TAG POS=2 TYPE=SPAN ATTR=CLASS:avico<SP>avico-close
+						TAG POS=1 TYPE=SPAN ATTR=CLASS:avico<SP>avico-close
+							SET !TIMEOUT_STEP 11
+'======аплоуд фото для услуг:			
+TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=ID:image_upload CONTENT={{папкаФоток}}{{имяПроекта}}\DSC-000{{счетчикКартинок}}.jpg 
+'========для квартиры:
+TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=ID:image_upload CONTENT={{папкаФоток}}{{имяПроекта}}\{{раздел1}}\{{счетчикКартинок}}.jpg
+TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=ID:image_upload CONTENT={{папкаФоток}}{{имяПроекта}}\{{раздел2}}\{{счетчикКартинок}}.jpg
+TAG POS=1 TYPE=INPUT:FILE FORM=NAME:NoFormName ATTR=ID:image_upload CONTENT={{папкаФоток}}{{имяПроекта}}\{{раздел3}}\{{счетчикКартинок}}.jpg
+						WAIT SECONDS 7
+			'клик по ПРОДОЛЖИТЬ:
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+						TAG POS=1 TYPE=INPUT:RADIO FORM=NAME:NoFormName ATTR=ID:service_no
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_premium CONTENT=NO
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_vip CONTENT=NO
+						TAG POS=1 TYPE=INPUT:CHECKBOX FORM=NAME:NoFormName ATTR=ID:service_highlight CONTENT=NO
+						TAG POS=1 TYPE=INPUT:SUBMIT FORM=NAME:NoFormName ATTR=*

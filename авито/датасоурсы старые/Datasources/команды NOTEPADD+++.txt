@@ -1,0 +1,10 @@
+﻿http://romapad.ru/regulyarnye-vyrazheniya-v-notepad/
+"width([^m]*)"
+
+удалить строки длиней 51:
+^.{51,}$
+
+^(.{139}).*$ -аналог
+
+–јЅќ“ј≈“!(===works!:D ) после \n=на концы!;
+[^\r\n]{51,}

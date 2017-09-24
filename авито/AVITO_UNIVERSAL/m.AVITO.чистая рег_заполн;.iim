@@ -1,0 +1,18 @@
+﻿URL GOTO=https://m.avito.ru/profile/registration?next=%2Fprofile
+'==берем из файла ИМЯ...
+CMDLINE !DATASOURCE names4reg.txt
+'количество колонок в этом файле:
+SET !DATASOURCE_COLUMNS 1
+SET !VAR2 EVAL("var s=Math.floor(Math.random()*100 + 1); s;")
+SET !DATASOURCE_LINE {{!VAR2}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:NoFormName ATTR=ID:name CONTENT={{!COL1}}
+'===берем тел+почту из файла;
+CMDLINE !DATASOURCE tel+mail.txt
+SET !DATASOURCE_COLUMNS 2
+SET !DATASOURCE_LINE {{!LOOP}}
+TAG POS=1 TYPE=INPUT:TEL FORM=NAME:NoFormName ATTR=ID:phone CONTENT={{!COL1}}
+TAG POS=1 TYPE=INPUT:EMAIL FORM=NAME:NoFormName ATTR=ID:email CONTENT={{!COL2}}
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=NAME:NoFormName ATTR=ID:password CONTENT=kostia22
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=NAME:NoFormName ATTR=ID:confirm CONTENT=kostia22
+prompt ВВЕДИ_КОД!
+pause

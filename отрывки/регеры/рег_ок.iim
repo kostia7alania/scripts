@@ -1,0 +1,28 @@
+﻿
+'===берем тел+почту из файла;
+CMDLINE !DATASOURCE tel+mail.txt
+SET !DATASOURCE_COLUMNS 3
+SET !DATASOURCE_LINE {{!LOOP}}
+SET телефон {{!COL1}}
+SET почта {{!COL2}}
+SET телефон2 {{!COL3}}
+
+URL GOTO=http://m.ok.ru/dk?st.cmd=newRegEnterPhone&tkn
+TAG POS=1 TYPE=LABEL FORM=ACTION:/dk?st.cmd=newRegEnterPhone&_prevCmd=newRegEnterPhone&bk=NewRegEnterPhone&tkn=8355 ATTR=CLASS:input-text_visual_bg&&FOR:field_phone&&TXT:
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/dk?st.cmd=newRegEnterPhone&_prevCmd=newRegEnterPhone&bk=NewRegEnterPhone&tkn=8355 ATTR=ID:field_phone CONTENT={{телефон2}}
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:/dk?st.cmd=newRegEnterPhone&_prevCmd=newRegEnterPhone&bk=NewRegEnterPhone&tkn=8355 ATTR=ID:reg_phone_button
+'код из смс
+
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:/dk?bk=NewRegConfirmPhone&st.cmd=newRegConfirmPhone&_prevCmd=newRegConfirmPhone&tkn=6323 ATTR=ID:reg_submit_code_btn
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/dk?bk=NewRegProfile&STKN=JkqkMCrN7kgaUgKjydo0o1Jnc7285W%2FQ&st.cmd=newRegProfile&_prevCmd=newRegProfile&tkn=4077 ATTR=ID:field_name CONTENT={{имя1}}
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/dk?bk=NewRegProfile&STKN=JkqkMCrN7kgaUgKjydo0o1Jnc7285W%2FQ&st.cmd=newRegProfile&_prevCmd=newRegProfile&tkn=4077 ATTR=ID:field_surname CONTENT={{имя2}}
+TAG POS=1 TYPE=SELECT FORM=ACTION:/dk?bk=NewRegProfile&STKN=JkqkMCrN7kgaUgKjydo0o1Jnc7285W%2FQ&st.cmd=newRegProfile&_prevCmd=newRegProfile&tkn=4077 ATTR=ID:field_birthday CONTENT=%5
+TAG POS=1 TYPE=SELECT FORM=ACTION:/dk?bk=NewRegProfile&STKN=JkqkMCrN7kgaUgKjydo0o1Jnc7285W%2FQ&st.cmd=newRegProfile&_prevCmd=newRegProfile&tkn=4077 ATTR=ID:field_month CONTENT=%5
+TAG POS=1 TYPE=SELECT FORM=ACTION:/dk?bk=NewRegProfile&STKN=JkqkMCrN7kgaUgKjydo0o1Jnc7285W%2FQ&st.cmd=newRegProfile&_prevCmd=newRegProfile&tkn=4077 ATTR=ID:field_year CONTENT=%1953
+TAG POS=1 TYPE=INPUT:RADIO FORM=ACTION:/dk?bk=NewRegProfile&STKN=JkqkMCrN7kgaUgKjydo0o1Jnc7285W%2FQ&st.cmd=newRegProfile&_prevCmd=newRegProfile&tkn=4077 ATTR=ID:gender_female
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/dk?bk=NewRegProfile&STKN=JkqkMCrN7kgaUgKjydo0o1Jnc7285W%2FQ&st.cmd=newRegProfile&_prevCmd=newRegProfile&tkn=4077 ATTR=ID:field_city CONTENT=Москва,<SP>Россия
+TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/dk?bk=NewRegProfile&STKN=JkqkMCrN7kgaUgKjydo0o1Jnc7285W%2FQ&st.cmd=newRegProfile&_prevCmd=newRegProfile&tkn=4077 ATTR=ID:field_password CONTENT=kostia22
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:/dk?bk=NewRegProfile&STKN=JkqkMCrN7kgaUgKjydo0o1Jnc7285W%2FQ&st.cmd=newRegProfile&_prevCmd=newRegProfile&tkn=4077 ATTR=ID:registration_submit
+TAG POS=1 TYPE=SPAN ATTR=TXT:Добавить<SP>фото
+TAG POS=1 TYPE=INPUT:FILE FORM=ACTION:/dk?bk=NewRegUploadPhotoModern&STKN=OhL3X3OX9NAvvjlKeFwNpjtYAJHlpxZX&st.cmd=newRegUploadPhoto&_prevCmd=newRegUploadPhoto&tkn=5105 ATTR=ID:registration-upload_field-files-id CONTENT=C:\Users\user\Desktop\avito.ru\ведьма\mL5BKVtjnSs.jpg
+TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:/dk?bk=NewRegUploadPhotoModern&STKN=OhL3X3OX9NAvvjlKeFwNpjtYAJHlpxZX&st.cmd=newRegUploadPhoto&_prevCmd=newRegUploadPhoto&tkn=5105 ATTR=NAME:button_continue

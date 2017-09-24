@@ -1,0 +1,25 @@
+﻿ 
+set !errorignore yes
+ 
+TAG POS=1 TYPE=SPAN ATTR=TXT:Upload<SP>Now!
+URL GOTO=http://localhost:4343/#/upload
+'TAG POS=1 TYPE=P ATTR=TXT:Drag<SP>and<SP>Drop<SP>an<SP>Image<SP>or<SP>Video,<SP>or*
+TAG POS=1 TYPE=INPUT:FILE ATTR=* CONTENT=C:\Users\user\Google<SP>Диск\Irinka\osetinskie-pirogi\21-Pirog-s-yablokom-i-koricey\Pirog-s-yablokom-i-koricey-2.jpg
+TAG POS=1 TYPE=BUTTON ATTR=TXT:Any
+'TAG POS=1 TYPE=BUTTON ATTR=TXT:4:3
+'TAG POS=1 TYPE=BUTTON ATTR=TXT:1:1
+TAG POS=1 TYPE=BUTTON ATTR=TXT:Save
+TAG POS=1 TYPE=BUTTON ATTR=TXT:Filters
+TAG POS=1 TYPE=DIV ATTR=CLASS:avpw_tool_icon_inner&&TXT:
+TAG POS=1 TYPE=IMG ATTR=SRC:http://assets.aviary.com/cdsv2/assets/com.aviary.effectpack.06/images.largeIcon.2e05b360-64b6-438d-bff5-32d1f7b8217a.100.jpg
+TAG POS=1 TYPE=DIV ATTR=TXT:Sepia
+TAG POS=1 TYPE=DIV ATTR=TXT:Laguna
+TAG POS=1 TYPE=A ATTR=ID:avpw_close_save  
+
+TAG POS=1 TYPE=BUTTON ATTR=TXT:Continue
+EVENTS TYPE=KEYPRESS SELECTOR="#messageDiv" CHARS="Подавать на стол в горячем виде, смазав сливочным маслом.🍒🌈🌇🌆🌅🌄 ⌚ Работаем с 9:00 до 21:00, без выходных! 📞 8-905-551-0002 📨 vk.com/vkusno_pirogi 🌐 г. Раменское, ул. Крымская 4 (рядом с 10ым подъездом) 📡 yandex.ru/maps/-/CZgvEP4l <br> #раменское#осетинскиепироги#жуковский#закрытаяпицца#Кратово #Москва#вкуснопироги#дарыкавказа"
+TAG POS=2 TYPE=INPUT:RADIO FORM=NAME:uploadForm ATTR=NAME:day
+TAG POS=2 TYPE=INPUT:TEXT FORM=NAME:uploadForm ATTR=* CONTENT=2017-01-17
+TAG POS=3 TYPE=INPUT:TEXT FORM=NAME:uploadForm ATTR=* CONTENT=15
+TAG POS=4 TYPE=INPUT:TEXT FORM=NAME:uploadForm ATTR=* CONTENT=11
+TAG POS=1 TYPE=BUTTON FORM=NAME:uploadForm ATTR=TXT:Send!
