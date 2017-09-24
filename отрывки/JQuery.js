@@ -13,13 +13,13 @@
 }
 
 	
-	loadScriptFromURL('http://devbattles.com/js/jq.for.im.js');		
-	$ = window.$,
-	JQuery = window.JQuery;
+	loadScriptFromURL('http://devbattles.com/js/jq.for.im.js');	$ = window.$,	JQuery = window.JQuery; // инициализация JQ
  
  
-$('.switcher-closed').click();
+ 
+//=пример использования JQ:
 
+$('.switcher-closed').click();
 var s = $("input:eq(1)").val();
 alert('s==='+s)
 var checkName = $(".control-self").val();
