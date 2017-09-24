@@ -1,4 +1,7 @@
-﻿var start = new Date();
+﻿//тестировалось на FF 45, 47; imacros 8
+//все указываемые пути должны существовать в UTF-8+bom 
+
+var start = new Date();
 function timming() {diff=(new Date()-start)/1000; return 'Затрачено времени: '+Math.floor(diff/3600)+'ч:'+(Math.floor(diff/60)-(Math.floor(diff/3600)*60))+'м:'+Math.round(diff%60)+'с';}
 function дата() {var d=new Date();var day=d.getDate();var month=d.getMonth() + 1;var year=d.getFullYear(); return d.toLocaleString().replace(",	","	")}
 function копиБоди() {try{var x = window.document.getElementsByTagName("body")[0].innerHTML;}catch(e){var x='sex'} return x;}
@@ -8,8 +11,7 @@ function randGen(min,max) {return Math.floor(Math.random() * (max - min)) + min;
 function ждем(s) {iim('wait seconds='+s)}
 function добавитьВКонец(путь,инфа) {imns.FIO.appendTextFile(imns.FIO.openNode(путь),инфа)}
 
-var инвалид_база 	=	"C:\\FULL\\RESULTS\\GOOGLE\\инвалид_база.txt"// инвалид_база
-
+var инвалид_база 	=	"C:\\FULL\\RESULTS\\GOOGLE\\инвалид_база.txt"// инвалид_база (здесь будут сохраняться не работающие адреса);
 
 var тема = "MELbet"
 var текст = `Добрый день!
