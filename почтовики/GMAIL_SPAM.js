@@ -2,85 +2,43 @@
 //файл с отчетом должен существовать в UTF-8 bom 
  
 var отчет = "C:\\FULL\\RESULTS\\gmail-отчет.txt"
-var тема = "MELbet"
+var тема = "MELbet PR"
 var смс = `HI!
-Is it possible for you to advertise the Melbet BC on your website, if so, on what terms?
+Is it possible for you to advertise the Melbet-bookmaker on your website, if so, on what terms?
 
 At the moment the following are relevant:
 
 
 - Placement in the ranking bookmakers at the TOP-5 positions.
 It must contain the MELbet logo, and a brief description of the company, bonus information and a link to the site;
-
-- A video with participation in the rating of our company or an independent review of MELbet.
-
-If  video, then we need to know how often these videos will go, where the predicted coverage will be.
-
+ 
+ 
 What do you think about it? Do you have any opportunities?`
   
-var рассылкиСписок = `contact@myracing.com
-info@tonybet.com
-anonymous@sharpbet.net 
-bet@intertops.eu 
-bettingwellcom@gmail.com 
-blackmensnow@gmail.com 
-boxingscene@gmail.com 
-caxemirabet@gmail.com 
-charlene@rorcrating.com 
-client@smile-expo.com 
-contact@casinoonlinerating.com 
-customerservice@livecareer.com 
-discovery@storyandheart.com 
-disputes@bookmakersreview.com 
-editorial@sportinglife.com
-email@footballbettingwebsite.com 
-eyran@sbpost.ie 
-friends@email.com 
-hello@bettercollective.com 
-help@olybet.eu 
-help@teamprofit.com 
-timeform@timeform.com 
-info@100click.com 
-info@5dimes.eu 
-info@aceperhead.com 
-info@best-betting-sites.com 
-info@bestonlinebookmakers.co 
-info@bestonlinebookmakers.com 
-info@betstatz.com 
-info@bookmakers2u.com 
-info@bookmakersrating.ru 
-info@codewars.com
-info@european-lotteries.org 
-info@firsttouchonline.com 
-info@freesupertips.co 
-info@thepundits.co 
-info@tipstersreview.co 
-info@top100bookmakers.com 
-info@topclassbet.com 
-info@tourmyindia.com 
-mail@freebetreview.com 
-mail@semrush.com 
-mb@underdogchance.com 
-osga@osga.com 
-pagalba@olybet.lt 
-partners@esportslobby.com 
-partnership@csgobets.com
-predictem@hotmail.com 
-rji@rjionline.org 
-support@acepokersolutions.com 
-support@betburger.com 
-support@betclic.com 
-support@bettingrunner.com 
-support@codeinwp.com 
-support@getkirby.com 
-support@gtbets.eu
-support@jbetcasino.com 
-support@racingandsports.com 
-support@topbet.eu 
-support-ger@customerservices365.com 
-tipsters@bettingadvice.com 
-tony.corke@gmail.com
-worldbet@email.it`
+var рассылкиСписок = `contact@betseek.com
+marketing@blacktype.bet
+admin@onlinebookmakers.co
+admin@sportsbettingapps.net
+bookmakersranking@gmail.com
+contact@sportwiser.com
+info-eng@planetwin365.com
+INFO@AMERICASBOOKIE.COM
+info@completesportsnigeria.com
+info@dailyodds.com
+info@ebetfinder.com
+info@online-betting.me.uk
+info@soccer-rating.com
+mgmtcontact@hostpph.com
+ratingbetnet@gmail.com
+rickk@surepick.com.au
+Support@BettingGods.com 
+support@coversmedia.com
+support@freebets.co.uk.
+support@kabinteractive.com 
+support@punters.com.au
+support@smarkets.com
+support@sportsline.com 
+support@thegreek.com`
 
 iim=iimPlayCode;
 function читать(файл) {return imns.FIO.readTextFile(imns.FIO.openNode(файл))} 
