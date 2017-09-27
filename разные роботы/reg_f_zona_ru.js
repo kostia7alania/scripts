@@ -1,28 +1,28 @@
-﻿
- 
- 
-
-iim = iimPlayCode;
+﻿iim = iimPlayCode;
  
 function randGen(min, max) {return Math.floor(Math.random() * (max - min)) + min;}
 var _c=Components,XMLHttpRequest=_c.Constructor('@mozilla.org/xmlextras/xmlhttprequest;1');
 function получитьHTML (AAA){var a=XMLHttpRequest();return a.open('GET',AAA,!1),a.send(''),a.responseText}
- 
+function читать(файл) {return imns.FIO.readTextFile(imns.FIO.openNode(файл))}
+
 
 // ================ настройки ============
 var путьСохр = "C:\\FULL\\report.txt";	//КУДА СОХРАНЯЕМ ОТЧЕТ
  
-var email = "https://m.vk.com/doc40778210_450699272"
 var ждатьОт = 1000
 var ждатьДо = 4444 
  
-var email = получитьHTML(email).split('\n')  
- 
+// var email = "https://m.vk.com/doc40778210_450699272"
+// var email = получитьHTML(email).split('\n')  
+
+var email = "C:\\FULL\\ресурсы\\4reg.txt"
+var email = читать(email).split('\n')
+var тестовое_слово_1 = "успешно"
+var тестовое_слово_2 = "Спасибо за регистрацию"
 
 function добавитьВКонец(путь, инфа) {imns.FIO.appendTextFile(imns.FIO.openNode(путь), инфа)}
 var start = new Date();
 function timming() {diff = (new Date() - start) / 1000;return Math.floor(diff / 3600) + 'ч:' + (Math.floor(diff / 60) - (Math.floor(diff / 3600) * 60)) + 'м:' + Math.round(diff % 60) + 'с';}
-function читать(файл) {return imns.FIO.readTextFile(imns.FIO.openNode(файл)).split('\n')}
 function дата() { var d = new Date(); var day = d.getDate();var month = d.getMonth() + 1;var year = d.getFullYear();return d.toLocaleString().replace(", ", "	")}
 
 function ждем(s) {iim('wait seconds=' + s)}
@@ -66,8 +66,8 @@ for (q = 0; q < email.length; q++) {
 	TAG POS=1 TYPE=INPUT:SUBMIT FORM=ACTION:register/register ATTR=TYPE:submit&&ID:SubmitButton&&CLASS:button<SP>primary&&ACCESSKEY:s&&VALUE:Регистрация
 	wait seconds=2
 	EVENT TYPE=CLICK SELECTOR="#SubmitButton" BUTTON=0`)
-
-	if(копиБоди().search('успешно')>-1){	
+ var a = копиБоди()
+	if((a.search(тестовое_слово_1)!=-1)||(a.search(тестовое_слово_2)!=-1)){	
 		var отчет = дата()+"	"+q+"	"+вход.replace(/\r/gim,'').replace(/\n/gim,'')+timming()+"\n"
 		iimDisplay(отчет) 
 		добавитьВКонец(путьСохр, отчет);

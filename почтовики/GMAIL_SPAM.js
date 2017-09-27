@@ -7,8 +7,7 @@ var смс = `HI!
 Is it possible for you to advertise the Melbet-bookmaker on your website, if so, on what terms?
 
 At the moment the following are relevant:
-
-
+ 
 - Placement in the ranking bookmakers at the TOP-5 positions.
 It must contain the MELbet logo, and a brief description of the company, bonus information and a link to the site;
  
@@ -20,25 +19,7 @@ marketing@blacktype.bet
 admin@onlinebookmakers.co
 admin@sportsbettingapps.net
 bookmakersranking@gmail.com
-contact@sportwiser.com
-info-eng@planetwin365.com
-INFO@AMERICASBOOKIE.COM
-info@completesportsnigeria.com
-info@dailyodds.com
-info@ebetfinder.com
-info@online-betting.me.uk
-info@soccer-rating.com
-mgmtcontact@hostpph.com
-ratingbetnet@gmail.com
-rickk@surepick.com.au
-Support@BettingGods.com 
-support@coversmedia.com
-support@freebets.co.uk.
-support@kabinteractive.com 
-support@punters.com.au
-support@smarkets.com
-support@sportsline.com 
-support@thegreek.com`
+contact@sportwiser.com`
 
 iim=iimPlayCode;
 function читать(файл) {return imns.FIO.readTextFile(imns.FIO.openNode(файл))} 

@@ -6,34 +6,68 @@ function получитьHTML (AAA){var a=XMLHttpRequest();return a.open('GET',A
 function timming() {diff=(new Date()-start)/1000; return ';\nЗатрачено времени: '+Math.floor(diff/3600)+'ч:'+(Math.floor(diff/60)-(Math.floor(diff/3600)*60))+'м:'+Math.round(diff%60)+'с';}
 function добавитьВКонец(путь,инфа) {imns.FIO.appendTextFile(imns.FIO.openNode(путь),инфа)}
 function читать(файл) {return imns.FIO.readTextFile(imns.FIO.openNode(файл))}
-function randGen(min,max) {return Math.floor(Math.random() * (max - min)) + min;}
+function randGen(min,max) {return Math.floor(Math.random() * (max - min)) + min;} 
+var _c=Components,XMLHttpRequest=_c.Constructor('@mozilla.org/xmlextras/xmlhttprequest;1');
+function получитьHTML (AAA){var a=XMLHttpRequest();return a.open('GET',AAA,!1),a.send(''),a.responseText}
+function translit(text, engToRus, replace){rus = "щшчцюяёжъыэабвгдезийклмнопрстуфхь".split("");eng = "shh sh ch cz yu ya yo zh `` y e a b v g d e z i j k l m n o p r s t u f x  ".split(" ");for(var x = 0; x < rus.length; x++){text = text.split(engToRus ? eng[x] : rus[x]).join(engToRus ? rus[x] : eng[x]);text = text.split(engToRus ? eng[x].toUpperCase() : rus[x].toUpperCase()).join(engToRus ? rus[x].toUpperCase() : eng[x].toUpperCase()); 
+}if(replace){r = replace.split(",");try{pr = new RegExp("([^\\"+r[0]+"]+)(?=\\"+r[1]+")","g");text.match(pr).forEach(function(i){text=text.split(r[0]+i+r[1]).join(translit(i, engToRus ? "" : true))})}catch(e){}}return text;}
+var муж="C:\\FULL\\ресурсы\\names\\мужские-имена-транслит.txt";		// имена в столбик в utf-8;
+var жен="C:\\FULL\\ресурсы\\names\\женские-имена-транслит.txt";		// имена в столбик в utf-8;
 
-var муж="C:\\FULL\\ресурсы\\мужские-имена-транслит.txt";		// имена в столбик в utf-8;
-var жен="C:\\FULL\\ресурсы\\женские-имена-транслит.txt";		// имена в столбик в utf-8;
-
+var имена  = "https://m.vk.com/doc-125614288_450503984";
+var фамилии= "https://m.vk.com/doc40778210_450651681";
+var имена = получитьHTML(имена).split('\n')
+var фамилии = получитьHTML(фамилии).split('\n')
  
  
 for(i=0;i<11100;i++){
 iim=iimPlayCode;
 iim('clear \n URL GOTO=https://multiurok.ru/index.php/user/register')
 
-var name = '';
-if(randGen(1,2)>1){var name = читать(муж).split('\n')[randGen(0,читать(муж).split('\n').length)]}
-else {var name = читать(жен).split('\n')[randGen(0,читать(жен).split('\n').length)]}
-var name = name+randGen(0,999999999);
+	var рандомИмя = randGen(1,имена.length);
+	var рандомФам = randGen(1,фамилии.length); 
+	var имя 	= имена[рандомИмя]
+	var фамилия = фамилии[рандомФам]
+
+	if(randGen(1,4)>2){
+		логин = имя
+		if(randGen(1,4)>2){
+			var логин = логин+randGen(0,9)
+		}else{
+			логин = логин + фамилия;
+			if(randGen(1,4)>2){
+				var логин = логин+randGen(0,9)
+			}
+		}
+	}else{
+		логин = фамилия
+		if(randGen(1,4)>2){
+			var логин = логин+randGen(0,9)
+		}else{
+			логин = логин + имя;
+			if(randGen(1,4)>2){
+				var логин = логин+randGen(0,9)
+			}
+		}
+	} 
+ 
+	var name = translit(логин)
+	
+	try{
 iim('TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/index.php/user/register ATTR=NAME:email CONTENT='+name+'@mail.ru')
 iim('TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:/index.php/user/register ATTR=NAME:display_name CONTENT='+name)
 iim(`TAG POS=1 TYPE=INPUT:PASSWORD FORM=ACTION:/index.php/user/register ATTR=NAME:password CONTENT=kostia22
-TAG POS=1 TYPE=INPUT:PASSWORD FORM=ACTION:/index.php/user/register ATTR=NAME:passwordVerify CONTENT=kostia22
-TAG POS=1 TYPE=DIV ATTR=TXT:Я<SP>ученик
-TAG POS=1 TYPE=DIV ATTR=TXT:Я<SP>учитель
-TAG POS=1 TYPE=DIV ATTR=TXT:Я<SP>родитель
-TAG POS=1 TYPE=BUTTON FORM=ACTION:/index.php/user/register ATTR=NAME:submit
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=ACTION:/index.php/user/register ATTR=NAME:passwordVerify CONTENT=kostia22`)
+iim('TAG POS=1 TYPE=DIV ATTR=TXT:Я<SP>ученик')
+if(randGen(1,10)>6){iim('TAG POS=1 TYPE=DIV ATTR=TXT:Я<SP>учитель')}
+if(randGen(1,10)>6){iim('TAG POS=1 TYPE=DIV ATTR=TXT:Я<SP>родитель')}
+
+iim(`TAG POS=1 TYPE=BUTTON FORM=ACTION:/index.php/user/register ATTR=NAME:submit
 wait seconds=2
 url goto=https://multiurok.ru/index.php/irinalysokon22/
 TAG POS=1 TYPE=A ATTR=TXT:Подписаться
 wait seconds=2`)
-
+	}catch(e){}
 try{ 
 получитьHTML('https://multiurok.ru/files/download/opornyi-konspiekt-akieny-matierial-dlia-podghotovk/')
 получитьHTML('https://multiurok.ru/files/download/opornyi-konspiekt-tsikloalkany')
