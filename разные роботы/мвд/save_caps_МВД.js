@@ -1,8 +1,7 @@
 ﻿var апиКлюч = "6440c629b2418bf14c6ca56d0e7e21d0"
 
 //переЗАПИСЬ:
-var saveTextPromise = (сохр_текст,путь) => {
-	Components.utils.import("resource://gre/modules/osfile.jsm"); // загрузить модуль ОС
+var saveTextPromise = (сохр_текст,путь) => {Components.utils.import("resource://gre/modules/osfile.jsm"); // загрузить модуль ОС
 	var encoder = new window.TextEncoder(); //Этот encoder мб переЮзан повторно для нескок операций записи
 	var array = encoder.encode(сохр_текст); // Преобразование текста в массив
 	var promise = OS.File.writeAtomic(путь, array,{tmpPath: "1.txt.tmp"}); // Пишем массив атомарно в файл file.txt, используя временный;
