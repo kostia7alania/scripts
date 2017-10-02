@@ -1,8 +1,84 @@
-﻿/////////////////////////////////////////////
+﻿
+// var iMacros = ( function() {
+   // const Cu = Components.utils;
+    // let {imns} = Cu.import("resource://imacros/utils.js");
+    // let {SOAPClient} = Cu.import("resource://imacros/SOAPClient.js");
+
+    // var obj = {};
+  
+   // window.openDialog("chrome://imacros/content/smplcopy.xul",
+                              // "", "modal,centerscreen", 1);
+ 
+	// alert(1)
+
+
+	
+    // obj.onUnload = function() {
+        // this.unregisterObservers();
+    // };        
+
+	
+    // return obj;
+	// }) ();
+
+	
+	
+	// window.addEventListener("load", function() {
+    // iMacros.onLoad();
+// }, false);
+
+
+// window.addEventListener("unload", function() {
+    // iMacros.onUnload();
+// }, false);
+
+
+
+
+	 
+	 
+ //imacros-js:showsteps no
+var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+//iimPlayCode(t0+'URL GOTO=about:config');
+prefs.setIntPref("browser.sessionhistory.max_total_viewer",0);
+prefs.setBoolPref("config.trim_on_minimize", true);
+prefs.setIntPref("browser.sessionstore.interval",20000);
+prefs.setIntPref("browser.sessionhistory.max_entries",10);
+prefs.setBoolPref("network.http.pipelining", true);
+prefs.setIntPref("network.http.pipelining.maxrequests", 5);
+prefs.setBoolPref("network.http.proxy.pipelining", true);
+prefs.setBoolPref("network.prefetch-next", false);
+ 
+
+
+function iim(code) {  
+    var Cc = Components.classes,
+        Ci = Components.interfaces,
+        wm = Cc["@mozilla.org/appshell/window-mediator;1"]
+                .getService(Ci.nsIWindowMediator)
+                .getMostRecentWindow("navigator:browser");
+    iimPlay('CODE:' + code);
+    if (iimGetLastError() == 'Macro stopped manually') {
+            window.setTimeout(function() {
+                wm.iMacros.panel.sidebar.document.getElementById('message-box-button-close').click()
+            } , 4);
+            throw 'Скрипт остановлен кнопкой стоп!';
+    }
+};
+
+
+/////////////////////////////////////////////
  
 // function loadJQ() {function loadScriptFromURL(url) {var request = Components.classes['@mozilla.org/xmlextras/xmlhttprequest;1'].createInstance(Components.interfaces.nsIXMLHttpRequest),async = false;request.open('GET', url, async);request.send();if (request.status !== 200) {var message = 'An error occurred while loading script at url: ' + url + ', status: ' + request.status;iimDisplay(message);return false;}eval(request.response);return true;}; loadScriptFromURL('http://devbattles.com/js/jq.for.im.js ');$ = window.$,JQuery = window.JQuery;}; loadJQ();
  
+ var Cc = Components.classes,Ci = Components.interfaces,wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator).getMostRecentWindow("navigator:browser");var mainWindow = wm.iMacros.panel.sidebar;
+
+function asd(a) {mainWindow.document.querySelector('#imacros-message-box').setAttribute("style", "height: 10px; background:black; color:red; transform:SCALE("+a+"); font-size: 14px;")}
  
+
+  // mainWindow.document.querySelector('#imacros-message-box-container').setAttribute("style", "width:100%!important;height: 11px!important; background:black; color:red!important; transform:SCALE(2)!important; font-size: 14px!important;")
+  // iimPlayCode('wait seconds=0')
+
  function toDataURL(url, callback) {
   var xhr = new window.XMLHttpRequest();
   xhr.onload = function() {
@@ -18,6 +94,8 @@
   // window.document.querySelectorAll('img')[0].src=xhr.responseText;  
   // alert(11)
 }
+
+iim('wait seconds=11')
 
 toDataURL('https://71.мвд.рф/captcha', function(dataUrl) { 
   window.document.querySelectorAll('img')[0].src=dataUrl; 
