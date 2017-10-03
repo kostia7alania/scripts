@@ -26,3 +26,4 @@ function iim(code) {
             throw 'Скрипт остановлен кнопкой стоп!';
     }
 };
+alert('aa')
