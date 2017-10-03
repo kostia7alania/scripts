@@ -1,6 +1,7 @@
 # scripts
 это скрипты аймакроса
-группа vk.com/imacros_javascript
+
+группа https://vk.com/imacros_javascript
 
 
 Быстрый старт в IMACROS: https://vk.com/wall-125614288_55 
