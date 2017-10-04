@@ -1,0 +1,188 @@
+
+//НАСТРОЙКИ:
+var ссылка_на_гугл 		= 	"http://google.ru"							// здесь все понятно);
+var путьСохр       		= 	"C:\\FULL\\RESULTS\\GOOGLE\\fuckGoogle-result.txt";	//КУДА СОХРАНЯЕМ ОТЧЕТ 
+var скок_стр_парсить  	= 	2;											//сколько страниц парсить с 1 запроса;
+var начинатьСКлюча 		=	0;
+// var ключи 				=	"C:\\FULL\\RESULTS\\GOOGLE\\ключи\\"+профиль+"-ключи.txt"//  
+
+var запросы = `осетинские пироги
+вкусные осетинские пироги
+рейтинг пироги москва
+какие лучшие пироги в москве`
+
+var домен = "vkusno-pirogi.ru"
+var генеритьСобытий = 50; //скок генерить событий;
+// var вероятностьУрл = 8; //вероятность перехода по ссылке;
+var открыватьКоллег="1,15,14"//[открывать сайт коллег] -генерируем случ число между 1 и 15 и если оно больше 14, то переходим.
+var минПауза = 0;
+var максПауза = 2;
+var радиусНаводки =222; //область в пикселях в радиусе которого будем водить мышку;
+
+var скорость = "set !replayspeed fast\nset !errorignore yes \nset !TIMEOUT_STEP 0\n"
+var таймаут = "set !TIMEOUT_STEP 0\n"
+var таймаут_tag = "set !TIMEOUT_tag 0\n"
+var наборЭлементов = "LI,P,H1,H2,H3,H4,H5,H6,SPAN,TD,A,DIV"
+var наборСобытий = "MOUSEOVER,MOUSEDOWN,MOUSEUP,MOUSEMOVE,CLICK,DBLCLICK"
+var прокси = "196.19.8.188:8000" 		//SYC IPv4 Seychelles   
+var prox = 'PROXY ADDRESS='+прокси+'\n'
+var prox=""//без проксей;
+ 
+var заголовок_выдачи 	=	".g>div>div>h3>a" 
+var заголовок_выдачи 	=	"DIV>DIV>DIV>DIV>DIV>DIV>DIV>H3>A" 
+var ключи = запросы.replace(/ /gim,'<sp>').split('\n') ; // запросы (разделитель - столбик)
+var элементы = наборЭлементов.split(',');
+var события = наборСобытий.split(',');
+
+function загрузитьСкрипт() {function loadScriptFromURL(url) {var request = Components.classes['@mozilla.org/xmlextras/xmlhttprequest;1'].createInstance(Components.interfaces.nsIXMLHttpRequest),async = false;request.open('GET', url, async);request.send();if (request.status !== 200) {var message = 'An error occurred while loading script at url: ' + url + ', status: ' + request.status;iimDisplay(message);return false;}eval(request.response);return true;}; loadScriptFromURL('http://bit.ly/наработки');}; загрузитьСкрипт();
+
+function iim(code){var Cc = Components.classes,Ci = Components.interfaces,wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator).getMostRecentWindow("navigator:browser");iimPlay('CODE:' + code);if (iimGetLastError() == 'Macro stopped manually') {window.setTimeout(function() {wm.iMacros.panel.sidebar.document.getElementById('message-box-button-close').click()} , 4);throw 'Скрипт остановлен кнопкой стоп!';}};
+ждем = (n) =>{iim('wait seconds='+n)}
+function добавитьВКонец(путь, инфа) {imns.FIO.appendTextFile(imns.FIO.openNode(путь), инфа)}
+var start = new Date();
+function timming() {diff = (new Date() - start) / 1000;return Math.floor(diff / 3600) + 'ч:' + (Math.floor(diff / 60) - (Math.floor(diff / 3600) * 60)) + 'м:' + Math.round(diff % 60) + 'с';}
+function читать(файл) {return imns.FIO.readTextFile(imns.FIO.openNode(файл)).split('\n')}
+function читать2(файл) {return imns.FIO.readTextFile(imns.FIO.openNode(файл))}
+function дата() { var d = new Date(); var day = d.getDate();var month = d.getMonth() + 1;var year = d.getFullYear();return d.toLocaleString().replace(", ", "	")}
+function randGen(min, max) {return Math.floor(Math.random() * (max - min)) + min;}
+function копиБоди() {try {var x = window.document.getElementsByTagName("body")[0].innerHTML;} catch (e) {var x = 'sex'}return x;}
+function копиУрл() {return window.location.href}
+function тестНаКаптчу() {if (window.document.querySelector('body').innerHTML.search('recaptcha') > 0) {return 0}else{return 1}}
+function удалитьСлово(a,b) {window.document.body.innerHTML=window.document.body.innerHTML.replace(RegExp( a, "gim" ), b)}
+function unique(arr) { var obj = {};for (var i = 0; i < arr.length; i++) {  var str = arr[i];obj[str] = true; }// запомнить строку в виде свойства объекта
+	return Object.keys(obj); } // или собрать ключи перебором для IE8- //<<===оставить тока уник эл-ты массива;
+
+function randomEvent(type,id,событие) {try{iim(prox+'TAG POS='+id+' TYPE='+type+' ATTR=* CONTENT=EVENT:'+событие)}catch(e){console.log('не нашли елемент -- #'+id+"\nс типом "+type)}}
+function покрутить() {var высотаСтр = window.document.body.scrollHeight; var текПозСтр = window.pageYOffset; for(i=0;i<randGen(0,высотаСтр-текПозСтр);i++){window.scrollBy(0,1)}; for(i=0;i<randGen(0,высотаСтр-текПозСтр);i++){window.scrollBy(0,-1)}}
+var поводитьМышкой = (n) => {
+	var текПозСтр = window.pageYOffset;
+	var Ю = () => {return randGen(текПозСтр-n,текПозСтр+n)}
+	iim(`EVENTS TYPE=MOUSEMOVE SELECTOR="HTML" POINTS="(`+Ю()+`,`+Ю()+`),(`+Ю()+`,`+Ю()+`),(`+Ю()+`,`+Ю()+`),(`+Ю()+`,`+Ю()+`),(`+Ю()+`,`+Ю()+`),(`+Ю()+`,`+Ю()+`),(`+Ю()+`,`+Ю()+`),(`+Ю()+`,`+Ю()+`),(`+Ю()+`,`+Ю()+`),(`+Ю()+`,`+Ю()+`),(`+Ю()+`,`+Ю()+`)"`)
+}
+var промотки = () => {//ТУТ ПРОМОТКам всяким  начало
+						if(randGen(1,11)>8){покрутить()}
+						if(randGen(1,11)>8){
+							var рандомПромоткаUP = new Array(Math.round(Math.sqrt(Math.sqrt(window.document.body.scrollHeight)))) 
+							for(up=0;up<рандомПромоткаUP;up++){рандомПромоткаUP[up]=40};
+							iim(`EVENTS TYPE=KEYPRESS SELECTOR="HTML" KEYS=[рандомПромоткаUP.join(',')]`)	//нажимаем вниз или вверх в зависимости от размера стр;
+						}
+						if(randGen(1,10)>7){iim(`EVENT TYPE=MOUSEDOWN SELECTOR="HTML" BUTTON=`+randGen(0,1))}//- нажатие на скроллБар
+						if(randGen(1,10)>8){
+							var рандомПромоткаDOWN = new Array(Math.round(Math.sqrt(Math.sqrt(window.document.body.scrollHeight)))) 
+							for(DOWN=0;DOWN<рандомПромоткаDOWN;DOWN++){рандомПромоткаDOWN[DOWN]=38};
+							iim(`EVENTS TYPE=KEYPRESS SELECTOR="HTML" KEYS=[рандомПромоткаDOWN.join(',')]`)	//нажимаем вниз или вверх в зависимости от размера стр;
+						}
+}				//ТУТ ПРОМОТКам всяким  КОНЕЦ
+// var кликПоВыдаче = (n) => {
+	// if(firshPage=0){iim(prox+`EVENT TYPE=CLICK SELECTOR="DIV>DIV>DIV>DIV>DIV:nth-of-type(`+n+`)>DIV>DIV>H3>A" BUTTON=1 \n tab t=2`)}//если мы на первой десятке;
+	// else{iim(prox+`EVENT TYPE=CLICK SELECTOR="DIV>DIV:nth-of-type(`+n+`)>DIV>DIV>H3>A" BUTTON=1 \n tab t=2`)}//если переключились на 100 стр	}
+	
+var _c=Components,XMLHttpRequest=_c.Constructor('@mozilla.org/xmlextras/xmlhttprequest;1');
+function получитьHTML (AAA){var a=XMLHttpRequest();return a.open('GET',AAA,!1),a.send(''),a.responseText}
+////////////////////ПРОКСИ начало/////////////////
+var proxy_off=()=>{var pref = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);var a = pref.getBranch("network.proxy.");var массив="http,http_port,socks,socks_port,ftp,ftp_port,ssl,ssl_port".split(',');var sex = [].map.call(массив, function(obj) {try{a.setCharPref(obj, "")}catch(e){}});a.setIntPref("type", 0)}
+
+var proxy_on=(proxy)=>{proxy_off();
+	var pref = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+	var a = pref.getBranch("network.proxy.");
+	a.setIntPref("type", 1);
+	var prox = proxy.split(':');
+	if(proxy.search("socks")!=-1){
+		a.setBoolPref("share_proxy_settings", false);
+		a.setCharPref("socks", prox[0]);
+		a.setIntPref("socks_port", prox[1]);
+		a.setIntPref("socks_version", prox[2][5]);
+	}else{//http'S
+		a.setBoolPref("share_proxy_settings", true);
+		a.setCharPref("http", prox[0]);
+		a.setIntPref("http_port", prox[1]);
+	}
+}
+////////////////////ПРОКСИ конец/////////////////
+	
+var firshPage=0; //для тестов: 10 или 100-видный гугл 
+var номер_прокси=-1;
+var соксы = "https://raw.githubusercontent.com/kostia7alania/scripts/master/proxy_socks"
+var прокся = получитьHTML(соксы).split('\n');
+for(q=начинатьСКлюча;q<ключи.length;q++){
+	do{ номер_прокси++;
+		iimDisplay("Номер_прокси = "+номер_прокси)
+		proxy_on(прокся[номер_прокси]+":socks5");
+		iim('set !replayspeed fast\n clear \n tab closeallothers \n') 
+		iim(prox+`url goto=`+ссылка_на_гугл+` 
+		set !errorignore yes
+		EVENTS TYPE=KEYPRESS SELECTOR="#lst-ib" CHARS=`+ключи[q].replace(/ /gim,'<sp>')+`
+		TAG POS=1 TYPE=INPUT:SUBMIT FORM=ID:tsf ATTR=NAME:btnK`) 
+	}while(тестНаКаптчу()==0); 
+
+	for(zz=0;zz<скок_стр_парсить;zz++){
+		try{var заголовок = window.document.querySelectorAll(заголовок_выдачи)}catch(e){заголовок = ""}
+		for (var i = 0; i < заголовок.length; i++) {
+			try{var домен1 = заголовок[i].href;}catch(e){домен1_титл = домен1=""}
+			if(домен1.search(домен)>0){//подходит);
+				alert(i+" of "+ window.document.querySelectorAll('DIV>DIV>DIV>DIV>H3>A').length+"	"+window.document.querySelectorAll('DIV>DIV>DIV>DIV>H3>A')[i].innerText)
+				// кликПоВыдаче(i+1);
+				window.document.querySelectorAll('DIV>DIV>DIV>DIV>H3>A')[i].click()
+				ждем(randGen(минПауза,максПауза))
+				var тайтл = window.document.title;
+				var ссылка = window.document.title;
+				alert("начинаем обходить ссылки")
+				var событий=кликов=0;//пока не юзаются ети ограничители);
+				for(e=0;e<генеритьСобытий;e++){
+					// window.document.querySelectorAll('p')[3].innerText.length
+					// var линков = window.document.links, рисунков = window.document.images;  
+					// randomEvent("IMG",randGen(0,рисунков),"MOUSEOVER");randomEvent("span",randGen(0,спанов),"MOUSEOVER")
+					if(randGen(0,10)>8){ 
+						var элемент = элементы[randGen(0,элементы.length)]
+						var элемент_селект = window.document.querySelectorAll(элемент)
+						var элемент_номер = randGen(0,элемент_селект.length)
+						var событие = наборСобытий[randGen(0,события.length)]					
+						var скокТекста = элемент_селект[элемент_номер].innerText.length; 
+						var скокЖдать = Math.sqrt(скокТекста);
+						промотки(); //случайные промотки);
+						// randomEvent("span",randGen(0,спанов),"MOUSEOVER"); 
+						randomEvent(элемент,элемент_номер,событие);  //ЗДЕСЬ МОЖЕТ БЫТЬ КЛИК(!)
+						ждем(скокЖдать) 	//ждет в зависимости от того -скок перед мышкой текста 
+						поводитьМышкой(радиусНаводки);;//водим мышкой;
+					} 
+				}
+				var отчет = дата()+"	"+домен+"	"+i+1+"	"+тайтл+"	"+ссылка+"	"+ключи[q].replace(/<sp>/gim,' ')+"	"+timming() 
+				добавитьВКонец(путьСохр, отчет); i=9999999;
+			}else{//если строка выдачи не подходит, то тупо иногда ее открываем, как и норм юзер=));
+				if(randGen(открыватьКоллег.split(',')[0],randGen(открыватьКоллег.split(',')[1]))>randGen(открыватьКоллег.split(',')[2])){
+					// кликПоВыдаче(i); 
+					window.document.querySelectorAll('DIV>DIV>DIV>DIV>H3>A')[i].click();
+					if(randGen(1,10)>7){промотки()}
+					if(randGen(1,10)>7){поводитьМышкой(радиусНаводки)};//водим мышкой;
+					iim('tab t=0 \n ')
+				}
+				} 
+		}
+
+	if(firshPage==1){		
+			if(iim(prox+'set !timeout_tag 1\nEVENT TYPE=MOUSEDOWN SELECTOR="#pnnext>SPAN" BUTTON=0')>0){ //след.стр существует,продолжаем.
+			if(iim(prox+'EVENT TYPE=CLICK SELECTOR="#pnnext>SPAN" BUTTON=0')>0){}else{iim(prox+'EVENT TYPE=CLICK SELECTOR="#pnnext>SPAN" BUTTON=0')} //если гугл будет тормозить,жмем еще раз;
+			}else{iimDisplay("УСЕ с етим ключем!\nСтраница: "+(zz+1)+"\nЭто был ключ: "+ключи[q]+"\n"+timming()); zz=30;}
+	}else{var firshPage=1; //первую страницу всегда с расширения начнет (вместо перехода на 2 страницу;
+		// = вместо 10 раз перелистываний. лучше сразу 10 стр одним махом отобразить!;
+		var запрос = ключи[q]; iimSet('запрос',запрос)	
+		iim(prox+`	TAG POS=1 TYPE=A ATTR=ID:abar_button_opt&&HREF:/preferences
+		EVENT TYPE=CLICK SELECTOR="#lb>DIV>A" BUTTON=0
+		'TAG POS=1 TYPE=A ATTR=HREF:/preferences?*&&ROLE:menuitem&&CLASS:_VJq* 
+
+		ONDIALOG POS=1 BUTTON=OK CONTENT=
+		TAG POS=1 TYPE=DIV ATTR=CLASS:goog-slider-thumb
+		EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(5)>FORM>DIV>DIV:nth-of-type(2)>DIV>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>DIV>DIV:nth-of-type(2)" BUTTON=0
+		EVENTS TYPE=KEYPRESS SELECTOR="HTML>BODY>DIV:nth-of-type(5)>FORM>DIV>DIV:nth-of-type(2)>DIV>DIV:nth-of-type(2)>DIV:nth-of-type(2)>DIV>DIV" KEYS="[39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39]"
+		EVENT TYPE=click SELECTOR="#form-buttons>DIV" BUTTON=0
+		EVENT TYPE=CLICK SELECTOR="#lst-ib" BUTTON=0
+		'EVENTS TYPE=KEYPRESS SELECTOR="#lst-ib" CHARS={{запрос}}
+		'TAG POS=1 TYPE=INPUT:SUBMIT FORM=ID:tsf ATTR=NAME:btnK
+		'refresh`)
+	}	
+	// ждем(3);
+	// if(тестНаКаптчу()==1){}; 
+	
+	}
+ }
+
