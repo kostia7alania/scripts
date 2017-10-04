@@ -20,3 +20,24 @@ var hideme_key = 32092123557813;	//брать тут  = vk.com/hidemy_name_keys
 var type = "s5" // hs45 (http,https,socks4,socks5);
 var b = hideme_parse (type,hideme_key)
 alert(b.length)
+
+///////////////////////= ЕЩЕ ПРИМЕР://///////////////////////////////////
+
+var hideme_key = 32092123557813;	//брать тут  = vk.com/hidemy_name_keys
+var дисплей = "Кол-во:\n"
+var http = hideme_parse ('h',hideme_key); 	var дисплей = дисплей+"http = "+http.length+"\n";iimDisplay(дисплей)
+var https = hideme_parse ('s',hideme_key); 	var дисплей = дисплей+"https = "+https.length+"\n";iimDisplay(дисплей)
+var socks4 = hideme_parse ('4',hideme_key);	var дисплей = дисплей+"socks4 = "+socks4.length+"\n";iimDisplay(дисплей)
+var socks5 = hideme_parse ('5',hideme_key);	var дисплей = дисплей+"socks5 = "+socks5.length+"\n";iimDisplay(дисплей)
+
+alert(http)
+http.forEach(function(item, i, arr) {http[i] = item.ip+":"+item.port+":"+"http"; iimDisplay(дисплей+http.length)});
+https.forEach(function(item, i, arr) {https[i] = item.ip+":"+item.port+":"+"http";iimDisplay(дисплей+https.length)});
+socks4.forEach(function(item, i, arr) {socks4[i] = item.ip+":"+item.port+":"+"http";iimDisplay(дисплей+socks4.length)});
+socks5.forEach(function(item, i, arr) {socks5[i] = item.ip+":"+item.port+":"+"http";iimDisplay(дисплей+socks5.length)});
+
+alert(socks5[0]	)
+
+// var https = [].map.call(https, function(obj){https})
+// var всеПрокси = 
+// Arrray.forEach(function(element, i){})
