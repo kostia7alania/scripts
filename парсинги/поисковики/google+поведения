@@ -24,9 +24,9 @@ var таймаут = "set !TIMEOUT_STEP 0\n"
 var таймаут_tag = "set !TIMEOUT_tag 0\n"
 var наборЭлементов = "LI,P,H1,H2,H3,H4,H5,H6,SPAN,TD,A,DIV"
 var наборСобытий = "MOUSEOVER,MOUSEDOWN,MOUSEUP,MOUSEMOVE,CLICK,DBLCLICK"
-var прокси = "196.19.8.188:8000" 		//SYC IPv4 Seychelles   
-var prox = 'PROXY ADDRESS='+прокси+'\n'
-var prox=""//без проксей;
+//var прокси = "196.19.8.188:8000" 		//SYC IPv4 Seychelles   
+//var prox = 'PROXY ADDRESS='+прокси+'\n'
+//var prox=""//без проксей;
  
 var заголовок_выдачи 	=	".g>div>div>h3>a" 
 var заголовок_выдачи 	=	"DIV>DIV>DIV>DIV>DIV>DIV>DIV>H3>A" 
