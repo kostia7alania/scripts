@@ -1,0 +1,30 @@
+
+var proxy_off=()=>{var pref = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);var a = pref.getBranch("network.proxy.");var массив="http,http_port,socks,socks_port,ftp,ftp_port,ssl,ssl_port".split(',');var sex = [].map.call(массив, function(obj) {try{a.setCharPref(obj, "")}catch(e){}});a.setIntPref("type", 0)}
+
+var proxy_on=(proxy)=>{
+	var pref = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+	var a = pref.getBranch("network.proxy.");
+	a.setIntPref("type", 1);
+	var prox = proxy.split(':');
+	if(proxy.search("http")!=-1){
+		a.setBoolPref("share_proxy_settings", true);
+		a.setCharPref("http", prox[0]);
+		a.setIntPref("http_port", prox[1]);
+	}
+	if(proxy.search("socks")!=-1){
+		a.setBoolPref("share_proxy_settings", false);
+		a.setCharPref("socks", prox[0]);
+		a.setIntPref("socks_port", prox[1]);
+		a.setIntPref("socks_version", prox[2][5]);
+	}
+}
+
+прокся = 
+`196.19.8.188:8000:https
+196.19.8.188:8000:http
+149.202.38.124:32321:socks4
+85.135.86.82:10981:socks4`
+.split('\n');
+
+proxy_off();
+proxy_on(прокся[2]);
