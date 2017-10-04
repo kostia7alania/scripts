@@ -1,0 +1,22 @@
+/// документация по АПИ ХайдМи: https://vk.com/topic-125614288_36088941
+var _c=Components,XMLHttpRequest=_c.Constructor('@mozilla.org/xmlextras/xmlhttprequest;1');
+function получитьHTML (AAA){var a=XMLHttpRequest();return a.open('GET',AAA,!1),a.send(''),a.responseText}
+
+//= ответ при out=csv:
+//host[0];ip[1];port[2];lastseen[3];delay[4];cid[5];country_code[6];country_name[7];city[8];checks_up[9];checks_down[10];anon[11];http[12];ssl[13];socks4[14];socks5[15]
+//обработчик в этом случае: a=a.split('\n'); for(i=0;i<a.length;i++){alert(i+" = "+a[i])}
+//= ответ при out=js:
+// b = JSON.parse(a)
+// b[0].ip, b[0].port, b[0].http, b[0].socks4, b[0].socks5
+//тип: HTTP - h; HTTPS - s; SOCKS4 - 4; SOCKS5 - 5; =пример: https+socks5:  &type=s5
+
+var hideme_parse = (type,key)=>{
+	a=получитьHTML('http://hidemy.name/ru/api/proxylist.php?out=js&type='+type+'&code='+hideme_key)
+	if(a.search('One more step')!=-1){alert('каптча!')}
+	else{b = JSON.parse(a); return b}// alert(b[0].ip+":"+b[0].port+":"+b[0].http+":"+b[0].socks4+":"+b[0].socks5)
+}
+
+var hideme_key = 32092123557813;	//брать тут  = vk.com/hidemy_name_keys
+var type = "s5" // hs45 (http,https,socks4,socks5);
+var b = hideme_parse (type,hideme_key)
+alert(b.length)
