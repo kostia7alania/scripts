@@ -17,8 +17,7 @@
  
  
  
-//=пример использования JQ:
-
+//=пример использования JQ: 
 $('.switcher-closed').click();
 var s = $("input:eq(1)").val();
 alert('s==='+s)

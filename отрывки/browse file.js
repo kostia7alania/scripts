@@ -1,3 +1,4 @@
+//дата: март 2018
 // взял тут - µ https://stackoverflow.com/questions/36250643/choose-datasource-file-in-imacros-javascript
 
 // imacros imns.Dialogs.browseForFileOpen() does not provide a way to appendFilter 

@@ -1,5 +1,5 @@
 ﻿var pause = iimPlayCode('wait seconds=1')
-window.document.getElementsByClassName("nowrap al fs-12")[0].style.background = "red";
+window.document.getElementsByClassName("nowrap al fs-12")[0].style.background = "red"; 
 
 window.document.getElementsByClassName("nowrap al fs-12")[0].focus();
 window.document.getElementsByClassName("nowrap al fs-12")[0].click();
@@ -53,12 +53,9 @@ window.document.getElementsByClassName("gwt-SuggestBox it")[0].val("sex");
 // njuskalo.open("GET","http://www.njuskalo.hr/usb-memorija/mem-ufd-8gb-jf300-ts-oglas-15090605");
 // njuskalo.send();
  $('control-self control-self-submit button button-solid button-blue button-large').click();
- window.document.getElementsByClassName("control-self control-self-password ").val='sex'
+ window.document.getElementsByClassName("control-self control-self-password ").val='sex' 
  
- 
-$( ".control-self control-self-submit button button-solid button-blue button-large" ).submit();
-
-
+$( ".control-self control-self-submit button button-solid button-blue button-large" ).submit(); 
 //////////////////////////////////////
 //////////////////////////////////////
 //////////////////////////////////////
