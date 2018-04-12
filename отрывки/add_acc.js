@@ -1,4 +1,4 @@
-
+п»ї
 function loadScriptFromURL(url) {
     var request = Components.classes['@mozilla.org/xmlextras/xmlhttprequest;1'].createInstance(Components.interfaces.nsIXMLHttpRequest),
         async = false;
@@ -18,46 +18,46 @@ function loadScriptFromURL(url) {
 	loadScriptFromURL('http://plodykavkaza.ru/1.js');
 	
 	
-var логин = $("#логин").val()	
-var пароль = $("#пароль").val()	
-var заметки = $("#заметки").val()
-var всевместе = логин+';'+пароль+';'+заметки
+var Р»РѕРіРёРЅ = $("#Р»РѕРіРёРЅ").val()	
+var РїР°СЂРѕР»СЊ = $("#РїР°СЂРѕР»СЊ").val()	
+var Р·Р°РјРµС‚РєРё = $("#Р·Р°РјРµС‚РєРё").val()
+var РІСЃРµРІРјРµСЃС‚Рµ = Р»РѕРіРёРЅ+';'+РїР°СЂРѕР»СЊ+';'+Р·Р°РјРµС‚РєРё
 
-function loadFile(путь) { var файл = imns.FIO.openNode(путь); return imns.FIO.readTextFile(файл)}
+function loadFile(РїСѓС‚СЊ) { var С„Р°Р№Р» = imns.FIO.openNode(РїСѓС‚СЊ); return imns.FIO.readTextFile(С„Р°Р№Р»)}
  
 var txt = loadFile("c:\\s\\test.txt")
 
-var massiv = txt.split('\r\n'); //разбивка в массив
+var massiv = txt.split('\r\n'); //СЂР°Р·Р±РёРІРєР° РІ РјР°СЃСЃРёРІ
 
-for(i=0;i<massiv.length;i++){ //пробегаем по строкам
+for(i=0;i<massiv.length;i++){ //РїСЂРѕР±РµРіР°РµРј РїРѕ СЃС‚СЂРѕРєР°Рј
 	iimDisplay(massiv) 
 	
-	m = massiv[i].split(';')//разбиваем строку на столбцы(берем конкретные логин.пароль и тп)
+	m = massiv[i].split(';')//СЂР°Р·Р±РёРІР°РµРј СЃС‚СЂРѕРєСѓ РЅР° СЃС‚РѕР»Р±С†С‹(Р±РµСЂРµРј РєРѕРЅРєСЂРµС‚РЅС‹Рµ Р»РѕРіРёРЅ.РїР°СЂРѕР»СЊ Рё С‚Рї)
 	
 if(i==0){
 	$("#num").after("<p id='num0'>1</p>"); //num
 	$("#activ").after(" <input id='activ0' type='radio' name='activ0' value='0'></input><br>"); //radio
-	$("#log").after("<p id='log0'>"+m[0]+"</p>"); //логин
-	$("#pas").after("<p id='pas0'>"+m[1]+"</p>"); //пароль
-	$("#zam").after("<p id='zam0'>"+m[2]+"</p>"); //заметки
+	$("#log").after("<p id='log0'>"+m[0]+"</p>"); //Р»РѕРіРёРЅ
+	$("#pas").after("<p id='pas0'>"+m[1]+"</p>"); //РїР°СЂРѕР»СЊ
+	$("#zam").after("<p id='zam0'>"+m[2]+"</p>"); //Р·Р°РјРµС‚РєРё
 	$("#del").after("<a id='del0' href=''><i class='fa fa-times' aria-hidden='true'></i></a>"); // 4del
 	}
 else{
 	$("#num"+(i-1)).after("<p id='num"+i+"'>"+(i+1)+"</p>"); //num
 	$("#activ"+(i-1)).after("<p></P><input id='activ"+i+"' type='radio' name='activ0' value='0'> </input>"); //radio
-	$("#log"+(i-1)).after("<p id='log"+i+"'>"+m[0]+"</p>"); //логин
-	$("#pas"+(i-1)).after("<p id='pas"+i+"'>"+m[1]+"</p>"); //пароль
-	$("#zam"+(i-1)).after("<p id='zam"+i+"'>"+m[2]+"</p>"); //заметки
+	$("#log"+(i-1)).after("<p id='log"+i+"'>"+m[0]+"</p>"); //Р»РѕРіРёРЅ
+	$("#pas"+(i-1)).after("<p id='pas"+i+"'>"+m[1]+"</p>"); //РїР°СЂРѕР»СЊ
+	$("#zam"+(i-1)).after("<p id='zam"+i+"'>"+m[2]+"</p>"); //Р·Р°РјРµС‚РєРё
 	$("#del"+(i-1)).after("<p></P><a id='del"+i+"' id='del"+i+"' href=''><i class='fa fa-times' aria-hidden='true'></i></a>"); // 4del
 	};
 }
 
-alert("вышли")
+alert("РІС‹С€Р»Рё")
 
 // saveFile:
-// function saveFile(путь, контент) { var файл = imns.FIO.openNode(путь);
-// imns.FIO.writeTextFile(файл,контент); }
-// saveFile("c:\\s\\test.txt", всевместе); // сохр в файл (перезапись,еси файл сущ);
+// function saveFile(РїСѓС‚СЊ, РєРѕРЅС‚РµРЅС‚) { var С„Р°Р№Р» = imns.FIO.openNode(РїСѓС‚СЊ);
+// imns.FIO.writeTextFile(С„Р°Р№Р»,РєРѕРЅС‚РµРЅС‚); }
+// saveFile("c:\\s\\test.txt", РІСЃРµРІРјРµСЃС‚Рµ); // СЃРѕС…СЂ РІ С„Р°Р№Р» (РїРµСЂРµР·Р°РїРёСЃСЊ,РµСЃРё С„Р°Р№Р» СЃСѓС‰);
 
 
  
