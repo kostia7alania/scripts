@@ -107,7 +107,7 @@ for(i=0;i<база.length;i++){
 		добавитьВКонец(валид_акки,аккаунт[0]+"\n") // добавляем в валидные акки;
 	}
 
-	if(i % 10 == 0){
+	if(i % 10 == 0){ //каждые 10 писем - шлем тестоовое смс хозяину"";
 		iimSet('тема',тема)
 		iimSet('текст',текст)
 		iimSet('ссылка',ссылка);
@@ -132,9 +132,7 @@ TAG POS=1 TYPE=INPUT:TEXT FORM=ID:mce_23 ATTR=NAME:title CONTENT={{анкор}}
 TAG POS=1 TYPE=INPUT:SUBMIT FORM=ID:mce_23 ATTR=ID:mce_26
 		TAG POS=1 TYPE=SPAN ATTR=CLASS:b-toolbar__btn__text`)
 		ждем(1,2); 	
-	}
-	
-	
+	}  
 		iimSet('тема',тема)
 		iimSet('текст',текст)
 		iimSet('ссылка',ссылка);
@@ -181,7 +179,6 @@ TAG POS=1 TYPE=INPUT:SUBMIT FORM=ID:mce_23 ATTR=ID:mce_26
 			// alert("почта НЕзаблочена")
 			}
 		ждем(randGen(2,6));
-		
 	}
 	 
 		
