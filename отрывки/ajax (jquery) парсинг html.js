@@ -4,6 +4,6 @@ function loadJQ() {function loadScriptFromURL(url) {var request = Components.cla
  
 var request = $.ajax({url: url,method: 'GET',dataType: "HTML"}); 
 request.done(function(msg) {
-	 alert(msg)
-	alert(msg.search(/window._sharedData =/ig)) 
-}); 
+                             alert(msg);
+                             alert(msg.search(/window._sharedData =/gi)); //поиск в исходном коде слова window._sharedData =
+                           }); 

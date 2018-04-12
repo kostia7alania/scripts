@@ -1,8 +1,0 @@
-﻿clear
-set строка 333
-SET !REPLAYSPEED fast
-CMDLINE !DATASOURCE useragents.txt
-SET !DATASOURCE_LINE {{строка}}
-SET !USERAGENT {{!COL1}}
-WAIT SECONDS=2
-SET !EXTRACT {{!COL1}}

