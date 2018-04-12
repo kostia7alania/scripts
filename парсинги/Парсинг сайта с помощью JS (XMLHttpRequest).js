@@ -78,6 +78,5 @@ for(i=0;i<запрос.length;i++){
 		TAG POS=1 TYPE=IMG ATTR=SRC:*{{imageName}}*
 		 
 		TAG POS=1 TYPE=BUTTON FORM=ACTION:http://lebel-for.me/admin/index.php?route=catalog/product/add&* ATTR=DATA-ORIGINAL-TITLE:Сохранить*`)
-		
-
+		 
 }

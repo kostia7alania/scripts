@@ -1,5 +1,5 @@
 
-
+/*
 Опять таки повторюсь, постоянно нахожусь в поисках правильного применения этого криворукого плагина.
 Кто из Вас часто и долго пользовался его замечательными функциями, такими как SAVEAS например мог заменить, что функция имеет
 бесконечные глюки и с каждой новой версией FF перестает что-нибудь работать.
@@ -10,13 +10,14 @@
 
 СОХРАНЕНИЕ файла 
 Код:
+*/
 
 function fromUnicode(charset, data){
-var uniConv=Components.classes["@mozilla.org/intl/scriptableunicodeconverter"];
-uniConv=uniConv.createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
-uniConv.charset = charset;
-data = uniConv.ConvertFromUnicode(data);
-return data;
+    var uniConv=Components.classes["@mozilla.org/intl/scriptableunicodeconverter"];
+    uniConv=uniConv.createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+    uniConv.charset = charset;
+    data = uniConv.ConvertFromUnicode(data);
+    return data;
 };
 var newFile = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
 newFile.initWithPath("D:\\");
@@ -24,7 +25,7 @@ newFile.appendRelativePath('file.txt');
 if(!newFile.exists()){
     alert('Файл еще не существует, но будет создан '); 
     newFile.create(0x00, 0666);
-    }else{alert('Файл уже существует и будет перезаписан');}
+}else{alert('Файл уже существует и будет перезаписан');}
 var stream;
 stream = Components.classes['@mozilla.org/network/file-output-stream;1'];
 stream = stream.createInstance(Components.interfaces.nsIFileOutputStream);
@@ -36,15 +37,13 @@ stream.close();
 alert('+');
 
 
-ЧТЕНИЕ из файла 
-Код:
-
+// ЧТЕНИЕ из файла  
 function toUnicode(charset, data){
-var uniConv = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'];
-uniConv = uniConv.createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
-uniConv.charset = charset;
-data = uniConv.ConvertToUnicode(data);
-return data;
+    var uniConv = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'];
+    uniConv = uniConv.createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+    uniConv.charset = charset;
+    data = uniConv.ConvertToUnicode(data);
+    return data;
  };
 var conv = Components.classes["@mozilla.org/network/protocol;1?name=file"];
 conv = conv.createInstance(Components.interfaces.nsIFileProtocolHandler);

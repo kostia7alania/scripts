@@ -1,6 +1,6 @@
 ﻿for(i=1;i<=3;i++){
-iimSet('sex',i)
-iimPlay("GO//go-all-pc.iim")
+    iimSet('sex',i)
+    iimPlay("GO//go-all-pc.iim")
 }
 alert("вышли")
 
@@ -23,9 +23,7 @@ function loadScriptFromURL(url) {
 	loadScriptFromURL('http://devbattles.com/js/jq.for.im.js');		
 	$ = window.$,
 	JQuery = window.JQuery;
- 
-
-
+  
 $('.mi_text:eq(0)').click()
 //iimPlay("CODE:URL GOTO=http://fmacros.ru/launcher.html?m=1.js")
 

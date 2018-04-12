@@ -20,8 +20,6 @@
 	
     // return obj;
 	// }) ();
-
-	
 	
 	// window.addEventListener("load", function() {
     // iMacros.onLoad();
@@ -31,9 +29,6 @@
 // window.addEventListener("unload", function() {
     // iMacros.onUnload();
 // }, false);
-
-
-
 
 	 
 	 
@@ -47,9 +42,7 @@ prefs.setIntPref("browser.sessionhistory.max_entries",10);
 prefs.setBoolPref("network.http.pipelining", true);
 prefs.setIntPref("network.http.pipelining.maxrequests", 5);
 prefs.setBoolPref("network.http.proxy.pipelining", true);
-prefs.setBoolPref("network.prefetch-next", false);
- 
-
+prefs.setBoolPref("network.prefetch-next", false); 
 
 function iim(code) {  
     var Cc = Components.classes,
@@ -77,8 +70,7 @@ function asd(a) {mainWindow.document.querySelector('#imacros-message-box').setAt
  
 
   // mainWindow.document.querySelector('#imacros-message-box-container').setAttribute("style", "width:100%!important;height: 11px!important; background:black; color:red!important; transform:SCALE(2)!important; font-size: 14px!important;")
-  // iimPlayCode('wait seconds=0')
-
+  // iimPlayCode('wait seconds=0') 
  function toDataURL(url, callback) {
   var xhr = new window.XMLHttpRequest();
   xhr.onload = function() {
@@ -127,8 +119,7 @@ console.log('RESULT:', dataUrl)
 		// if (resp.indexOf('ERROR')!=-1) {return "ERROR"}
 		// if (resp.indexOf('OK')!=-1) {var cap = resp.split('|')[1]; return cap}
 	// }
-	
-
+	 
 //переЗАПИСЬ:
 var saveTextPromise = (сохр_текст,путь) => {Components.utils.import("resource://gre/modules/osfile.jsm"); // загрузить модуль ОС
 	var encoder = new window.TextEncoder(); //Этот encoder мб переЮзан повторно для нескок операций записи

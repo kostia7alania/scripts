@@ -10,13 +10,10 @@
     }
     eval(request.response);
     return true;
-}
-
+} 
 	
 	loadScriptFromURL('http://devbattles.com/js/jq.for.im.js');	$ = window.$,	JQuery = window.JQuery; // инициализация JQ
- 
- 
- 
+  
 //=пример использования JQ: 
 $('.switcher-closed').click();
 var s = $("input:eq(1)").val();
