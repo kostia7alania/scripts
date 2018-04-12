@@ -9,6 +9,8 @@ function читать(файл) {return imns.FIO.readTextFile(imns.FIO.openNode(
 function дата() {var d=new Date();var day=d.getDate();var month=d.getMonth() + 1;var year=d.getFullYear(); return d.toLocaleString().replace(", ","	")}
 function копиБоди() {try{var x = window.document.getElementsByTagName("body")[0].innerHTML;}catch(e){var x='sex'} return x;}
  
+var querSelAll = node => window.document.querySelectorAll(node);
+var querSel = node => window.document.querySelector(node);
 // var _c=Components,XMLHttpRequest=_c.Constructor('@mozilla.org/xmlextras/xmlhttprequest;1');
 // function получитьHTML (AAA){var a=XMLHttpRequest();return a.open('GET',AAA,!1),a.send(''),a.responseText}
 // var html = получитьHTML('https://www.similarweb.com/website/stoplose.com')
@@ -30,20 +32,20 @@ var url = читать(urls).split('\n');
 
 for(q=0;q<читать(urls).length;q++){ 
 	iim('url goto='+simialarweb_url+url[q]);
-	try{тестНаКаптчу()}catch(e){window.console.error(e)} 
-		 	var subTit = window.document.querySelectorAll(".rankingItem-subTitle");
+	try{тестНаКаптчу();}catch(e){window.console.error(e);} 
+		 	var subTit = querSelAll(".rankingItem-subTitle");
 			var global = subTit[0].innerText;
 			var country = subTit[1].innerText;
 			var категория = subTit[2].innerText;
 			
-			var rankItVal = window.document.querySelectorAll(".rankingItem-value");
+			var rankItVal = (".rankingItem-value");
 			var global_value = rankItVal[0].innerText;
 			var country_value = rankItVal[1].innerText;
 			var category_value = rankItVal[2].innerText;
 	
-	 var engNum = window.document.querySelectorAll('.engagementInfo-valueNumber');
+	 var engNum = querSelAll(".engagementInfo-valueNumber");
 	 var визитов = engNum[0].innerText;
-	 var engVal = window.document.querySelectorAll(".engagementInfo-value>.websitePage-relativeChange--up");
+	 var engVal = querSelAll(".engagementInfo-value>.websitePage-relativeChange--up");
 	 if (engVal.length > 0) {
      var визитов_дельта = " (+" + engVal[0].innerText;
    } else {
@@ -55,42 +57,53 @@ for(q=0;q<читать(urls).length;q++){
 			var стрНаЮзера 	  = engNum[2].innerText;
 			var отказы 		  = engNum[3].innerText;
 			
-			var strana0 = window.document.querySelectorAll(".country-name");
+			var strana0 = querSelAll(".country-name");
 			var страна1 = strana0[0].innerText;
 			var страна2 = strana0[1].innerText;
 			var страна3 = strana0[2].innerText;
 			var страна4 = strana0[3].innerText;
 			var страна5 = strana0[4].innerText;
 
-			var strana0_tr = window.document.querySelectorAll(".traffic-share-valueNumber");
+			var strana0_tr = querSelAll(".traffic-share-valueNumber");
 			var страна1_траф = strana0_tr[0].innerText;
 			var страна2_траф = strana0_tr[1].innerText;
 			var страна3_траф = strana0_tr[2].innerText;
 			var страна4_траф = strana0_tr[3].innerText;
 			var страна5_траф = strana0_tr[4].innerText;
 			
-			var relChNum = window.document.querySelectorAll('.websitePage-relativeChangeNumber');
-			if(window.document.querySelectorAll('#geo-countries-accordion>div:nth-child(1)>div>span>span.traffic-share-value>.websitePage-relativeChange--up').length>0){
-				var страна1_траф_percent = " +" + relChNum[0];
-			}else{	
-				var страна1_траф_percent = " -" + relChNum[0];
-			}
+			var relChNum = querSelAll(".websitePage-relativeChangeNumber");
 
-			if(window.document.querySelectorAll('#geo-countries-accordion>div:nth-child(2)>div>span>span.traffic-share-value>.websitePage-relativeChange--up').length>0){
-						var страна2_траф_percent = " +" + relChNum[1];}
-				else{	var страна2_траф_percent = " -" + relChNum[1];}
+			var nachalo = '#geo-countries-accordion>div:nth-child';
+			var konec = ">div>span>span.traffic-share-value>.websitePage-relativeChange--up";
+	if (querSelAll(nachalo + "(1)" + konec).length > 0) {
+      var страна1_траф_percent = ` +${relChNum[0]}`;
+    } else {
+      var страна1_траф_percent = ` -${relChNum[0]}`;
+    }
 
-			if(window.document.querySelectorAll('#geo-countries-accordion>div:nth-child(3)>div>span>span.traffic-share-value>.websitePage-relativeChange--up').length>0){
-						var страна3_траф_percent = " +" + relChNum[2];}
-				else{	var страна3_траф_percent = " -" + relChNum[2];}
+	if (querSelAll(nachalo + "(2)" + konec).length > 0) {
+    var страна2_траф_percent = " +" + relChNum[1];
+  } else {
+    var страна2_траф_percent = " -" + relChNum[1];
+  }
 
-			if(window.document.querySelectorAll('#geo-countries-accordion>div:nth-child(4)>div>span>span.traffic-share-value>.websitePage-relativeChange--up').length>0){
-						var страна4_траф_percent = " +" + relChNum[3];}
-				else{	var страна4_траф_percent = " -" + relChNum[3];}
+	if (querSelAll(nachalo + "(3)" + konec).length > 0) {
+    var страна3_траф_percent = " +" + relChNum[2];
+  } else {
+    var страна3_траф_percent = " -" + relChNum[2];
+  }
 
-			if(window.document.querySelectorAll('#geo-countries-accordion>div:nth-child(5)>div>span>span.traffic-share-value>.websitePage-relativeChange--up').length>0){
-						var страна5_траф_percent = " +" + relChNum[4];}
-				else{	var страна5_траф_percent = " -" + relChNum[4];}
+	if (querSelAll(nachalo + "(4)" + konec).length > 0) {
+    var страна4_траф_percent = " +" + relChNum[3];
+  } else {
+    var страна4_траф_percent = " -" + relChNum[3];
+  }
+
+	if (querSelAll(`${nachalo}(5)${konec}`).length > 0) {
+    var страна5_траф_percent = " +" + relChNum[4];
+  } else {
+    var страна5_траф_percent = " -" + relChNum[4];
+  }
 			
 			var x00 = window.document.querySelectorAll(".highcharts-axis-labels>text >tspan");
 			var x1 = x00[0].innerHTML;
@@ -103,7 +116,8 @@ for(q=0;q<читать(urls).length;q++){
 	  var отчет = дата()+"	"+q+"	"+url[q]+"	"+global+"	"+global_value+"	"
 	  +country+"	"+country_value+"	"+category+"	"+category_value+"	"
 	  +country+"	"+country+"	"+country+"	"+timming()+"\n"; 
-	}catch(e){alert('error!!')}; // "тест", "пройден" 
+	}catch(e){window.console.error('Ошбика при формировании отчета!!', e)}; // "тест", "пройден" 
+
 	добавитьВКонец(путьСохр,отчет)  
 	iimDisplay(отчет.replace('	','\n'));   
 }
