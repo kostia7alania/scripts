@@ -8,7 +8,6 @@ function читать(файл) {return imns.FIO.readTextFile(imns.FIO.openNode(
 function дата() {var d=new Date();var day=d.getDate();var month=d.getMonth() + 1;var year=d.getFullYear(); return d.toLocaleString().replace(", ","	")}
 function копиБоди() {try{var x = window.document.getElementsByTagName("body")[0].innerHTML;}catch(e){var x='sex'} return x;}
  
- 
 //НАСТРОЙКИ:
 var simialarweb_url		= "https://www.similarweb.com/website/"		//
  

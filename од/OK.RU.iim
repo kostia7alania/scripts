@@ -222,4 +222,3 @@ EVENT TYPE=CLICK SELECTOR="#user-friends>LI>DIV>DIV>A>IMG" BUTTON=0
 wait seconds={{var4}}
 
 wait seconds=100
-
