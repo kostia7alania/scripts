@@ -108,7 +108,7 @@ function getFile(url) {
   req.send(null);
   return req.responseText;
 }
-function dataFile(url) {
+function dataFile(url) { // функция для чтения папок (в данном случае);
   var arrData = [];
   var getStart = getFile(url); // гет запрос локально
   var decodeText = decodeURIComponent(getStart); // декодируем в UTF-8 ответ
@@ -127,14 +127,8 @@ function dataFile(url) {
     arrData.push(arrFile);
   }
   return arrData;
-}
-var url = papka+photos; //задаем путь где считать
-var test = dataFile("file:///" + url); // не забывайте добавлять 'file:///'
-    var photo = test[0][3];
-    window.console.log(papka+photos+'\\'+photo);
- 
-alert("по пути " + url + "\nфайлов " + file + "\nпапок " + dir);
-
+} 
+  
 getBalance  = apikey => {var a = loadScriptFromURL(smsReg + `getBalance.php?apikey=${apikey}`); b = a.search(`"response":"1"`) > 0 ? JSON.parse(a).balance : "Balance не получен!=>"; return b;}
 getCodeOperation  = (apikey, service) => {var a = loadScriptFromURL(smsReg+`getNum.php?country=ru&service=${service}&apikey=${apikey}`); b = a.search(`"response":"1"`) > 0 ? JSON.parse(a).tzid:false; return b;}
  getState = (apikey, codeOperation, stage) => {var stt, otv;
@@ -222,17 +216,23 @@ var number = getState(apikey, codeOperation, 0); !number?alert("Недождал
         EVENT TYPE=KEYPRESS SELECTOR="#code_in_cliff" KEY=13
         wait seconds=10
         TAG POS=1 TYPE=DIV ATTR=TXT:Аккаунт<sp>подтвержден
-    `)==1){ 
+    `)==1){
+        var photo = dataFile("file:///" + papka + photos); // не забывайте добавлять 'file:///'
+        photo = photo[0][3];
+        photo = papka + photos + "\\" + photo;
+
         var stat = iim(`TAG POS=1 TYPE=A ATTR=TXT:OK
          TAG POS=1 TYPE=A ATTR=HREF:#&&CLASS:_156p&&AJAXIFY:/profile/picture/menu_dialog/?context_id=u_0_z&profile_id=*&&REL:dialog&&ROLE:button&&ID:u_0_16
-         TAG POS=1 TYPE=INPUT:FILE ATTR=TITLE:Выберите<SP>файл<SP>для<SP>загрузки&&ACCEPT:image/*&&AUTOFOCUS:1&&TYPE:file CONTENT=C:\Users\Developer_2\Pictures\a_1fa446c3.jpg
+         TAG POS=1 TYPE=INPUT:FILE ATTR=TITLE:Выберите<SP>файл<SP>для<SP>загрузки&&ACCEPT:image/*&&AUTOFOCUS:1&&TYPE:file CONTENT=${photo}
          TAG POS=1 TYPE=BUTTON ATTR=DATA-TESTID:profilePicSaveButton&&TYPE:submit&&VALUE:1
-        `)==1?"С аватаром":"Без аватара";
-         //toLog(1, `${name} ${surname}   ${number}:${pass}    ${d}.${m}.${y} ${sex} ${balance}   ${stat}`)
+        `) == 1 ? "С аватаром" : "Без аватара";
+         toLog(1, `${name} ${surname}   ${number}:${pass}   ${prox_ip}:${prox_port}:${prox_log}:${prox_pas}    ${d}.${m}.${y} ${sex} ${balance}   ${stat}`);
+
     }else{
         alert('%ЕРНЯ случилась,шеф!')
         iim("SCREENSHOT TYPE=BROWSER FOLDER=* FILE=*");
-       toLog(0, `${name} ${surname}   ${number}:${pass}    ${d}.${m}.${y} ${sex} ${balance}   Из-за каокй-то херни не смогли закончить!`)
+        toLog(0, `${name} ${surname}   ${number}:${pass}    ${d}.${m}.${y} ${sex} ${balance}   Из-за каокй-то херни не смогли закончить!`)
     }
+
    
 }

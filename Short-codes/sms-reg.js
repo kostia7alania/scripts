@@ -30,16 +30,16 @@ setOperationOk = (apikey,codeOperation) => smsReg+`setOperationOk.php?tzid=${cod
 setOperationUsed = (apikey,codeOperation) =>   smsReg+`setOperationUsed.php?tzid=${codeOperation}&apikey=${apikey}`
 setOperationOver = (apikey, codeOperation) =>    smsReg+`setOperationOver.php?tzid=${codeOperation}&apikey=${apikey}`;
 
-var balance = getBalance(apikey); balance<2?alert('бабки на смс-реге закончились!!'); //alert(balance);       //1
-var codeOperation = getCodeOperation(apikey, service); //alert(codeOperation);        //2
-var number = getState(apikey, codeOperation, 0); !number?alert("Недождались number!"):'';// alert("number => "+number); //3
-var ready = setReady (apikey, codeOperation); !ready ? alert("Ошибка переключения в режим 'Готов принять смс'!") : ""; //4
+var balance = getBalance(apikey); balance<2?alert('бабки на смс-реге закончились!!'):'';  // alert(balance);       //1
+var codeOperation = getCodeOperation(apikey, service); //alert(codeOperation);            // 2
+var number = getState(apikey, codeOperation, 0); !number?alert("Недождались number!"):''; // alert("number => "+number); //3
+var ready = setReady (apikey, codeOperation); !ready ? alert("Ошибка переключения в режим 'Готов принять смс'.!.") : ""; //4
 var cod = getState(apikey, codeOperation, 1);  
 !cod?alert("Недождались кода!") : ""; alert("код => " + cod); //3
 
  
 // sms-reg.com/docs/APImethods.html?setOperationRevise (если поступил ошибочный код)
-alert( loadScriptFromURL( setOperationRevise(apikey, codeOperation) ) )
+alert(loadScriptFromURL(setOperationRevise(apikey, codeOperation)))
 alert(loadScriptFromURL(setOperationOk(apikey, codeOperation)))
 alert(loadScriptFromURL(setOperationUsed(apikey, codeOperation)))
 alert(loadScriptFromURL(setOperationOver(apikey, codeOperation)))
