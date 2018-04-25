@@ -1,5 +1,6 @@
 ﻿
-iimPlayCode('URL GOTO=imacros://run/?m=GO/3-FiNAL+REG+ADD+TJ.js')
+//заходит в настройки роутера и переподключает инет, тем самым, обновляя айпи;
+' iimPlayCode('URL GOTO=imacros://run/?m=GO/3-FiNAL+REG+ADD+TJ.js')
 VERSION BUILD=8961227 RECORDER=FX
 SET !ERRORIGNORE YES
 TAB T=1

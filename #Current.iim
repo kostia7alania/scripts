@@ -1,0 +1,5 @@
+﻿ 
+TAG POS=1 TYPE=A ATTR=HREF:#&&CLASS:_156p&&AJAXIFY:/profile/picture/menu_dialog/?context_id=u_0_z&profile_id=100025690146758&&REL:dialog&&ROLE:button&&ID:u_0_16
+TAG POS=1 TYPE=INPUT:FILE ATTR=TITLE:Выберите<SP>файл<SP>для<SP>загрузки&&ACCEPT:image/*&&AUTOFOCUS:1&&TYPE:file CONTENT=C:\Users\Developer_2\Pictures\a_1fa446c3.jpg
+
+TAG POS=1 TYPE=BUTTON ATTR=DATA-TESTID:profilePicSaveButton&&TYPE:submit&&VALUE:1
