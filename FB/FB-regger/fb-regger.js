@@ -1,6 +1,7 @@
-﻿//осуждение => https://vk.com/topic-125614288_35041402 
+﻿
+//осуждение => https://vk.com/topic-125614288_35041402 
 //проверено на FF45 - на этой сборке :: vk.com/imacros_javascript
- 
+
  
   papka = "C://imacros/scripts/FB/FB-regger/" /* <== именно такие слеши! */ .replace(/\//gim,'\\');
   useragents = "useragents.txt"
@@ -13,7 +14,7 @@
   start_proxy = 0
   dateOfBirthFrom   = [1,1,1988];//dd,mm,yyyy
   dateOfBirthTo     = [28,12,2000];//dd,mm,yyyy
-  sex = 'mw'// 'm'-мужской,w-женский,mw-рандомный;
+  sex = 'w'// 'm'-мужской,w-женский,mw-рандомный;
   
 var apikey = `vdo8kwwniz5j96pf2wqa1gvo2tz9uxg6`;//sms-reg api
 var smsReg = 'http://api.sms-reg.com/';         //sms-reg api
@@ -146,10 +147,16 @@ getCodeOperation  = (apikey, service) => {var a = loadScriptFromURL(smsReg+`getN
 setReady = (apikey, codeOperation) => {var a = loadScriptFromURL(smsReg + `setReady.php?tzid=${codeOperation}&apikey=${apikey}`); return a.search(`"response":"1"`) > -1 ? true:false}
 
 
+
+//////////////////START?//////////////////////////////
+
 for (var i = start_proxy; i < proxys.length; i++ ){
-    iim('clear');
+var usAg = `\n SET !USERAGENT "${useragents[randGen(0, useragents.length)].trim().replace(/"/gim,"'")}" \n`; //генерируем случайный юзерагент
+ 
+    iim(`clear`);
     var [prox_ip, prox_port, prox_log, prox_pas] = proxys[i].trim().split(":"); //распаковка;
     uP(); //снять прокси
+//ЕСЛИ НАДО МЕНЯТЬ ПРОКСИ, РАСКОМЕНТИРУЙ СЛЕД СТРОКУ:::
     // P(prox_ip, prox_port, prox_log, prox_pas); //установить прокси; 
 
 var balance = getBalance(apikey); //alert(balance);       //1
@@ -182,11 +189,11 @@ var number = getState(apikey, codeOperation, 0); !number?alert("Недождал
         ${sex == "m" ? "TAG POS=1 TYPE=INPUT:RADIO FORM=ID:reg ATTR=ID:u_0_b" : "TAG POS=1 TYPE=INPUT:RADIO FORM=ID:reg ATTR=ID:u_0_a"}
         TAG POS=1 TYPE=BUTTON FORM=ID:reg ATTR=ID:u_0_12 `)
 */
-
     d=randGen(dateOfBirthFrom[0], dateOfBirthTo[0]);
     m=randGen(dateOfBirthFrom[1], dateOfBirthTo[1]);
     y=randGen(dateOfBirthFrom[2], dateOfBirthTo[2]);
-    iim(`clear \n '<=чистим куки
+    iim(`${usAg}
+        clear \n '<=чистим куки
         URL GOTO=https://www.facebook.com/
         EVENT TYPE=CLICK SELECTOR="#u_0_k" BUTTON=0
         EVENTS TYPE=KEYPRESS SELECTOR="#u_0_k" CHARS="${name}"
@@ -199,16 +206,23 @@ var number = getState(apikey, codeOperation, 0); !number?alert("Недождал
         TAG POS=1 TYPE=SELECT FORM=ID:reg ATTR=ID:day   CONTENT=%${d}
         TAG POS=1 TYPE=SELECT FORM=ID:reg ATTR=ID:month CONTENT=%${m}
         TAG POS=1 TYPE=SELECT FORM=ID:reg ATTR=ID:year  CONTENT=%${y}
-        ${sex == "m" ? "TAG POS=1 TYPE=INPUT:RADIO FORM=ID:reg ATTR=ID:u_0_b" : "TAG POS=1 TYPE=INPUT:RADIO FORM=ID:reg ATTR=ID:u_0_a"}
+
+        
+
+        ${sex == "m" ? "TAG POS=1 TYPE=INPUT:RADIO FORM=ID:reg ATTR=NAME:sex&&VALUE:1" : "TAG POS=1 TYPE=INPUT:RADIO FORM=ID:reg ATTR=NAME:sex&&VALUE:2"}
         EVENT TYPE=CLICK SELECTOR="#u_0_12" BUTTON=0
+        wait seconds=5
     `);
+var err = window.document.querySelectorAll(".hidden_elem > #reg_error_inner");
+    err.length > 0?alert('ошибка => '+err[0].value):'';
+
         toDisp("Баланс: " + balance, "Номер: " + number, "Поля заполнили. Оповещаем смс-рег, что код можно ждать.");
     var ready = setReady (apikey, codeOperation); !ready ? alert("Ошибка переключения в режим 'Готов принять смс'!") : ""; //4
         toDisp("Баланс: " + balance, "Номер: " + number, "Опрашиваем СМС-рег - не пришел ли код...");
     var cod = getState(apikey, codeOperation, 1);  
     !cod?alert("Недождались кода!") : ""; alert("код => " + cod); //3
 
-    if(iim(`
+    if (iim(`${usAg}
         EVENT TYPE=CLICK SELECTOR="#code_in_cliff" BUTTON=0
         EVENTS TYPE=KEYPRESS SELECTOR="#code_in_cliff" CHARS="${cod.trim()}"
         EVENT TYPE=CLICK SELECTOR="#u_4_m" BUTTON=0
@@ -216,22 +230,26 @@ var number = getState(apikey, codeOperation, 0); !number?alert("Недождал
         EVENT TYPE=KEYPRESS SELECTOR="#code_in_cliff" KEY=13
         wait seconds=10
         TAG POS=1 TYPE=DIV ATTR=TXT:Аккаунт<sp>подтвержден
-    `)==1){
-        var photo = dataFile("file:///" + papka + photos); // не забывайте добавлять 'file:///'
-        photo = photo[0][3];
-        photo = papka + photos + "\\" + photo;
+    `) == 1) {
+      var photo = dataFile("file:///" + papka + photos); // не забывайте добавлять 'file:///'
+      photo = photo[randGen(0,photo.length-1)][3];//случайная фотка;
+      photo = papka + photos + "\\" + photo;
 
-        var stat = iim(`TAG POS=1 TYPE=A ATTR=TXT:OK
-         TAG POS=1 TYPE=A ATTR=HREF:#&&CLASS:_156p&&AJAXIFY:/profile/picture/menu_dialog/?context_id=u_0_z&profile_id=*&&REL:dialog&&ROLE:button&&ID:u_0_16
-         TAG POS=1 TYPE=INPUT:FILE ATTR=TITLE:Выберите<SP>файл<SP>для<SP>загрузки&&ACCEPT:image/*&&AUTOFOCUS:1&&TYPE:file CONTENT=${photo}
-         TAG POS=1 TYPE=BUTTON ATTR=DATA-TESTID:profilePicSaveButton&&TYPE:submit&&VALUE:1
+      iim(`${usAg} set !errorignore yes
+            TAG POS=1 TYPE=A ATTR=TXT:OK
+            TAG POS=1 TYPE=BUTTON FORM=ID:* ATTR=VALUE:1&&NAME:confirm&&TYPE:submit&&ID:*
+            TAG POS=1 TYPE=A ATTR=ROLE:button&&CLASS:*<SP>layerCancel<SP>uiOverlayButton<SP>selected<SP>*&&HREF:#&&ONCLICK:goURI("\/",<SP>true);&&TABINDEX:0
+        `);
+      var stat = iim(`${usAg}
+            url goto=https://www.facebook.com/home.php?ref=wizard 
+            TAG POS=1 TYPE=INPUT:FILE FORM=ID:* ATTR=TITLE:Выберите<SP>файл<SP>для<SP>загрузки&&ACCEPT:image/*&&NAME:file&&ID:js_*&&TYPE:file CONTENT=${photo}
+            wait seconds=2
         `) == 1 ? "С аватаром" : "Без аватара";
-         toLog(1, `${name} ${surname}   ${number}:${pass}   ${prox_ip}:${prox_port}:${prox_log}:${prox_pas}    ${d}.${m}.${y} ${sex} ${balance}   ${stat}`);
-
-    }else{
-        alert('%ЕРНЯ случилась,шеф!')
-        iim("SCREENSHOT TYPE=BROWSER FOLDER=* FILE=*");
-        toLog(0, `${name} ${surname}   ${number}:${pass}    ${d}.${m}.${y} ${sex} ${balance}   Из-за каокй-то херни не смогли закончить!`)
+      toLog(1, `${name} ${surname}   ${number}:${pass}   ${prox_ip}:${prox_port}:${prox_log}:${prox_pas}    ${d}.${m}.${y} ${sex} ${balance}   ${stat}  ${photo}`);
+    } else {
+      alert("%ЕРНЯ случилась,шеф!");
+      iim("SCREENSHOT TYPE=BROWSER FOLDER=* FILE=*");
+      toLog(0, `${name} ${surname}   ${number}:${pass}    ${d}.${m}.${y} ${sex} ${balance}   Из-за каокй-то херни не смогли закончить!`);
     }
 
    
