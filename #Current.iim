@@ -1,21 +1,5 @@
 ﻿VERSION BUILD=8970419 RECORDER=FX
 TAB T=1
-URL GOTO=https://m.facebook.com/?refsrc=https%3A%2F%2Fwww.facebook.com%2F&_rdr
-TAG POS=1 TYPE=A ATTR=ROLE:button&&CLASS:_5t3c<SP>_28le<SP>btn<SP>btnS<SP>medBtn<SP>mfsm<SP>touchable&&ID:signup-button&&DATA-SIGIL:m_reg_button&&DATA-AUTOID:autoid_2
-TAG POS=1 TYPE=INPUT:TEXT FORM=ID:mobile-reg-form ATTR=AUTOCAPITALIZE:on&&CLASS:_5whq<SP>input&&NAME:firstname&&VALUE:&&DATA-SIGIL:focus_me<SP>clearableInput&&DATA-AUTOID:autoid_5&&TYPE:text CONTENT=имя
-TAG POS=1 TYPE=INPUT:TEXT FORM=ID:mobile-reg-form ATTR=AUTOCAPITALIZE:on&&CLASS:_5whq<SP>input&&NAME:lastname&&VALUE:&&DATA-SIGIL:clearableInput&&DATA-AUTOID:autoid_7&&TYPE:text CONTENT=фамилия
-TAG POS=1 TYPE=BUTTON FORM=ID:mobile-reg-form ATTR=TYPE:submit&&VALUE:Далее&&CLASS:_54k8<SP>_52jh<SP>_56bs<SP>_56b_<SP>_56bv&&DATA-SIGIL:touchable<SP>multi_step_next
-TAG POS=1 TYPE=SELECT FORM=ID:mobile-reg-form ATTR=ARIA-LABEL:День&&NAME:birthday_day&&ID:day&&TITLE:День&&CLASS:_3az2<SP>__v4&&DATA-SIGIL:birthday_day CONTENT=%1
-TAG POS=1 TYPE=SELECT FORM=ID:mobile-reg-form ATTR=ARIA-LABEL:Месяц&&NAME:birthday_month&&ID:month&&TITLE:Месяц&&CLASS:_3az2<SP>__v4&&DATA-SIGIL:birthday_month CONTENT=%1
-TAG POS=1 TYPE=SELECT FORM=ID:mobile-reg-form ATTR=ARIA-LABEL:Год&&NAME:birthday_year&&ID:year&&TITLE:Год&&CLASS:_3az2<SP>__v4&&DATA-SIGIL:birthday_year CONTENT=%2011
-TAG POS=1 TYPE=BUTTON FORM=ID:mobile-reg-form ATTR=TYPE:submit&&VALUE:Далее&&CLASS:_54k8<SP>_52jh<SP>_56bs<SP>_56b_<SP>_56bv&&DATA-SIGIL:touchable<SP>multi_step_next
-TAG POS=1 TYPE=INPUT:TEXT FORM=ID:mobile-reg-form ATTR=AUTOCAPITALIZE:off&&CLASS:_5whq<SP>input&&NAME:reg_email__&&DATA-SIGIL:focus_me<SP>contactpoint_step_input<SP>clearableInput&&ARIA-OWNS:js_0&&DATA-AUTOID:autoid_1&&TYPE:text CONTENT=+
-TAG POS=1 TYPE=INPUT:TEXT FORM=ID:mobile-reg-form ATTR=AUTOCAPITALIZE:off&&CLASS:_5whq<SP>input&&NAME:reg_email__&&DATA-SIGIL:focus_me<SP>contactpoint_step_input<SP>clearableInput&&ARIA-OWNS:js_0&&DATA-AUTOID:autoid_1&&ARIA-ACTIVEDESCENDANT:&&ARIA-EXPANDED:false&&TYPE:text CONTENT=+79680608071
-TAG POS=1 TYPE=BUTTON FORM=ID:mobile-reg-form ATTR=TYPE:submit&&VALUE:Далее&&CLASS:_54k8<SP>_52jh<SP>_56bs<SP>_56b_<SP>_56bv&&DATA-SIGIL:touchable<SP>multi_step_next
-TAG POS=1 TYPE=INPUT:RADIO FORM=ID:mobile-reg-form ATTR=NAME:sex&&VALUE:1&&CLASS:_15db&&ID:Женщина&&TYPE:radio
-TAG POS=1 TYPE=INPUT:RADIO FORM=ID:mobile-reg-form ATTR=NAME:sex&&VALUE:2&&CLASS:_15db&&ID:Мужчина&&TYPE:radio
-TAG POS=1 TYPE=BUTTON FORM=ID:mobile-reg-form ATTR=TYPE:submit&&VALUE:Далее&&CLASS:_54k8<SP>_52jh<SP>_56bs<SP>_56b_<SP>_56bv&&DATA-SIGIL:touchable<SP>multi_step_next
-TAG POS=1 TYPE=INPUT:TEXT FORM=ID:mobile-reg-form ATTR=AUTOCORRECT:off&&AUTOCAPITALIZE:off&&AUTOCOMPLETE:off&&SPELLCHECK:false&&CLASS:_5whq<SP>input&&NAME:reg_passwd__&&VALUE:&&ID:password_step_input&&DATA-SIGIL:focus_me<SP>multi_step_password<SP>clearableInput&&DATA-AUTOID:autoid_9&&TYPE:text CONTENT=лщыешф22
-TAG POS=1 TYPE=BUTTON FORM=ID:mobile-reg-form ATTR=TYPE:submit&&VALUE:Регистрация&&CLASS:_54k8<SP>_52jh<SP>_56bs<SP>_56b_<SP>_56bv&&NAME:submit&&DATA-SIGIL:touchable<SP>multi_step_submit
-REFRESH
-TAG POS=1 TYPE=DIV ATTR=CLASS:acw&&ID:root&&ROLE:main&&DATA-SIGIL:context-layer-root<SP>content-pane
+URL GOTO=https://ok.ru/goldmans/post
+TAG POS=3 TYPE=DIV ATTR=TXT:Добавить<SP>фото
+TAG POS=1 TYPE=INPUT:FILE ATTR=NAME:photo CONTENT=C:\imacros\scripts\FB\FB-regger\photos\591529_022.jpg
