@@ -1,4 +1,5 @@
-﻿iim = iimPlayCode;
+﻿//допилить надо когда откроют регу. Исходники сайта особо не меняли уже более года.
+iim = iimPlayCode;
 location = window.location;
 setInterval = window.setInterval;
 setInterval = window.setTimeout;
@@ -108,7 +109,7 @@ EVENT TYPE=CLICK SELECTOR="#dop_ass>DIV:nth-of-type(2)>DIV:nth-of-type(15)>DIV>L
 
 
 /*для теста->*/ iim(`EVENT TYPE=CLICK SELECTOR="#button_next" BUTTON=0`) //Продолжить: (для теста ! УДАЛИТЬ ПОТОМ! )
- var otvet = getCapOtv(captchaId1, captchaId2, captchaId2);
+ var otvet = getCapOtv(captchaId1, captchaId2, captchaId2);//3 потока =)
  alert('КАПТЧА РАСПОЗНАНА:\n' + otvet);
 
 // Период проведения ярмарок:*
