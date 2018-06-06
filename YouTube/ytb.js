@@ -37,106 +37,96 @@
 • E-mail: melbetpartners@gmail.com 
 • Skype: melbetpartners 
 • Telegram: @melbet_partners (https://t.me/melbet_partners)
-`.split(' ').join('<sp>').split('\n').join('<br>')
+`.split(' ').join('<sp>').split('\n').join('<br>') //уже не актуально(ибо->в кавычках выводим "${sms}")
 // for(i=0;i<1000;i++){sms=sms.replace(' ','<sp>').replace('\n','<br>')}
-// alert(sms)
-iim=iimPlayCode;
+// alert(sms) 
 iim('set !useragent Mozilla/5.0<sp>(Windows<sp>NT<sp>6.1;<sp>WOW64;<sp>rv:40.0)<sp>Gecko/20100101<sp>Firefox/40.1\n wait seconds=1')
+var неТрогаем = '1хБет,1хБет,1x Bet,1х Бет,Melbet,Мелбет'; //упоминание этих слов в названии и описании видео - пропускаем видос!
 var start = new Date();
+var path = 'C:\\imacros\\scripts\\YouTube\\txt\\';
+var ключи = читать(path+"ключи.txt");
+var предложения = читать(path+"тексты.txt").split('\n');
+var база=читать(path+"ютуб_база.txt");		// все тхт в utf-8;
+var путь_Сохр = path+"ютуб_выход.txt";	       // должна существовать; формат: login:password;ip:port
+var новая_база=читать(путь_Сохр);
+// alert(предложения[Math.round(Math.random() * (предложения.length - 0) + 0)];)
+var начинатьСКлюча = 0;
+var скокСтраницНаКлюч = 7;
+
+for(i=начинатьСКлюча;i<ключи.length;i++){ //ВХОД В ПОИСК!
+ var ключ = ключи.split('\n')[i].split(' ').join('<sp>')
+	iim(`SET !ERRORIGNORE YES \n url goto=https://www.youtube.com/results?q=${ключ} \n TAG POS=1 TYPE=YT-FORMATTED-STRING ATTR=ID:text \n TAG POS=1 TYPE=YT-FORMATTED-STRING ATTR=TXT:За<SP>этот<SP>год`);
+	ждем(2);
+	var infinity_num_vidos = 0;
+	for(ii=0;ii<скокСтраницНаКлюч;ii++){//скок страниц на 1 ключ) //ПЛАНИРУЕМ СКОК СТРАНИЦ ПРОХОДИТЬ! //в 2018 -инфинити скрол, а не страницы!
+		try{ 
+			var videos = querAll('ytd-video-renderer #video-title'); //(".yt-lockup-video>div>div>a"); 
+			window.console.log(videos)  
+			for(iii=0;iii<videos.length;iii++){//перебираем =<20 видео на странице: 
+ 			window.scrollTo(0, randGen(1, 123)); //листаем вниз;
+			try{var возрастВидео = querAll("#metadata-line>.ytd-video-meta-block:nth-child(2)")[infinity_num_vidos].innerText;}catch(e){var возрастВидео = "Хз"} //.yt-lockup-meta-info>li:nth-child(1)		
+			// if(возрастВидео.search('года')==-1){ //старше 2-х лет -отсеиваем;
+				var баян=0;
+				try{var урлВидео =videos[infinity_num_vidos].href// конкеретный результ выдачи   // querAll(".yt-lockup-video>div>div>a")
+				}catch(e){баян=1;}//отображается либо канал,либо плейлист;-проводим как баян);
+				if(база.search(урлВидео)!=-1){баян=1}
+				if(читать(путь_Сохр).search(урлВидео)!=-1){баян=1} 
+				if(баян==0){
+					iim(`TAB OPEN	\n	TAB T=2	\n SET !ERRORIGNORE YES	\n	URL GOTO=${урлВидео}`)
+					ждем(1);
+					window.scrollTo(0, randGen(500,2222));	//листаем вниз;
+					ждем(randGen(5,16));
+					var урлКанала = querAll("#owner-name >A")[0].href; //.yt-user-info>a
+					var опубликовано = querAll(".date")[0].innerText; //#watch-uploader-info
+					var баян=1;
+					if( (опубликовано.search('2016')>-1) || (опубликовано.search('2017')>-1) || (опубликовано.search('2018')>-1)){var баян=0};//ВИДЕО 2016-2018 года  
+					try{
+						var коммыОтключены = querAll("#contents #message")[0].innerText; //".display-message"
+						if(коммыОтключены=="Комментарии к этому видео отключены."){var баян=1}//сделаем вид,че ето баян, т.к. нет доступа к коментам);
+					}catch(e){window.console.log('catch=>',e)}
+					if(база.search(урлКанала)!=-1){баян=1}
+					if(читать(путь_Сохр).search(урлКанала)!=-1){баян=1}
+						var описание = querAll("#content #description")[0].innerText;		//#watch-description-text
+						неТрогаем.split(',').forEach(function(e){ 	баян = описание.search('1xBet') != -1 ? 1 : баян; 	})
+					if(баян==0){
+						var просмотров = querAll("#info-text #count")[0].innerText; ///.watch-view-count
+						var названиеВидео = querAll("#container .title")[0].innerText; //.watch-title
+						var названиеКанала = querAll("#container #owner-name")[0].innerText; //.yt-user-info > a
+						try{var подписота = querAll("#subscribe-button .deemphasize ")[0].innerText;}catch(e){var подписота = "хз"}		//.yt-subscription-button-subscriber-count-branded-horizontal
+						var текст = предложения[randGen(0,предложения.length)];
+						// alert(текст)
+						window.scrollTo(0, 1222);
+						ждем(3);
+						window.document.querySelectorAll("#simplebox-placeholder")[0].click(); //клик по комментам
+
+						var a =iim(`
+						EVENT TYPE=CLICK SELECTOR="IRON-AUTOGROW-TEXTAREA>DIV:nth-of-type(2)>TEXTAREA" BUTTON=0
+						EVENTS TYPE=KEYPRESS SELECTOR="PAPER-INPUT-CONTAINER>DIV>DIV>DIV>IRON-AUTOGROW-TEXTAREA>DIV:nth-of-type(2)>TEXTAREA" CHARS=${sms}
+						TAG POS=2 TYPE=PAPER-BUTTON ATTR=ID:button`);
+						alert(a)
+						ждем(randGen(1, 2));
+						
+						iim('EVENT TYPE=CLICK SELECTOR="YTD-BUTTON-RENDERER:nth-of-type(2)>A>PAPER-BUTTON" BUTTON=0');
+						добавитьВКонец(путь_Сохр,`${дата()}	${i}.${ii}.${infinity_num_vidos}	${названиеКанала}	${подписота}	${названиеВидео}	${просмотров}	${опубликовано}	${урлКанала}	${урлВидео}	${timming()}`);
+						ждем(randGen(2, 6));
+ 						iimDisplay(`${дата()} \n Добавили. Ща в циклах №${i}.${ii}.${infinity_num_vidos}`)
+					}
+					else { iimDisplay(`${дата()} \n Было уже. Ща в циклах №${i}.${ii}.${infinity_num_vidos}`) }
+					iim('tab t=0 \n tab closeallothers');
+				} 
+				// } 
+				infinity_num_vidos = infinity_num_vidos + 1; //след видео;)
+			}
+			//iim('TAG POS=1 TYPE=A ATTR=TXT:Следующая<SP>»') //след страница
+			window.scrollTo(0,5222); //в 2018 году  - след стр уже нету! теперь infinity scroll :(
+		}catch(e){window.console.log('CATCh=>>>',e)}	
+	}
+}
+function querAll(e){return window.document.querySelectorAll(e)}
+function iim(e) {return iimPlayCode(e)}
 function timming() {diff=(new Date()-start)/1000; return '; Робот работает в этой сессии:'+Math.floor(diff/3600)+'ч:'+(Math.floor(diff/60)-(Math.floor(diff/3600)*60))+'м:'+Math.round(diff%60)+'с';}
 function дата() {var d=new Date();var day=d.getDate();var month=d.getMonth() + 1;var year=d.getFullYear(); return d.toLocaleString().replace(", ","	")}
-function следующееВидео() {iim('EVENT TYPE=CLICK SELECTOR="#watch7-sidebar-modules>DIV>DIV>DIV:nth-of-type(2)>UL>LI>DIV>A>SPAN:nth-of-type(3)" BUTTON=0\n wait seconds=3')}
-function второеВидео() {iim('EVENT TYPE=CLICK SELECTOR="#watch-related>LI>DIV>DIV>A>SPAN" BUTTON=0\n wait seconds=3')}
 function randGen(min,max) {return Math.floor(Math.random() * (max - min)) + min;}
 function читать(файл) {return imns.FIO.readTextFile(imns.FIO.openNode(файл))} 
 function добавитьВКонец(путь,инфа) {imns.FIO.appendTextFile(imns.FIO.openNode(путь),инфа+"\n")}  
 function ждем(s) {iim('wait seconds='+s)}
-var ключи = читать("C:\\ютуб\\ключи.txt");
-var предложения = читать("C:\\ютуб\\тексты.txt").split('\n');
-var база=читать("C:\\ютуб\\ютуб_база.txt");		// все тхт в utf-8;
-var путь_Сохр = "C:\\ютуб\\ютуб_выход.txt";	       // должна существовать; формат: login:password;ip:port
-var новая_база=читать(путь_Сохр);
-// alert(предложения[Math.round(Math.random() * (предложения.length - 0) + 0)];)
-var начинатьСКлюча = 5
-for(i=начинатьСКлюча;i<ключи.length;i++){ //ВХОД В ПОИСК!
- var ключ = ключи.split('\n')[i].split(' ').join('<sp>')
-
-
-
-	iim('set !errorignore yes \n url goto=https://www.youtube.com/results?q='+ключ);
-	iim('TAG POS=1 TYPE=BUTTON ATTR=TXT:Фильтры \n TAG POS=1 TYPE=SPAN ATTR=TXT:За<SP>этот<SP>год')
-	ждем(2)
-	// var резульатовПримерно = parseInt(window.document.querySelectorAll(".num-results ")[0].innerText.replace(/\s/g, '').split('примерно')[1]);
-	// alert (резульатовПримерно)
-	
-	for(ii=0;ii<7;ii++){//20 страниц на одном видео=...эмм===))=.)); //ПЛАНИРУЕМ СКОК СТРАНИЦ ПРОХОДИТЬ!
-		try{
-		var скокВидосовНаСтр=window.document.querySelectorAll(".yt-lockup-video>div>div>a");
-		
-		for(iii=0;iii<скокВидосовНаСтр.length;iii++){//перебираем =<20 видео на странице: 
-		window.scrollTo(0, randGen(1,123));	//листаем вниз;
-		try{var возрастВидео = window.document.querySelectorAll(".yt-lockup-meta-info>li:nth-child(1)")[iii].innerText;
-		}catch(e){var возрастВидео = "Хз"}
-		 // alert(возрастВидео)
-		 // alert((возрастВидео.search('года')==-1))
-		
-		// if(возрастВидео.search('года')==-1){ //старше 2-х лет -отсеиваем;
-			var баян=0;
-			try{var урлВидео = window.document.querySelectorAll(".yt-lockup-video>div>div>a")[iii].href// конкеретный результ выдачи
-			// alert(урлВидео)
-			}catch(e){баян=1;}//отображается либо канал,либо плейлист;-проводим как баян);
-			if(база.search(урлВидео)!=-1){баян=1}
-			if(читать(путь_Сохр).search(урлВидео)!=-1){баян=1} 
-			if(баян==0){
-				iim('tab open \n tab t=2')
-				iim('set !errorignore yes\n url goto='+урлВидео);
-				ждем(1); window.scrollTo(0, randGen(500,2222));	//листаем вниз;
-				ждем(randGen(5,16));
-				var урлКанала = window.document.querySelectorAll(".yt-user-info>a")[0].href;
-				var опубликовано = window.document.querySelectorAll("#watch-uploader-info")[0].innerText;
-				var баян=1;
-				if(опубликовано.search('2015')>-1){var баян=0};//ВИДЕО 2015 года 
-				if(опубликовано.search('2016')>-1){var баян=0};//ВИДЕО 2016 года 
-				if(опубликовано.search('2017')>-1){var баян=0};//ВИДЕО 2017 года 
-				try{var коммыОтключены = window.document.querySelectorAll(".display-message")[0].innerText
-				if(коммыОтключены=="Комментарии к этому видео отключены."){var баян=1}//сделаем вид,че ето баян, т.к. нет доступа к коментам);
-				}catch(e){}
-				if(база.search(урлКанала)!=-1){баян=1}
-				if(читать(путь_Сохр).search(урлКанала)!=-1){баян=1}
-					var описание = window.document.querySelectorAll("#watch-description-text")[0].innerText;
-					if(описание.search('1xBet')!=-1){var баян=1};
-					if(описание.search('1хБет')!=-1){var баян=1};
-					if(описание.search('1x Bet')!=-1){var баян=1};
-					if(описание.search('1х Бет')!=-1){var баян=1};
-					if(описание.search('Melbet')!=-1){var баян=1};
-					if(описание.search('Мелбет')!=-1){var баян=1};
-				if(баян==0){
-					var просмотров = window.document.querySelectorAll(".watch-view-count")[0].innerText;
-					var названиеВидео = window.document.querySelectorAll(".watch-title")[0].innerText;
-					var названиеКанала = window.document.querySelectorAll(".yt-user-info > a")[0].innerText;
-					try{var подписота = window.document.querySelectorAll(".yt-subscription-button-subscriber-count-branded-horizontal")[0].innerText;}catch(e){var подписота = "хз"}
-					var текст = предложения[randGen(0,предложения.length)];
-					// alert(текст)
-					iim('TAG POS=3 TYPE=DIV ATTR=TXT:Оставьте<SP>комментарий')
-					iim('EVENT TYPE=CLICK SELECTOR="#comment-simplebox>DIV:nth-of-type(2)>DIV:nth-of-type(2)" BUTTON=0')
-					iim('EVENTS TYPE=KEYPRESS SELECTOR="#comment-simplebox>DIV:nth-of-type(2)>DIV:nth-of-type(2)" CHARS='+sms)
-					iim('TAG POS=1 TYPE=BUTTON ATTR=TXT:Оставить<SP>комментарий')
-					добавитьВКонец(путь_Сохр,дата()+"	"+i+"."+ii+"."+iii+"	"+названиеКанала+"	"+подписота+"	"+названиеВидео+"	"+просмотров+"	"+опубликовано+"	"+урлКанала+"	"+урлВидео+"	"+timming())
-					ждем(randGen(2,6));
-					//=RANDOM LIKE:
-					if(randGen(1,2)==2){try{iim('TAG POS='+randGen(2,5)+' TYPE=BUTTON ATTR=ARIA-LABEL:Нравится&&ONCLICK:;return<SP>false;&&TYPE:button&&CLASS:yt-uix-button<SP>yt-uix-button-size-default<SP>yt-uix-button-default<SP>yt-uix-button-empty<SP>yt-uix-button-has-icon<SP>no-icon-markup<SP>comment-action-buttons-renderer-thumb<SP>yt-uix-sessionlink<SP>sprite-comment-actions<SP>sprite-like<SP>i-a-v-sprite-like&&TXT:')}catch(e){}}
-					iimDisplay("Добавили. Ща в циклах №"+i+"."+ii+"."+iii+"\n"+дата())
-				}
-				else{iimDisplay("Было уже. Ща в циклах №"+i+"."+ii+"."+iii+"\n"+дата())}
-				iim('tab t=0 \n tab closeallothers')
-			}	
-		// }
-			
-		}
-		iim('TAG POS=1 TYPE=A ATTR=TXT:Следующая<SP>»') //след страница
-		
-	}catch(e){
-
-	}	
-	}
-}

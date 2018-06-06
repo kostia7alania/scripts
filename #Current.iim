@@ -1,2 +1,3 @@
-﻿refresh	
-TAG POS=1 TYPE=img ATTR=CLASS:captcha_img EXTRACT=HTM
+﻿VERSION BUILD=8970419 RECORDER=FX
+TAB T=1
+URL GOTO=https://www.youtube.com/watch?v=vViVeRkFTRI
