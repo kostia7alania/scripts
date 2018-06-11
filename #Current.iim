@@ -1,5 +1,3 @@
-﻿VERSION BUILD=8970419 RECORDER=FX
-TAB T=1
-URL GOTO=https://ok.ru/gazetavseobovsem/post
-TAG POS=3 TYPE=DIV ATTR=TXT:Поделиться
-TAG POS=1 TYPE=SPAN ATTR=TXT:Администратор<SP>запретил<SP>делиться<SP>темами<SP>в<SP>этой*
+﻿EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV>DIV>LABEL" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV:nth-of-type(2)>DIV>LABEL" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV:nth-of-type(3)>DIV>LABEL" BUTTON=0

@@ -1,4 +1,4 @@
-﻿iim=iimPlayCode;
+﻿iim = s => iimPlayCode ('set !timeout_tag 1\n'+s);
 function wait(sec) {iimPlayCode('WAIT SECONDS='+sec)}
 function run(prog) {var prgpath=prog; var args = ['-n','6', 'google.com']; var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile); file.initWithPath(prgpath); var process = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess); process.init(file); process.run(false, args, args.length)}
 function копиБоди() {try{var x = window.document.getElementsByTagName("body")[0].textContent;}catch(e){var x='sex'} return x;}
