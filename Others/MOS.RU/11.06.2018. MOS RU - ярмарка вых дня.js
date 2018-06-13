@@ -5,7 +5,7 @@ function копиБоди() {try{var x = window.document.getElementsByTagName("b
 console = window.console;
 cc = Components.classes; ci = Components.interfaces; x = cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance();
 var Path = 'C:\\CapNum\\'
-var key = 'cf2fc1467ef8d1539e573d61e4cc5595'; //rucapthca api_key
+var key = '81315bbf06bbb83a5b164bd1ed7b055d'; //rucapthca api_key -> https://pp.userapi.com/c848616/v848616682/641c/ndDv1Q4NBI4.jpg
 googleKey='6LdVYCATAAAAAO2oWqR9gXhgjII3BFkOfGU9zujM';
 urlHack='mos.ru/pgu/ru/application/dtiu/030301';
 
