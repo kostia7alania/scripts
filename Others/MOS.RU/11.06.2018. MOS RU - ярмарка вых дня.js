@@ -11,10 +11,8 @@ urlHack='mos.ru/pgu/ru/application/dtiu/030301';
 
 var url1 = "http://rucaptcha.com/in.php?key="+key+"&method=userrecaptcha&googlekey="+googleKey+"&pageurl="+urlHack; 
 var url2 = "http://rucaptcha.com/res.php?key="+key+"&action=get&id=";
-
-
-
-var idRecap_recogTask = firstStepRecaptcha(url1);  //прежде всего, шлем задачу на распознавание каптчи таджикам; (даже до захода на сам сайт:))
+ 
+// var idRecap_recogTask = firstStepRecaptcha(url1);  //прежде всего, шлем задачу на распознавание каптчи таджикам; (даже до захода на сам сайт:))
 
 var okrug = 8; // <-- выбирай wифру из списка ниже;
 var rajon = 1;
@@ -38,12 +36,13 @@ var dop_assortiment =
 
 //<-- -- -- -- -- -- -- -- - шаг 1-- -- -- -- -- -- -- -- --  -- ->
 
-iim(`url goto=https://www.mos.ru/pgu/ru/application/dtiu/030301/#step_1`)//переход на сайт МОС (можно убрать)
+//iim(`url goto=https://www.mos.ru/pgu/ru/application/dtiu/030301/#step_1`)//переход на сайт МОС (можно убрать)
 
 iim(`TAG POS=1 TYPE=DIV ATTR=TXT:Категория<SP>заявителя:*<SP>Физическое<SP>лицо<SP>Индивидуал*
 TAG POS=1 TYPE=LABEL FORM=NAME:form ATTR=TXT:Индивидуальный<SP>предприниматель
 TAG POS=2 TYPE=INPUT:RADIO FORM=NAME:form ATTR=NAME:field[internal.person_type]`)
 
+//iim('FRAME F=12 \n EVENT TYPE=CLICK SELECTOR="#recaptcha-anchor>DIV:nth-of-type(5)" BUTTON=0') // нажатие на галку рекаптчи (долго грузится, убрал)
 
 _=quesel('.btn-close-pop');_?_.click():''; //закрываем уведомление о том,что ярмарка закрыта(если вдруг всплыла)
 quesel('#step_2').classList.remove('hidden'); //если ярмарка еще закрыта или по ходу дела возникли ошибки, то эта штука отобразит след шаги :)
@@ -120,7 +119,7 @@ EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV:nth-of-type(2)>DI
 EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV:nth-of-type(3)>DIV>LABEL" BUTTON=0`)
 
 
-secondStepRecaptcha(idRecap_recogTask); //смотрим -че распознали нам ребята;
+// secondStepRecaptcha(idRecap_recogTask); //смотрим -че распознали нам ребята;
  
 
 // финальное "далее":
