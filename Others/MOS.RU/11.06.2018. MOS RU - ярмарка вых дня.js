@@ -183,10 +183,8 @@ function show_all_objects(){
     //queselAll('#step_3 .form-block')[5].classList.remove('hidden') // отобразим внаглую поле "Сведения о продавцах" (это, кажется и так отображается -бесполезно)
     _=queselAll('#step_3 .form-block')[6];   _?show_obj(_):'';  // отобразим внаглую поле птички "Согласие на условия предоставления услуги" <== !ОБЪЯЗАТЕЛЬНОЕ ПОЛЕ!
     _=quesel('.captcha');                    _?show_obj(_):''; //отобразим реКаптчу внаглую;
-}
+ }
 function show_obj (obj) {
-    try {
-        obj?obj.classList.remove('hidden'):'';
-        obj?obj.classList.style.display="block":'';
-    } catch(e) { window.console.log('ошибка в шоу_объект=>',e); }
+    try {obj?obj.classList.remove('hidden'):'';         } catch(e) { window.console.log('ошибка в шоу_объект1=>',e); }
+    try {obj?obj.style.display="block":'';    } catch(e) { window.console.log('ошибка в шоу_объект2=>',e); }
 }
