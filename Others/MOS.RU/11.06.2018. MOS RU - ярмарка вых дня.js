@@ -97,12 +97,12 @@ try { quesel('#new_check_1').checked = true; quesel('#new_check_2').checked = tr
 
 
 //Торговые периоды:
-/*
-iim(`EVENT TYPE=CLICK SELECTOR="#step_1>FIELDSET>DIV:nth-of-type(3)>DIV>DIV>DIV>A" BUTTON=0
-TAG POS=1 TYPE=LABEL FORM=ID:form_element ATTR=TXT:25.08.2017-27.08.2017
-TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.yarmarka.56.period_0] CONTENT=YES`)
-*/
-queselAll('.documents-build input').forEach(e=>e.checked=1) //выбираем все возможные периоды
+ 
+iim(`TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.yarmarka* CONTENT=YES`)//1 период
+iim(`TAG POS=2 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.yarmarka* CONTENT=YES`)//2 период 
+iim(`TAG POS=3 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.yarmarka* CONTENT=YES`)//3 период 
+ 
+queselAll('.documents-build input').forEach(function(e){e.checked=true}) //выбираем все возможные периоды
 
  //Продолжить:
 iim(`EVENT TYPE=CLICK SELECTOR="#button_next" BUTTON=0`)
