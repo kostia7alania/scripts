@@ -73,11 +73,12 @@ iim(`EVENT TYPE=CLICK SELECTOR="#tovar_group_chosen>A" BUTTON=0
 EVENT TYPE=CLICK SELECTOR="#tovar_group_chosen>DIV>UL>LI:nth-of-type(${gruppa_tovarov})" BUTTON=0 `)
 
 //Дополнительный ассортимент * 
-dop_assortiment.split('\n').forEach( 
-        e => iim(`TAG POS=1 TYPE=LABEL FORM=ID:form_element ATTR=TXT:"${e.trim().split('  ').join(' ')}"`) //<-"защита от дурака"  (чистим от лишних пробелов);
+dop_assortiment.split('\n').forEach( e => iim(`TAG POS=1 TYPE=LABEL FORM=ID:form_element ATTR=TXT:"${e.trim().split('  ').join(' ')}"`) //<-"защита от дурака"  (чистим от лишних пробелов);
     ); 
  
 
+try{queselAll('#dop_ass input').forEach( e => { e.checked = dop_assortiment.includes(e.value) ? 1 : 0 ; }) //на JS скоростной вариант! (продукты должны быть 1 в 1 !!!! без звездочек!)
+}catch(e){console.log('ошибка на скоростном варианте JS -птички продуктов:',e)}
 
 
 //Продолжить:
@@ -117,6 +118,13 @@ EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(2)>DIV:nth-of-type(3)>DI
 EVENTS TYPE=KEYPRESS SELECTOR="#step_3>FIELDSET:nth-of-type(2)>DIV:nth-of-type(3)>DIV>INPUT" CHARS="304482226400192"
 EVENTS TYPE=KEYPRESS SELECTOR="#step_3>FIELDSET:nth-of-type(2)>DIV:nth-of-type(4)>DIV>INPUT" CHARS="482603651706"`)
 
+
+
+quesel("#declarant-emailaddress").value = "osetia-alania@mail.ru"; //'Адрес электронной почтыАдрес электронной почты'
+quesel("#declarantSeries").value = "9005";//серия
+quesel("#declarantNumber").value = "900005";//номер
+quesel("#declarantDate").value = "11.01.2011"; //када выдан
+quesel("#rowdeclarantnew_passport_place .document_place").value = 'Отдел уфмс россии по респ. Северная осетия-алания в пригородном р-не'; //кем выдан
 
 // secondStepRecaptcha(idRecap_recogTask); //смотрим -че распознали нам ребята;
 
