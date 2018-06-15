@@ -15,7 +15,7 @@ var url2 = "http://rucaptcha.com/res.php?key="+key+"&action=get&id=";
 // var idRecap_recogTask = firstStepRecaptcha(url1);  //прежде всего, шлем задачу на распознавание каптчи таджикам; (даже до захода на сам сайт:))
 
 var okrug = 8; // <-- выбирай wифру из списка ниже;
-var rajon = 1;
+var rajon = 5; //STROGINO
     //список: https://pp.userapi.com/c824700/v824700093/15eeb8/l1UjGy0FHsU.jpg 
     //как пользоваться списком: зеленым веделены округи,а районы - под соотв округами. Берем цифру из соотв полей: например, для ВАО Богородского: var okrug = 2; var rajon = 1;
 //списки районов получал так: document.querySelectorAll('.chosen-results')[2].querySelectorAll('.active-result ').forEach((e,i)=>{console.log(i+1+' - '+e.innerHTML)})
@@ -87,6 +87,13 @@ iim(`EVENT TYPE=CLICK SELECTOR="#button_next" BUTTON=0`)
 
 show_all_objects(); //отобр все шаги;
 
+//согласия на условия
+iim(`EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV>DIV>LABEL" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV:nth-of-type(2)>DIV>LABEL" BUTTON=0
+EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV:nth-of-type(3)>DIV>LABEL" BUTTON=0`)
+//альтернативный метод ставить птички на согласие: 
+try { quesel('#new_check_1').checked = true; quesel('#new_check_2').checked = true; quesel("#new_check_3").checked = true; } catch (e) { window.console.log('Ошибка на птичках:', e) }
+
 
 //Торговые периоды:
 iim(`EVENT TYPE=CLICK SELECTOR="#step_1>FIELDSET>DIV:nth-of-type(3)>DIV>DIV>DIV>A" BUTTON=0
@@ -107,12 +114,6 @@ EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(2)>DIV:nth-of-type(3)>DI
 EVENTS TYPE=KEYPRESS SELECTOR="#step_3>FIELDSET:nth-of-type(2)>DIV:nth-of-type(3)>DIV>INPUT" CHARS="304482226400192"
 EVENTS TYPE=KEYPRESS SELECTOR="#step_3>FIELDSET:nth-of-type(2)>DIV:nth-of-type(4)>DIV>INPUT" CHARS="482603651706"`)
 
-//согласия на условия
-iim(`EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV>DIV>LABEL" BUTTON=0
-EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV:nth-of-type(2)>DIV>LABEL" BUTTON=0
-EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV:nth-of-type(3)>DIV>LABEL" BUTTON=0`)
-//альтернативный метод ставить птички: 
-try{quesel('#new_check_1').checked = true;quesel('#new_check_2').checked = true; quesel("#new_check_3").checked = true;}catch(e){window.console.log('Ошибка на птичках:',e)}
 
 // secondStepRecaptcha(idRecap_recogTask); //смотрим -че распознали нам ребята;
 
