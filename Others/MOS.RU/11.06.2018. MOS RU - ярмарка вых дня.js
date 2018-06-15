@@ -91,15 +91,18 @@ show_all_objects(); //отобр все шаги;
 iim(`EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV>DIV>LABEL" BUTTON=0
 EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV:nth-of-type(2)>DIV>LABEL" BUTTON=0
 EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV:nth-of-type(3)>DIV>LABEL" BUTTON=0`)
+
 //альтернативный метод ставить птички на согласие: 
 try { quesel('#new_check_1').checked = true; quesel('#new_check_2').checked = true; quesel("#new_check_3").checked = true; } catch (e) { window.console.log('Ошибка на птичках:', e) }
 
 
 //Торговые периоды:
+/*
 iim(`EVENT TYPE=CLICK SELECTOR="#step_1>FIELDSET>DIV:nth-of-type(3)>DIV>DIV>DIV>A" BUTTON=0
 TAG POS=1 TYPE=LABEL FORM=ID:form_element ATTR=TXT:25.08.2017-27.08.2017
 TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.yarmarka.56.period_0] CONTENT=YES`)
-
+*/
+quesel('.documents-build input').forEach(e=>e.checked=1) //выбираем все возможные периоды
 
  //Продолжить:
 iim(`EVENT TYPE=CLICK SELECTOR="#button_next" BUTTON=0`)
