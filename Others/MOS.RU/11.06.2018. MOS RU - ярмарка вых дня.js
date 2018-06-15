@@ -102,7 +102,7 @@ iim(`EVENT TYPE=CLICK SELECTOR="#step_1>FIELDSET>DIV:nth-of-type(3)>DIV>DIV>DIV>
 TAG POS=1 TYPE=LABEL FORM=ID:form_element ATTR=TXT:25.08.2017-27.08.2017
 TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.yarmarka.56.period_0] CONTENT=YES`)
 */
-quesel('.documents-build input').forEach(e=>e.checked=1) //выбираем все возможные периоды
+queselAll('.documents-build input').forEach(e=>e.checked=1) //выбираем все возможные периоды
 
  //Продолжить:
 iim(`EVENT TYPE=CLICK SELECTOR="#button_next" BUTTON=0`)
