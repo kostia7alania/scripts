@@ -54,9 +54,9 @@ queselAll('#step_3 .form-block')[1].classList.remove('hidden') // отобраз
 //queselAll('#step_3 .form-block')[3].classList.remove('hidden') // отобразим внаглую поле "Сведения о физическом лице (индивидуальном предпринимателе)"
 //queselAll('#step_3 .form-block')[4].classList.remove('hidden') // отобразим внаглую поле "Документ, удостоверяющий личность заявителя"
 //queselAll('#step_3 .form-block')[5].classList.remove('hidden') // отобразим внаглую поле "Сведения о продавцах" (это, кажется и так отображается -бесполезно)
-queselAll('#step_3 .form-block')[6].classList.remove('hidden') // отобразим внаглую поле птички "Согласие на условия предоставления услуги" <== !ОБЪЯЗАТЕЛЬНОЕ ПОЛЕ!
+_=queselAll('#step_3 .form-block')[6].classList.remove('hidden') // отобразим внаглую поле птички "Согласие на условия предоставления услуги" <== !ОБЪЯЗАТЕЛЬНОЕ ПОЛЕ!
 
-quesel('.captcha').style.display = "block" //отобразим реКаптчу внаглую;
+_=quesel('.captcha');_?_.style.display = "block":''; //отобразим реКаптчу внаглую;
 
 
 //выбираем период
@@ -117,10 +117,10 @@ EVENTS TYPE=KEYPRESS SELECTOR="#step_3>FIELDSET:nth-of-type(2)>DIV:nth-of-type(4
 iim(`EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV>DIV>LABEL" BUTTON=0
 EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV:nth-of-type(2)>DIV>LABEL" BUTTON=0
 EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(7)>DIV:nth-of-type(3)>DIV>LABEL" BUTTON=0`)
-
+//альтернативный метод ставить птички: 
+try{quesel('#new_check_1').checked = true;quesel('#new_check_2').checked = true; quesel("#new_check_3").checked = true;}catch(e){window.console.log('Ошибка на птичках:',e)}
 
 // secondStepRecaptcha(idRecap_recogTask); //смотрим -че распознали нам ребята;
- 
 
 // финальное "далее":
 iim('TAG POS=1 TYPE=A ATTR=ID:button_next'); 
