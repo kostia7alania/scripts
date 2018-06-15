@@ -34,6 +34,7 @@ var dop_assortiment =
 Сезонные ягоды`
 .trim();
 
+
 //<-- -- -- -- -- -- -- -- - шаг 1-- -- -- -- -- -- -- -- --  -- ->
 
 //iim(`url goto=https://www.mos.ru/pgu/ru/application/dtiu/030301/#step_1`)//переход на сайт МОС (можно убрать)
@@ -45,19 +46,6 @@ TAG POS=2 TYPE=INPUT:RADIO FORM=NAME:form ATTR=NAME:field[internal.person_type]`
 //iim('FRAME F=12 \n EVENT TYPE=CLICK SELECTOR="#recaptcha-anchor>DIV:nth-of-type(5)" BUTTON=0') // нажатие на галку рекаптчи (долго грузится, убрал)
 
 _=quesel('.btn-close-pop');_?_.click():''; //закрываем уведомление о том,что ярмарка закрыта(если вдруг всплыла)
-quesel('#step_2').classList.remove('hidden'); //если ярмарка еще закрыта или по ходу дела возникли ошибки, то эта штука отобразит след шаги :)
-quesel('#step_3').classList.remove('hidden') //и сразу 3й шаг отобразим=)
- 
-//queselAll('#step_3 .form-block')[0].classList.remove('hidden') // отобразим внаглую поле Данные юридического лица
-queselAll('#step_3 .form-block')[1].classList.remove('hidden') // отобразим внаглую поле "Данные индивидуального предпринимателя"
-//queselAll('#step_3 .form-block')[2].classList.remove('hidden') // отобразим внаглую поле "Юридический адрес"
-//queselAll('#step_3 .form-block')[3].classList.remove('hidden') // отобразим внаглую поле "Сведения о физическом лице (индивидуальном предпринимателе)"
-//queselAll('#step_3 .form-block')[4].classList.remove('hidden') // отобразим внаглую поле "Документ, удостоверяющий личность заявителя"
-//queselAll('#step_3 .form-block')[5].classList.remove('hidden') // отобразим внаглую поле "Сведения о продавцах" (это, кажется и так отображается -бесполезно)
-_=queselAll('#step_3 .form-block')[6].classList.remove('hidden') // отобразим внаглую поле птички "Согласие на условия предоставления услуги" <== !ОБЪЯЗАТЕЛЬНОЕ ПОЛЕ!
-
-_=quesel('.captcha');_?_.style.display = "block":''; //отобразим реКаптчу внаглую;
-
 
 //выбираем период
 iim(`set !errorignore yes\nEVENT TYPE=CLICK SELECTOR="#period_chosen>A" BUTTON=0
@@ -90,10 +78,14 @@ dop_assortiment.split('\n').forEach(
     ); 
  
 
+
+
 //Продолжить:
 iim(`EVENT TYPE=CLICK SELECTOR="#button_next" BUTTON=0`)
 
 //<-- -- -- -- -- -- -- -- - шаг 2-- -- -- -- -- -- -- -- --  -- ->
+
+show_all_objects(); //отобр все шаги;
 
 
 //Торговые периоды:
@@ -106,6 +98,8 @@ TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.yarmar
 iim(`EVENT TYPE=CLICK SELECTOR="#button_next" BUTTON=0`)
  
 //<-- -- -- -- -- -- -- -- - шаг 3-- -- -- -- -- -- -- -- --  -- ->
+
+show_all_objects(); //отобр все шаги;
 
 //Сведения о ИП:
 iim(`set !errorignore yes
@@ -174,3 +168,25 @@ function secondStepRecaptcha(capId) {
 
 function quesel(e){return window.document.querySelector(e)}
 function queselAll(e){return window.document.querySelectorAll(e)}
+
+
+
+function show_all_objects(){
+    _=quesel('#step_2');            _?show_obj(_):''; //если ярмарка еще закрыта или по ходу дела возникли ошибки, то эта штука отобразит след шаги :)
+    _=quesel('#step_3');            _?show_obj(_):''; //и сразу 3й шаг отобразим=)
+    
+    //queselAll('#step_3 .form-block')[0].classList.remove('hidden') // отобразим внаглую поле Данные юридического лица
+    _=queselAll('#step_3 .form-block')[1];   _?show_obj(_):'';// отобразим внаглую поле "Данные индивидуального предпринимателя"
+    //queselAll('#step_3 .form-block')[2].classList.remove('hidden') // отобразим внаглую поле "Юридический адрес"
+    //queselAll('#step_3 .form-block')[3].classList.remove('hidden') // отобразим внаглую поле "Сведения о физическом лице (индивидуальном предпринимателе)"
+    //queselAll('#step_3 .form-block')[4].classList.remove('hidden') // отобразим внаглую поле "Документ, удостоверяющий личность заявителя"
+    //queselAll('#step_3 .form-block')[5].classList.remove('hidden') // отобразим внаглую поле "Сведения о продавцах" (это, кажется и так отображается -бесполезно)
+    _=queselAll('#step_3 .form-block')[6];   _?show_obj(_):'';  // отобразим внаглую поле птички "Согласие на условия предоставления услуги" <== !ОБЪЯЗАТЕЛЬНОЕ ПОЛЕ!
+    _=quesel('.captcha');                    _?show_obj(_):''; //отобразим реКаптчу внаглую;
+}
+function show_obj (obj) {
+    try {
+        obj?obj.classList.remove('hidden'):'';
+        obj?obj.classList.style.display="block":'';
+    } catch(e) { window.console.log('ошибка в шоу_объект=>',e); }
+}
