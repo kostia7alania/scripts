@@ -146,6 +146,7 @@ iim('TAG POS=1 TYPE=A ATTR=ID:button_next');
 
 
 
+//дальше идут просто функции:
  
 function show_all_objects(){
     _=quesel('#step_2');            _?show_obj(_):''; //если ярмарка еще закрыта или по ходу дела возникли ошибки, то эта штука отобразит след шаги :)
@@ -164,8 +165,7 @@ function show_obj (obj) {
     try {obj?obj.classList.remove('hidden'):'';         } catch(e) { window.console.log('ошибка в шоу_объект1=>',e); }
     try {obj?obj.style.display="block":'';    } catch(e) { window.console.log('ошибка в шоу_объект2=>',e); }
 }
-
-
+ 
 
 
 //анти-гугл-КАПТЧА!!!!!!!!!!!!!
