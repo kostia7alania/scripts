@@ -1,22 +1,13 @@
-﻿function wait(sec) {iimPlayCode('WAIT SECONDS='+sec)}
-function run(prog) {var prgpath=prog; var args = ['-n','6', 'google.com']; var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile); file.initWithPath(prgpath); var process = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess); process.init(file); process.run(false, args, args.length)}
-function копиБоди() {try{var x = window.document.getElementsByTagName("body")[0].textContent;}catch(e){var x='sex'} return x;}
-console = window.console;
+﻿//это переменные для гугл-каптчи (если руками будешь разгадывать, то игнорь эти переменные;)
 cc = Components.classes; ci = Components.interfaces; x = cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance();
-var Path = 'C:\\CapNum\\'
 var key = '81315bbf06bbb83a5b164bd1ed7b055d'; //rucapthca api_key -> https://pp.userapi.com/c848616/v848616682/641c/ndDv1Q4NBI4.jpg
 googleKey='6LdVYCATAAAAAO2oWqR9gXhgjII3BFkOfGU9zujM';
 urlHack='mos.ru/pgu/ru/application/dtiu/030301';
-
-var url1 = "http://rucaptcha.com/in.php?key="+key+"&method=userrecaptcha&googlekey="+googleKey+"&pageurl="+urlHack; 
+var url1 = "http://rucaptcha.com/in.php?key="+key+"&method=userrecaptcha&googlekey="+googleKey+"&pageurl="+urlHack;
 var url2 = "http://rucaptcha.com/res.php?key="+key+"&action=get&id=";
 
-/*
-var promise = new window.Promise(function(resolve, reject) { 
-    window.setTimeout(function(){resolve('Начало резолва промиса!')}, 1)
-});
+/* var promise = new window.Promise(function(resolve, reject) {window.setTimeout(function(){resolve('Начало резолва промиса!')}, 1) }); // планирую на асинк переписать;
 */
- 
 
 //var idRecap_recogTask = firstStepRecaptcha(url1);  //прежде всего, шлем задачу на распознавание каптчи таджикам; (даже до захода на сам сайт:))
 
@@ -156,17 +147,7 @@ iim('TAG POS=1 TYPE=A ATTR=ID:button_next');
 
 
 
-
-
-
-
-
-function setInterval(s, ss) { return window.setInterval(s, ss); }
-function iim(s) { return iimPlayCode('set !timeout_tag 1\n' + s) }
-function quesel(e){return window.document.querySelector(e)}
-function queselAll(e){return window.document.querySelectorAll(e)}
-function Promise(e) { window.Promise (e)}
-
+ 
 function show_all_objects(){
     _=quesel('#step_2');            _?show_obj(_):''; //если ярмарка еще закрыта или по ходу дела возникли ошибки, то эта штука отобразит след шаги :)
     _=quesel('#step_3');            _?show_obj(_):''; //и сразу 3й шаг отобразим=)
@@ -188,7 +169,7 @@ function show_obj (obj) {
 
 
 
-//КАПТЧА!!!!!!!!!!!!!
+//анти-гугл-КАПТЧА!!!!!!!!!!!!!
 function firstStepRecaptcha(url1) {
     var maxTryes=5;
     for(i=0;i<maxTryes;i++){
@@ -220,6 +201,18 @@ function secondStepRecaptcha(capId) {
 		else iim('WAIT SECONDS=1');
     }
 }
-//юзать по такой схеме:
+// функции антикаптчи юзать по такой схеме:
 // var idRecap_recogTask = firstStepRecaptcha();//получили код отслежки (таджики начали работу над каптчей)
 // secondStepRecaptcha(idRecap_recogTask); //ждем ответ от таджиков и вводим в скрытое поле около гугл.рекаптчи
+
+
+
+function wait(sec) { iimPlayCode('WAIT SECONDS=' + sec) }
+function run(prog) { var prgpath = prog; var args = ['-n', '6', 'google.com']; var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile); file.initWithPath(prgpath); var process = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess); process.init(file); process.run(false, args, args.length) }
+function копиБоди() { try { var x = window.document.getElementsByTagName("body")[0].textContent; } catch (e) { var x = 'sex' } return x; }
+function console(s) = { return window.console(s) }
+function setInterval(s, ss) { return window.setInterval(s, ss); }
+function iim(s) { return iimPlayCode('set !timeout_tag 1\n' + s) }
+function quesel(e) { return window.document.querySelector(e) }
+function queselAll(e) { return window.document.querySelectorAll(e) }
+function Promise(e) { window.Promise(e) }
