@@ -105,11 +105,11 @@ iim(`TAG POS=3 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.y
 */
 setInterval(     function(){ try{queselAll('.documents-build input').forEach(function(e){e.checked=1})}catch(e){} }, 555) //выбираем все возможные периоды на js:)
     //Продолжить:
-iim(`EVENT TYPE=CLICK SELECTOR="#button_next" BUTTON=0`)
+iim(`EVENT TYPE=CLICK SELECTOR="#button_next" BUTTON=0`);
  
 //<-- -- -- -- -- -- -- -- - шаг 3-- -- -- -- -- -- -- -- --  -- ->
 
-show_all_objects(); //отобр все шаги;
+show_all_objects(); //отобр все шаги; (если вдруг скрыл их мос.ру)
 
 //Данные индивидуального предпринимателя:
 setInterval(function () {
