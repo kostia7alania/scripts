@@ -66,8 +66,7 @@ EVENT TYPE=CLICK SELECTOR="#step_1>FIELDSET>DIV:nth-of-type(3)>DIV:nth-of-type(2
  //ярмарка (надо допилить);
 iim(`set !errorignore yes\nEVENT TYPE=CLICK SELECTOR="#yarmarka_chosen>A" BUTTON=0
 EVENT TYPE=CLICK SELECTOR="#yarmarka_chosen>DIV>UL>LI:nth-of-type(1)" BUTTON=0 `) //вроде бы должно первую выбрать из списка
-
-
+ 
 
 //группа товаров:
 iim(`EVENT TYPE=CLICK SELECTOR="#tovar_group_chosen>A" BUTTON=0
@@ -104,7 +103,7 @@ iim(`TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.y
 iim(`TAG POS=2 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.yarmarka* CONTENT=YES`)//2 период 
 iim(`TAG POS=3 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.yarmarka* CONTENT=YES`)//3 период и т.д.
 */
-setInterval(     function(){ try{queselAll('.documents-build input').forEach(function(e){e.checked=true})}catch(e){} }, 555) //выбираем все возможные периоды
+setInterval(     function(){ try{queselAll('.documents-build input').forEach(function(e){e.checked=1})}catch(e){} }, 555) //выбираем все возможные периоды на js:)
     //Продолжить:
 iim(`EVENT TYPE=CLICK SELECTOR="#button_next" BUTTON=0`)
  
