@@ -1,5 +1,4 @@
-﻿iim = s => iimPlayCode ('set !timeout_tag 1\n'+s);
-function wait(sec) {iimPlayCode('WAIT SECONDS='+sec)}
+﻿function wait(sec) {iimPlayCode('WAIT SECONDS='+sec)}
 function run(prog) {var prgpath=prog; var args = ['-n','6', 'google.com']; var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile); file.initWithPath(prgpath); var process = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess); process.init(file); process.run(false, args, args.length)}
 function копиБоди() {try{var x = window.document.getElementsByTagName("body")[0].textContent;}catch(e){var x='sex'} return x;}
 console = window.console;
@@ -11,8 +10,15 @@ urlHack='mos.ru/pgu/ru/application/dtiu/030301';
 
 var url1 = "http://rucaptcha.com/in.php?key="+key+"&method=userrecaptcha&googlekey="+googleKey+"&pageurl="+urlHack; 
 var url2 = "http://rucaptcha.com/res.php?key="+key+"&action=get&id=";
+
+/*
+var promise = new window.Promise(function(resolve, reject) { 
+    window.setTimeout(function(){resolve('Начало резолва промиса!')}, 1)
+});
+*/
  
-// var idRecap_recogTask = firstStepRecaptcha(url1);  //прежде всего, шлем задачу на распознавание каптчи таджикам; (даже до захода на сам сайт:))
+
+//var idRecap_recogTask = firstStepRecaptcha(url1);  //прежде всего, шлем задачу на распознавание каптчи таджикам; (даже до захода на сам сайт:))
 
 var okrug = 8; // <-- выбирай wифру из списка ниже;
 var rajon = 5; //STROGINO
@@ -37,11 +43,15 @@ var dop_assortiment =
 
 //<-- -- -- -- -- -- -- -- - шаг 1-- -- -- -- -- -- -- -- --  -- ->
 
-//iim(`url goto=https://www.mos.ru/pgu/ru/application/dtiu/030301/#step_1`)//переход на сайт МОС (можно убрать)
+iim(`url goto=https://www.mos.ru/pgu/ru/application/dtiu/030301/#step_1`); //переход на сайт МОС (можно убрать)
+var kategZayavitelya = 1; /*1-Физ лицо, 2-ИП*/
+setInterval(function () { try { var b = kategZayavitelya == 1 ? 0 : 1; queselAll("#step_1 .radiogroup input")[0].checked = kategZayavitelya; queselAll("#step_1 .radiogroup input")[1].checked = b; } catch (e) { } }, 555);
 
+/*//аймакросовские команды (заменили чистым JS -> см. функцию выше!)
 iim(`TAG POS=1 TYPE=DIV ATTR=TXT:Категория<SP>заявителя:*<SP>Физическое<SP>лицо<SP>Индивидуал*
 TAG POS=1 TYPE=LABEL FORM=NAME:form ATTR=TXT:Индивидуальный<SP>предприниматель
 TAG POS=2 TYPE=INPUT:RADIO FORM=NAME:form ATTR=NAME:field[internal.person_type]`)
+*/
 
 //iim('FRAME F=12 \n EVENT TYPE=CLICK SELECTOR="#recaptcha-anchor>DIV:nth-of-type(5)" BUTTON=0') // нажатие на галку рекаптчи (долго грузится, убрал)
 
@@ -98,35 +108,47 @@ try { quesel('#new_check_1').checked = true; quesel('#new_check_2').checked = tr
 
 
 //Торговые периоды:
- 
+ /*
 iim(`TAG POS=1 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.yarmarka* CONTENT=YES`)//1 период
 iim(`TAG POS=2 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.yarmarka* CONTENT=YES`)//2 период 
-iim(`TAG POS=3 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.yarmarka* CONTENT=YES`)//3 период 
- 
-queselAll('.documents-build input').forEach(function(e){e.checked=true}) //выбираем все возможные периоды
-
- //Продолжить:
+iim(`TAG POS=3 TYPE=INPUT:CHECKBOX FORM=ID:form_element ATTR=ID:field[internal.yarmarka* CONTENT=YES`)//3 период и т.д.
+*/
+setInterval(     function(){ try{queselAll('.documents-build input').forEach(function(e){e.checked=true})}catch(e){} }, 555) //выбираем все возможные периоды
+    //Продолжить:
 iim(`EVENT TYPE=CLICK SELECTOR="#button_next" BUTTON=0`)
  
 //<-- -- -- -- -- -- -- -- - шаг 3-- -- -- -- -- -- -- -- --  -- ->
 
 show_all_objects(); //отобр все шаги;
 
-//Сведения о ИП:
-iim(`set !errorignore yes
-EVENT TYPE=CLICK SELECTOR="#step_3>FIELDSET:nth-of-type(2)>DIV:nth-of-type(3)>DIV>INPUT" BUTTON=0
-EVENTS TYPE=KEYPRESS SELECTOR="#step_3>FIELDSET:nth-of-type(2)>DIV:nth-of-type(3)>DIV>INPUT" CHARS="304482226400192"
-EVENTS TYPE=KEYPRESS SELECTOR="#step_3>FIELDSET:nth-of-type(2)>DIV:nth-of-type(4)>DIV>INPUT" CHARS="482603651706"`)
+//Данные индивидуального предпринимателя:
+setInterval(function () {
+    try {
+        //quesel('#step_3 input[name="field[account.name_ip]"]').value ="ИП Базров Константин Валерьевич"; // Наименование Индивидуального предпринимателя:* обычно заполнено бывает, но на всяк случ;
+        quesel('#step_3 input[name="field[account.new_ogrn_ip]"]').value = "304482226400192";//ОГРНИП
+        quesel('#step_3 input[name="field[account.new_inn_ip]"]').value  = "482603651706"; //ИНН
+    } catch (e) { }
+}, 555);
 
+// Сведения о физическом лице (индивидуальном предпринимателе):
+/*quesel("#declarant-lastname").value = "Фамилия"; //Фамилия*
+quesel("#declarant-firstname").value = "имя"; //Имя*
+quesel("#declarant-middlename").value = "отч"; //Отчество*
+quesel("#declarant-mobilephone").value = "(999) 999-99-99"; //Тел с маской (999) 999-99-99 *
+quesel("#declarant-birthdate").value = "26.12.1992"; //Дата рождения с маской 26.12.1992 *
+*/
+quesel("#declarant-emailaddress").value = "osetia-alania@mail.ru"; //'Адрес электронной почты *
 
-
-quesel("#declarant-emailaddress").value = "osetia-alania@mail.ru"; //'Адрес электронной почтыАдрес электронной почты'
+// Документ, удостоверяющий личность заявителя
+/*
 quesel("#declarantSeries").value = "9005";//серия
 quesel("#declarantNumber").value = "900005";//номер
 quesel("#declarantDate").value = "11.01.2011"; //када выдан
 quesel("#rowdeclarantnew_passport_place .document_place").value = 'Отдел уфмс россии по респ. Северная осетия-алания в пригородном р-не'; //кем выдан
+*/
 
-// secondStepRecaptcha(idRecap_recogTask); //смотрим -че распознали нам ребята;
+//второй шаг разгадки каптчи:
+ //secondStepRecaptcha(idRecap_recogTask); //смотрим -че распознали нам ребята;
 
 // финальное "далее":
 iim('TAG POS=1 TYPE=A ATTR=ID:button_next'); 
@@ -138,50 +160,12 @@ iim('TAG POS=1 TYPE=A ATTR=ID:button_next');
 
 
 
- function firstStepRecaptcha(url1) {
-    var maxTryes=5;
-    for(i=0;i<maxTryes;i++){
-        x.open('GET', url1, false);
-        x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-        console.log(x)
-        x.send();
-        var rs = x.responseText;
-        
-        rs == "ERROR_KEY_DOES_NOT_EXIST" ? alert('API ключ не рабочий!;)') : "";
-        rs == `ERROR_NO_SLOT_AVAILABLE` ? alert('Все работники антикаптчи заняты! Мб поможет повышение цен;)') : "";
-        if (rs.split('|')[0] == "OK") return rs.split('|')[1]; //еси все ок,то выдвигаемся из функции с captchaID
-        window.console.log(maxTryes)
-        i==(maxTryes-1)?alert('не смогли сделать даже первый шаг рекапчи!'):'';
-    } 
-} 
- 
-function secondStepRecaptcha(capId) { 
-    for (var i=0; i<=60; i++) { 
-		x.open("GET", url2+capId, false);
-		x.send();
-		var resp = x.response;  
-		iimDisplay(`Цикл: ${i}\nОтвет: ${resp}`);
-		if (resp.indexOf('ERROR')!=-1) alert('возникла ОШИБКА! Дальше -вручную!!! \n'+resp);
-        if (resp.indexOf('OK') != -1)  {
-         quesel('#g-recaptcha-response').style.display = 'block'; //отображаем поле для хеша разгаданной каптчи
-         quesel('#g-recaptcha-response').value = resp.split('|')[1]; //записываем код разгадки каптчи в скрытое поле рекаптчи;
-         quesel('#g-recaptcha-response').style.border = '5px red dashed' //выделяем это поле ->типа успешно распознано:)
-        }
-		else iim('WAIT SECONDS=1')
-    }
-}
-//USAGE:
-// var idRecap_recogTask = firstStepRecaptcha();
-// secondStepRecaptcha(idRecap_recogTask);
-//КАПТЧА!!!!!!!!!!!!!
 
-
-
-
+function setInterval(s, ss) { return window.setInterval(s, ss); }
+function iim(s) { return iimPlayCode('set !timeout_tag 1\n' + s) }
 function quesel(e){return window.document.querySelector(e)}
 function queselAll(e){return window.document.querySelectorAll(e)}
-
-
+function Promise(e) { window.Promise (e)}
 
 function show_all_objects(){
     _=quesel('#step_2');            _?show_obj(_):''; //если ярмарка еще закрыта или по ходу дела возникли ошибки, то эта штука отобразит след шаги :)
@@ -200,3 +184,42 @@ function show_obj (obj) {
     try {obj?obj.classList.remove('hidden'):'';         } catch(e) { window.console.log('ошибка в шоу_объект1=>',e); }
     try {obj?obj.style.display="block":'';    } catch(e) { window.console.log('ошибка в шоу_объект2=>',e); }
 }
+
+
+
+
+//КАПТЧА!!!!!!!!!!!!!
+function firstStepRecaptcha(url1) {
+    var maxTryes=5;
+    for(i=0;i<maxTryes;i++){
+        x.open('GET', url1, false);
+        x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+        console.log(x)
+        x.send();
+        var rs = x.responseText;
+        rs == "ERROR_KEY_DOES_NOT_EXIST" ? alert("API ключ не рабочий!;)") : "";
+        rs.search('BALANCE')>-1 ? alert("Бабки закончились на рукаптче!;)") : "";
+        rs == `ERROR_NO_SLOT_AVAILABLE` ? alert('Все работники антикаптчи заняты! Мб поможет повышение цен;)') : "";
+        if (rs.split('|')[0] == "OK") { iimDisplay(`Получили код отслежки за каптчей: ${rs}`); return rs.split('|')[1];} //еси все ок,то выдвигаемся из функции с captchaID
+        i==(maxTryes-1)?alert('не смогли сделать даже первый шаг рекапчи!'):'';
+    } 
+} 
+function secondStepRecaptcha(capId) { 
+    for (var i=0; i<=60; i++) { 
+		x.open("GET", url2+capId, false);
+		x.send();
+		var resp = x.response;  
+		iimDisplay(`Цикл: ${i}\nОтвет: ${resp}`);
+		if (resp.indexOf('ERROR')!=-1) alert('возникла ОШИБКА! Дальше -вручную!!! \n'+resp);
+        if (resp.indexOf('OK') != -1)  {
+            iimDisplay(`Ребята распознали! \nЦикл: ${i}\nОтвет: ${resp}`);
+         quesel('#g-recaptcha-response').style.display = 'block'; //отображаем поле для хеша разгаданной каптчи
+         quesel('#g-recaptcha-response').value = resp.split('|')[1]; //записываем код разгадки каптчи в скрытое поле рекаптчи;
+         quesel('#g-recaptcha-response').style.border = '5px red dashed' //выделяем это поле ->типа успешно распознано:)
+        }
+		else iim('WAIT SECONDS=1');
+    }
+}
+//юзать по такой схеме:
+// var idRecap_recogTask = firstStepRecaptcha();//получили код отслежки (таджики начали работу над каптчей)
+// secondStepRecaptcha(idRecap_recogTask); //ждем ответ от таджиков и вводим в скрытое поле около гугл.рекаптчи
